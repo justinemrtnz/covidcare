@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Covid Patient monitoring system</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
+    <link rel="stylesheet" href=" https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css">
+
+	<title></title>
+
+</head>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+
+ {% for p in data %}
+        <div class="single">
+            <p class="title">{{p.val().Pname}}</p>
+            <p>{{p.val().PatientID}}</p>
+
+            <div>{{p.val().username}}</div>
+            <div>{{p.val().swabSchedule}}</div>
+
+            <a href="/edit/{{p.key()}}">Edit Post</a>
+        </div>
+ {% endfor %}
+
+</body>
+{% endblock %}
+</html>
+
