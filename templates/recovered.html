@@ -304,7 +304,7 @@ height:7px;
      <p>Recovered Patient</p>
   </div>
          <div class="column">
-         <i style="margin-left: 98%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
+         <i style="margin-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
          </div>
     </div>
   <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups" >
@@ -380,23 +380,7 @@ height:7px;
 </div>
 
 </div>
-<div style="display: none">
-     <table id="example1" style="width:100%; margin-left: 2%">
-        <thead>
-        <tr>
-             <th>Name</th>
 
-             <th>Signs and Symptoms</th>
- <th>Patient Status</th>
-                <th>Sex</th>
-                <th>Age</th>
-                <th>Barangay </th>
-                <th>Date Admitted</th>
-                <th>Date Recovered</th>
-        </tr>
-        </thead>
-    </table>
-</div>
 <div style="margin-left:7%; margin-right:2%;width: 90.9%;" class ="table-container" id="table-container">
     <div id="example1">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -470,13 +454,10 @@ height:7px;
 
 <script>
         $(document).ready(function() {
-            var table = $('#example').DataTable( {
-                "scrollX": true
-            } );
+              $('#example').DataTable();
 
-            new $.fn.dataTable.FixedHeader( table );
         } );
-</script>
+    </script>
 </div>
 
 
@@ -515,7 +496,6 @@ height:7px;
            wme.document.write('<center><b>' + date + '<br>' + '<br>');
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                       wme.document.write(printme1.outerHTML);
 
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
@@ -551,7 +531,6 @@ var date3 =  year1
 
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                       wme.document.write(printme1.outerHTML);
 
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
@@ -577,7 +556,6 @@ var date3 =  year1
            wme.document.write('<center><b>' + g+ ' ' + result + '<br>' + '<br>');
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                       wme.document.write(printme1.outerHTML);
 
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
@@ -604,7 +582,6 @@ var date3 =  year1
            wme.document.write('<center><b>' + g + '<br>' + '<br>');
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                       wme.document.write(printme1.outerHTML);
 
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
@@ -642,7 +619,7 @@ var date3 = month1 + "/" + day1 + "/" + year1
         wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
           wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                       wme.document.write(printme1.outerHTML);
+                       wme.document.write(printme1.outerHTML)
 
            wme.document.write(printme.outerHTML);
   wme.document.write(style);

@@ -36,7 +36,6 @@ def system():
 
 @app.route('/login', methods=('GET', 'POST'))
 def login():
-
     error = None
     name1 = request.form['username']
     pwd = request.form['password']
@@ -44,13 +43,13 @@ def login():
         if name1 not in database:
             flash("Invalid Credentials. Try again!", "danger")
         elif database[name1] != pwd:
-            flash("Invalid Credentials. Try again!",  "danger")
+            flash("Invalid Credentials. Try again!", "danger")
         else:
             flash('Successfully logged in!', "success")
             return redirect(url_for('dashboard'))
 
-
     return render_template('login.html', error=error)
+
 
 @app.route('/home', methods=('GET', 'POST'))
 def home():
@@ -70,7 +69,7 @@ def home():
         result2 = 0;
     else:
         result2 = db.child("Patients").get()
-    return render_template('index.html', t=result2, a = date , b = date1,c = date2 , d = date3,e = date4,  error=error)
+    return render_template('index.html', t=result2, a=date, b=date1, c=date2, d=date3, e=date4, error=error)
 
 
 @app.route('/dashboard')
@@ -111,18 +110,18 @@ def dashboard():
         result3 = len(db.child('Active').get().val())
         result7 = db.child("Active").get();
 
-    if dateee.val()==None:
+    if dateee.val() == None:
         result4 = 0;
     else:
         result4 = db.child("Patients").get()
-    if res4.val()==None:
+    if res4.val() == None:
         result8 = 0;
     else:
-        result8=len(db.child('Close Contact').get().val())
+        result8 = len(db.child('Close Contact').get().val())
         res9 = db.child("Close Contact").get()
 
-    return render_template('dashboard.html', t1=result, t5=result3, t2=result2, t3=result5, t4=result6, ta = result4,t6=result7 , a = date , b = date1,c = date2 , d = date3,e = date4, t7 = result8, t8=res9)
-
+    return render_template('dashboard.html', t1=result, t5=result3, t2=result2, t3=result5, t4=result6, ta=result4,
+                           t6=result7, a=date, b=date1, c=date2, d=date3, e=date4, t7=result8, t8=res9)
 
 
 @app.route('/Positive')
@@ -147,7 +146,8 @@ def Positive():
         result6 = 0;
     else:
         result6 = db.child("Patients").get();
-    return render_template('Positive.html', t=result5 ,t1 = result6, a = date , b = date1,c = date2 , d = date3,e = date4,)
+    return render_template('Positive.html', t=result5, t1=result6, a=date, b=date1, c=date2, d=date3, e=date4, )
+
 
 @app.route('/CloseContact')
 def CloseContact():
@@ -162,6 +162,7 @@ def CloseContact():
     today4 = datetime.datetime.now() + datetime.timedelta(days=5)
     date4 = today4.strftime('%d %B %Y')
     dateee = db.child("Patients").get()
+    error = None
     res3 = db.child("Close Contact").get()
     if res3.val() == None:
         result5 = 0;
@@ -171,7 +172,8 @@ def CloseContact():
         result6 = 0;
     else:
         result6 = db.child("Patients").get();
-    return render_template('CloseContact.html', t=result5 ,t1 = result6, a = date , b = date1,c = date2 , d = date3,e = date4,)
+    return render_template('CloseContact.html', t=result5, t1=result6, a=date, b=date1, c=date2, d=date3, e=date4,error=error )
+
 
 @app.route('/Recovered')
 def Recovered():
@@ -195,7 +197,7 @@ def Recovered():
         result7 = 0;
     else:
         result7 = db.child("Recovered").get();
-    return render_template('recovered.html', t=result7, t1=result6, a = date , b = date1,c = date2 , d = date3,e = date4,)
+    return render_template('recovered.html', t=result7, t1=result6, a=date, b=date1, c=date2, d=date3, e=date4, )
 
 
 @app.route('/Deceased')
@@ -220,7 +222,7 @@ def Deceased():
         result6 = 0;
     else:
         result6 = db.child("Deceased").get();
-    return render_template('Deceased.html', t=result6 , t1=result7, a = date , b = date1,c = date2 , d = date3,e = date4,)
+    return render_template('Deceased.html', t=result6, t1=result7, a=date, b=date1, c=date2, d=date3, e=date4, )
 
 
 @app.route('/Monitoring')
@@ -241,7 +243,7 @@ def Monitoring():
         result2 = 0;
     else:
         result2 = db.child("Monitoring Data").get()
-    return render_template('monitoringrecord.html', t=result2 ,  t1=dateee, a = date , b = date1,c = date2 , d = date3,e = date4,)
+    return render_template('monitoringrecord.html', t=result2, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, )
 
 
 @app.route('/Swab')
@@ -258,12 +260,21 @@ def Swab():
     date4 = today4.strftime('%d %B %Y')
     dateee = db.child("Patients").get()
     result = db.child("Patients").get()
+    result2 = db.child("Close Contact").get()
     if result.val() == None:
         res = 0;
-        return render_template('swab.html', t=res ,  t1=dateee, a = date , b = date1,c = date2 , d = date3,e = date4,)
+        if result2.val() == None:
+            res1 = 0;
+        else:
+            res1 = db.child("Close Contact").get()
+        return render_template('swab.html', t=res, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, t2=res1)
     else:
-        res =  result = db.child("Patients").get();
-        return render_template('swab.html', t=res ,  t1=dateee, a = date , b = date1,c = date2 , d = date3,e = date4,)
+        res = db.child("Patients").get();
+        if result2.val() == None:
+            res1 = 0;
+        else:
+            res1 = db.child("Close Contact").get()
+        return render_template('swab.html', t=res, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, t2=res1)
 
 
 @app.route('/edit/<username>', methods=('GET', 'POST'))
@@ -278,8 +289,8 @@ def edit(username):
         Mobile_num = request.form['mobile_num']
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
-        elif swabdate <  today:
-            flash("cannot input previous date!","warning")
+        elif swabdate < today:
+            flash("cannot input previous date!", "warning")
         else:
 
             db.child("Patients").child(username).update({
@@ -301,7 +312,84 @@ def edit(username):
 
     orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
 
-    return render_template("UpdateSwab.html", data=orderedDict , error=error)
+    return render_template("UpdateSwab.html", data=orderedDict, error=error)
+@app.route('/CCswab/<username>', methods=('GET', 'POST'))
+def CCswab(username):
+    from datetime import datetime
+    error = None
+
+    if request.method == 'POST':
+        swabdate = request.form['date']
+        today = datetime.today().strftime('%Y-%m-%d')
+        swabtime = request.form['time']
+        Mobile_num = request.form['mobile_num']
+        if swabdate == "" or swabtime == "":
+            flash("Please input date and time!", "danger")
+        elif swabdate < today:
+            flash("cannot input previous date!", "warning")
+        else:
+
+            db.child("Close Contact").child(username).update({
+                "swabSchedule": swabdate + " " + swabtime,
+            })
+
+            ccount_sid = 'ACd129dfc0753b6b00366bbcbfb09286cf'
+            token = "ff52ef5cc8831a56791be7e878d90d6b"
+            client = Client(ccount_sid, token)
+
+            message = client.messages.create(
+                to=Mobile_num,
+                from_='+12058583568',
+                body="Text Notification!  "
+                     "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+            )
+            flash("Schedule successfully added!")
+            return redirect(url_for('Swab'))
+
+    orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
+
+    return render_template("UpdateCCSwab.html", data=orderedDict, error=error)
+
+@app.route('/viewCC/<username>', methods=('GET', 'POST'))
+def viewCC(username):
+    if request.method == 'POST':
+        Pname = request.form['patientName']
+        PatientID = request.form['PatientID']
+        Birthday = request.form['birthday']
+        Age = request.form['age']
+        Sex = request.form['sex']
+        Mobile_num = request.form['mobile_num']
+        Address = request.form['address']
+        Condition = request.form['condition']
+        CaseStatus = request.form['caseStatus']
+        OtherIllness = request.form['otherIllness']
+        EmergencyCPerson = request.form['emergencyCPerson']
+        EmergencyContactNo = request.form['emergencyContact']
+        username = request.form['username']
+        CivilStatus = request.form['civilStatus']
+        result = request.form['result']
+
+        db.child("Close Contact").child(username).update({
+            "result": result,
+            "patientName": Pname,
+            "patientID": PatientID,
+            "birthday": Birthday,
+            "age": Age,
+            "sex": Sex,
+            "mobile_num": Mobile_num,
+            "address": Address,
+            "condition": Condition,
+            "caseStatus": CaseStatus,
+            "otherIllness": OtherIllness,
+            "emergencyCPerson": EmergencyCPerson,
+            "emergencyContact": EmergencyContactNo,
+            "username": username,
+            "civilStatus": CivilStatus,
+        })
+        return redirect(url_for('home'))
+
+    orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
+    return render_template("ViewCloseContact.html", data=orderedDict)
 
 
 @app.route('/view/<username>', methods=('GET', 'POST'))
@@ -322,6 +410,24 @@ def view(username):
 
     orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
     return render_template("ViewSwabTest.html", data=orderedDict)
+@app.route('/viewCCswab/<username>', methods=('GET', 'POST'))
+def viewCCswab(username):
+    if request.method == 'POST':
+        pname = request.form['Pname']
+        pID = request.form['PatientID']
+        swab = request.form['swabSchedule']
+        uname = request.form['username']
+
+        db.child("Patients").child(uname).update({
+            "patientName": pname,
+            "patientID": pID,
+            "swabSchedule": swab,
+            "username": uname
+        })
+        return redirect(url_for('Swab'))
+
+    orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
+    return render_template("ViewCCSwab.html", data=orderedDict)
 
 
 @app.route('/view2/<PatientID>', methods=('GET', 'POST'))
@@ -342,6 +448,12 @@ def edit1(username):
     today1 = datetime.today().strftime('%Y-%m-%d')
 
     if request.method == 'POST':
+        dayAdmitted = request.form['dayAdmitted']
+        estimatedDateRecovery = request.form['estimatedDateRecovery']
+        password = request.form['password']
+        security = request.form['security']
+        securityQues = request.form['securityQues']
+        swabSchedule = "Your Swab schedule is not yet available"
         Pname = request.form['patientName']
         PatientID = request.form['patientID']
         Birthday = request.form['birthday']
@@ -367,9 +479,14 @@ def edit1(username):
         doConsultation = request.form['doConsultation']
         result = request.form['result']
 
-
         if result == "Recovered":
             db.child(result).child(PatientID).set({"result": result,
+                                                   "password": password,
+                                                   "security": security,
+                                                   "securityQues": securityQues,
+                                                   "swabSchedule": swabSchedule,
+                                                   "dayAdmitted": dayAdmitted,
+                                                   "estimatedDateRecovery": estimatedDateRecovery,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
                                                    "birthday": Birthday,
@@ -387,10 +504,9 @@ def edit1(username):
                                                    "emergencyContact": emergencyContact,
                                                    "username": username,
                                                    "civilStatus": CivilStatus,
-                                                   "dateRecovered": today,
-                                                   "dayRecovered": today4,
                                                    "dateAdmitted": dateAdmitted,
-                                                   "PIcontact": PIcontact,
+                                                   "dayRecovered": today4,
+                                                   "PIncontact": PIcontact,
                                                    "NatureOfContact": NatureOfContact,
                                                    "SignAndSymp": SignAndSymp,
                                                    "doConsultation": doConsultation,
@@ -399,6 +515,12 @@ def edit1(username):
             db.child("Active").child(PatientID).remove()
             db.child("Patients").child(username).update({
                 "result": result,
+                "password": password,
+                "security": security,
+                "securityQues": securityQues,
+                "swabSchedule": swabSchedule,
+                "dayAdmitted": dayAdmitted,
+                "estimatedDateRecovery": estimatedDateRecovery,
                 "patientName": Pname,
                 "patientID": PatientID,
                 "birthday": Birthday,
@@ -417,10 +539,12 @@ def edit1(username):
                 "username": username,
                 "civilStatus": CivilStatus,
                 "dateAdmitted": dateAdmitted,
-                "PIcontact": PIcontact,
+                "dayRecovered": today4,
+                "PIncontact": PIcontact,
+                "NatureOfContact": NatureOfContact,
                 "SignAndSymp": SignAndSymp,
                 "doConsultation": doConsultation,
-                "NatureOfContact": NatureOfContact,
+
             })
 
         elif result == "Deceased":
@@ -447,9 +571,9 @@ def edit1(username):
                                                    "dayDied": today4,
                                                    "dateAdmitted": dateAdmitted,
                                                    "dateDied": today,
-                                                   "CauseOfDeath":COD,
-                                                   "DTofDeath":dateandtime,
-                                                    "PIcontact": PIcontact,
+                                                   "CauseOfDeath": COD,
+                                                   "DTofDeath": dateandtime,
+                                                   "PIcontact": PIcontact,
                                                    "NatureOfContact": NatureOfContact,
                                                    "SignAndSymp": SignAndSymp,
                                                    "doConsultation": doConsultation,
@@ -485,6 +609,12 @@ def edit1(username):
             })
         elif result == "Active":
             db.child(result).child(PatientID).set({"result": result,
+                                                   "password": password,
+                                                   "security": security,
+                                                   "securityQues": securityQues,
+                                                   "swabSchedule": swabSchedule,
+                                                   "dayAdmitted": dayAdmitted,
+                                                   "estimatedDateRecovery": estimatedDateRecovery,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
                                                    "birthday": Birthday,
@@ -504,7 +634,7 @@ def edit1(username):
                                                    "civilStatus": CivilStatus,
                                                    "dateAdmitted": dateAdmitted,
                                                    "dayRecovered": today4,
-                                                   "PIcontact": PIcontact,
+                                                   "PIncontact": PIcontact,
                                                    "NatureOfContact": NatureOfContact,
                                                    "SignAndSymp": SignAndSymp,
                                                    "doConsultation": doConsultation,
@@ -515,6 +645,12 @@ def edit1(username):
             db.child("Close Contact").child(PatientID).remove()
             db.child("Patients").child(username).update({
                 "result": result,
+                "password": password,
+                "security": security,
+                "securityQues": securityQues,
+                "swabSchedule": swabSchedule,
+                "dayAdmitted": dayAdmitted,
+                "estimatedDateRecovery": estimatedDateRecovery,
                 "patientName": Pname,
                 "patientID": PatientID,
                 "birthday": Birthday,
@@ -533,10 +669,12 @@ def edit1(username):
                 "username": username,
                 "civilStatus": CivilStatus,
                 "dateAdmitted": dateAdmitted,
-                "PIcontact": PIcontact,
+                "dayRecovered": today4,
+                "PIncontact": PIcontact,
+                "NatureOfContact": NatureOfContact,
                 "SignAndSymp": SignAndSymp,
                 "doConsultation": doConsultation,
-                "NatureOfContact": NatureOfContact,
+
             })
         elif result == "Close Contact":
             db.child(result).child(PatientID).set({"result": result,
@@ -564,7 +702,6 @@ def edit1(username):
                                                    "SignAndSymp": SignAndSymp,
                                                    "doConsultation": doConsultation,
 
-
                                                    })
         flash("Patient Status Updated Successfully!")
         db.child("Patients").child(username).update({
@@ -591,7 +728,6 @@ def edit1(username):
             "SignAndSymp": SignAndSymp,
             "doConsultation": doConsultation,
             "NatureOfContact": NatureOfContact,
-            "DTofDeath": dateandtime,
         })
         return redirect(url_for('home'))
 
@@ -600,46 +736,121 @@ def edit1(username):
     return render_template("UpdatePatientInfo.html", data=orderedDict)
 
 
-@app.route('/view1/<username>', methods=('GET', 'POST'))
-def view1(username):
+@app.route('/editCC/<username>', methods=('GET', 'POST'))
+def editCC(username):
+    from datetime import datetime
+    dt = datetime.today().strftime("%B %d, %Y %H:%M:%S")
+
+    today = datetime.today().strftime('%d %B %Y ')
+    today4 = datetime.today().strftime('%m/%d/%Y')
+    today2 = datetime.today().strftime('%B %Y ')
+    today1 = datetime.today().strftime('%Y-%m-%d')
+    res = db.child("Patients").get()
+    if res.val() == None:
+        res1 = 0;
+    else:
+        res1 = len(db.child('Patients').get().val())
     if request.method == 'POST':
         Pname = request.form['patientName']
-        PatientID = request.form['PatientID']
+        PatientID = request.form['patientID']
         Birthday = request.form['birthday']
         Age = request.form['age']
         Sex = request.form['sex']
         Mobile_num = request.form['mobile_num']
-        Address = request.form['address']
         Condition = request.form['condition']
         CaseStatus = request.form['caseStatus']
         OtherIllness = request.form['otherIllness']
         EmergencyCPerson = request.form['emergencyCPerson']
-        EmergencyContactNo = request.form['emergencyContact']
+        emergencyContact = request.form['emergencyContact']
         username = request.form['username']
         CivilStatus = request.form['civilStatus']
+        Address = request.form['address']
+        dateAdmitted = request.form['dateAdmitted']
+        housenum = request.form['housenum']
+        city = request.form['city']
+        province = request.form['province']
+        PIcontact = request.form['PIcontact']
+        NatureOfContact = request.form['NOcontact']
+        SignAndSymp = request.form['SignAndSymp']
+        doConsultation = request.form['doConsultation']
         result = request.form['result']
+        dayAdmitted = request.form['dayAdmitted']
+        estimatedDateRecovery = request.form['estimatedDateRecovery']
+        password = request.form['password']
+        security = request.form['security']
+        securityQues = request.form['securityQues']
+        res3=str(res1+1)
+        pID = "KP-" + res3;
+        swabSchedule = "Your Swab schedule is not yet available"
+        if result == "Active":
+            db.child(result).child(pID).set({"result": result,
+                                                   "password": password,
+                                                   "security": security,
+                                                   "securityQues": securityQues,
+                                                   "swabSchedule": swabSchedule,
+                                                   "dayAdmitted": dayAdmitted,
+                                                   "estimatedDateRecovery": estimatedDateRecovery,
+                                                   "patientName": Pname,
+                                                   "patientID": pID,
+                                                   "birthday": Birthday,
+                                                   "age": Age,
+                                                   "sex": Sex,
+                                                   "mobile_num": Mobile_num,
+                                                   "address": Address,
+                                                   "housenum": housenum,
+                                                   "city": city,
+                                                   "province": province,
+                                                   "condition": Condition,
+                                                   "caseStatus": CaseStatus,
+                                                   "otherIllness": OtherIllness,
+                                                   "emergencyCPerson": EmergencyCPerson,
+                                                   "emergencyContact": emergencyContact,
+                                                   "username": username,
+                                                   "civilStatus": CivilStatus,
+                                                   "dateAdmitted": dateAdmitted,
+                                                   "dayRecovered": today4,
+                                                   "PIncontact": PIcontact,
+                                                   "NatureOfContact": NatureOfContact,
+                                                   "SignAndSymp": SignAndSymp,
+                                                   "doConsultation": doConsultation,
+                                                   })
+            db.child("Patients").child(username).set({"result": result,
+                                                       "password": password,
+                                                       "security": security,
+                                                       "securityQues": securityQues,
+                                                       "swabSchedule": swabSchedule,
+                                                       "dayAdmitted": dayAdmitted,
+                                                       "estimatedDateRecovery": estimatedDateRecovery,
+                                                       "patientName": Pname,
+                                                       "patientID": pID,
+                                                       "birthday": Birthday,
+                                                       "age": Age,
+                                                       "sex": Sex,
+                                                       "mobile_num": Mobile_num,
+                                                       "address": Address,
+                                                       "housenum": housenum,
+                                                       "city": city,
+                                                       "province": province,
+                                                       "condition": Condition,
+                                                       "caseStatus": CaseStatus,
+                                                       "otherIllness": OtherIllness,
+                                                       "emergencyCPerson": EmergencyCPerson,
+                                                       "emergencyContact": emergencyContact,
+                                                       "username": username,
+                                                       "civilStatus": CivilStatus,
+                                                       "dateAdmitted": dateAdmitted,
+                                                       "dayRecovered": today4,
+                                                       "PIncontact": PIcontact,
+                                                       "NatureOfContact": NatureOfContact,
+                                                       "SignAndSymp": SignAndSymp,
+                                                       "doConsultation": doConsultation,
 
-        db.child("Patients").child(username).update({
-            "result": result,
-            "patientName": Pname,
-            "patientID": PatientID,
-            "birthday": Birthday,
-            "age": Age,
-            "sex": Sex,
-            "mobile_num": Mobile_num,
-            "address": Address,
-            "condition": Condition,
-            "caseStatus": CaseStatus,
-            "otherIllness": OtherIllness,
-            "emergencyCPerson": EmergencyCPerson,
-            "emergencyContact": EmergencyContactNo,
-            "username": username,
-            "civilStatus": CivilStatus,
-        })
-        return redirect(url_for('home'))
+                                                       })
+            db.child("Close Contact").child(username).remove()
+        return redirect(url_for('CloseContact'))
 
-    orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
-    return render_template("ViewPatientInfo.html", data=orderedDict)
+    orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
+    return render_template("UpdateCloseContact.html", data=orderedDict)
 
 
 @app.route('/logout')
@@ -679,9 +890,11 @@ def post3(username):
 
     return render_template("ViewPatientInfo.html", data=orderedDict)
 
+
 if __name__ == '__main__':
     app.run()
 from math import ceil
+
 
 def week_of_month(dt):
     first_day = dt.replace(day=1)
@@ -689,4 +902,4 @@ def week_of_month(dt):
     dom = dt.day
     adjusted_dom = dom + first_day.weekday()
 
-    return int(ceil(adjusted_dom/7.0))
+    return int(ceil(adjusted_dom / 7.0))

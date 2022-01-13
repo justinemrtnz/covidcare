@@ -279,6 +279,7 @@ height:7px;
    height:34px;
     width:190px;
         font-size: .8vw;
+
 }
     .btn-secondary1{
     height:35px;
@@ -416,7 +417,7 @@ height:7px;
 
   </div>
       <div class="btn-group mr-2" role="group" aria-label="First group" >
-           <button style="margin-top: 23%" class="button1 btn-secondary1" onclick="makepdf1()"
+           <button style="margin-top: 20%" class="button1 btn-secondary1" onclick="makepdf1()"
             type="button"
             value="print">PRINT
     </button>
@@ -424,21 +425,7 @@ height:7px;
 </div>
 
 </div>
-<div style="display: none">
-     <table id="example1" style="width:100%; ">
-        <thead>
-        <tr>
-            <th style="width: 114px">Name</th>
-             <th style="width: 194px">Signs and Symptoms</th>
- <th style="width: 92px" >Patient Status</th>
-            <th  style="width: 54px">Sex</th>
-            <th style="width: 36px">Age</th>
-            <th style="width: 85px">Barangay </th>
-               <th>Date Admitted</th>
-        </tr>
-        </thead>
-    </table>
-</div>
+
 <div style="margin-left:7%; margin-right:2%;width: 90.9%" class ="table-container" id="hide" >
 
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -518,14 +505,11 @@ height:7px;
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#example').DataTable( {
-            "scrollX": true
-        } );
+        $(document).ready(function() {
+              $('#example').DataTable();
 
-        new $.fn.dataTable.FixedHeader( table );
-    } );
-</script>
+        } );
+    </script>
 
 
 <script>
@@ -667,7 +651,7 @@ var year = date[0];
 var month = date[1];
 var day = date[2];
 var date1 =  year
-        var printme1=document.getElementById('example1');
+
 
     var printme=document.getElementById('example');
         var wme = window.open("p","","a4");
@@ -691,7 +675,7 @@ var date1 =  year
                       wme.document.write(htmlToPrint);
  wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(printme1.outerHTML);
+
         wme.document.write(printme.outerHTML);
 
         wme.document.close();
@@ -734,7 +718,7 @@ var date3 =  year1
                     wme.document.write(style);
   wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(printme1.outerHTML);
+
 
         wme.document.write(printme.outerHTML);
 
@@ -769,7 +753,7 @@ var date3 =  year1
                       wme.document.write(style);
  wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                       wme.document.write(printme1.outerHTML);
+
 
         wme.document.write(printme.outerHTML);
 
@@ -807,7 +791,7 @@ var date3 =  year1
                       wme.document.write(style);
  wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-                wme.document.write(printme1.outerHTML);
+
 
         wme.document.write(printme.outerHTML);
 

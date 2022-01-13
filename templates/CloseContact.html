@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="jquery-3.3.1.min.js"></script>
-    <title>Active Patients</title>
+    <title>Close Contact</title>
 <link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
           type = "image/icon" class="icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -312,7 +312,7 @@ height:7px;
      <p>Close Contact</p>
   </div>
          <div class="column">
-         <i style="margin-left: 98%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
+         <i style="margin-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
          </div>
     </div>
   <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups" >
@@ -424,7 +424,7 @@ height:7px;
 
 
                   <th class="td1"  style="display: none">Week Admitted</th>
-
+<th class="td1">Action</th>
             </tr>
             </thead>
 
@@ -445,6 +445,15 @@ height:7px;
 
 
   <td class="td1" style="display: none">{{l.val().dayAdmitted }}</td>
+                    <td class="td1">
+                        <a href="/viewCC/{{l.key()}}">
+                        <span style="height: 30px ; font-size: .8vw;  border-radius: 15px;" class="btn btn-warning btn-m"><i class="fa fa-eye" aria-hidden="true"></i> View </span>
+                        </a>
+
+                        <a href="/editCC/{{l.key()}}">
+                            <span style="height: 30px; font-size: .8vw;border-radius: 15px; " class="btn btn-warning btn-m"><i class="fa fa-pencil" aria-hidden="true"></i> Update Patient status</span>
+                        </a>
+                    </td>
                     </form>
                     </td>
                     </tr>

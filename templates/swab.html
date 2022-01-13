@@ -56,7 +56,7 @@ body::-webkit-scrollbar {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
 
-    .table-container thead tr{
+    .wrapper thead tr{
         background-color: #42adf5;
         color: #ffffff;
         text-align: left;
@@ -65,17 +65,17 @@ body::-webkit-scrollbar {
 
 
 
-    .table-container tbody tr{
+    .wrapper thead tbody tr{
         border-bottom: 1px solid #dddddd;
     }
 .swal2-popup {
 font-size: 1.6rem;
 }
-   .table-container tbody tr:nth-of-type(even){
+   .wrapper thead tbody tr:nth-of-type(even){
        background-color: #f3f3f3;
    }
 
-    .table-container tbody tr:last-of-type{
+    .wrapper thead tbody tr:last-of-type{
         border-bottom:  2px solid#009879;
     }
 
@@ -203,6 +203,105 @@ height:7px;
     word-wrap: break-word;
     word-break: break-word;
 }
+
+::selection{
+  background: rgba(23,162,184,0.3);
+}
+.wrapper{
+  max-width: 1700px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 25px 30px 30px 30px;
+  border-radius: 10px;
+  background: #fff;
+    font-size: 1vw;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper header{
+  font-size: 30px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+.wrapper nav{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.wrapper nav label{
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  color: #17a2b8;
+  font-size: 17px;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+.wrapper nav label:hover{
+  background: rgba(23,162,184,0.3);
+}
+#home:checked ~ nav label.home,
+#blog:checked ~ nav label.blog,
+#code:checked ~ nav label.code,
+#help:checked ~ nav label.help,
+  #about:checked ~ nav label.about{
+  color: #fff;
+}
+nav label i{
+  padding-right: 7px;
+}
+nav .slider{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: #17a2b8;
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#blog:checked ~ nav .slider{
+  left: 50%;
+}
+#code:checked ~ nav .slider{
+  left: 50%;
+}
+#help:checked ~ nav .slider{
+  left: 60%;
+}
+#about:checked ~ nav .slider{
+  left: 80%;
+}
+section .content{
+  display: none;
+  background: #fff;
+}
+#home:checked ~ section .content-1,
+#blog:checked ~ section .content-2,
+#code:checked ~ section .content-3,
+#help:checked ~ section .content-4,
+#about:checked ~ section .content-5{
+  display: block;
+}
+section .content .title{
+  font-size: 21px;
+  font-weight: 500;
+  margin: 30px 0 10px 0;
+}
+section .content p{
+text-align: justify;
+}
 </style>
 
 
@@ -254,8 +353,21 @@ height:7px;
     </div></div><div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
 </div>
 
-<div style="margin-left:7%; margin-right:2% " class = "table-container">
-     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
+<div class="wrapper" style="margin-left:7%;">
+
+    <input type="radio" name="slider" checked id="home">
+    <input type="radio" name="slider" id="blog">
+
+    <nav>
+      <label for="home" class="home">Swab Schedule for Active Patients</label>
+      <label for="blog" class="blog">Swab Schedule for Close Contact</label>
+      <div class="slider"></div>
+    </nav>
+<section>
+      <div class="content content-1" style="margin-top: 1%">
+
+ <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example" class="sortable" style="width:100%">
             <thead>
              <tr>
@@ -270,8 +382,6 @@ height:7px;
 
         <tbody>
         {% if t == 0 %}
-
-            <h3>None</h3>
         {% else %}
 
             {% for l in t %}
@@ -297,10 +407,56 @@ height:7px;
 
             {% endif %}
             </tbody>
+        </table>      </div>
+      <div class="content content-2" style="margin-top: 1%">
+ <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <table id="example1" class="sortable" style="width:100%">
+            <thead>
+             <tr>
+                 <th>Patient ID</th>
+                 <th>Name</th>
+                 <th>Patient Status</th>
+                 <th>Swab Schedule</th>
+
+                 <th>Action</th>
+             </tr>
+            </thead>
+
+        <tbody>
+        {% if t2 == 0 %}
+
+        {% else %}
+
+            {% for l in t2 %}
+
+                <td>{{l.val().patientID }}</td>
+                <td>{{l.val().patientName}}</td>
+
+ <td>{{l.val().result }}</td>
+                 <td>{{l.val().swabSchedule }}</td>
+                <td>
+                    <a href="/viewCCswab/{{l.key()}}">
+                    <span  style="height: 30px; font-size: .9vw; border-radius: 15px" class="btn btn-warning btn-m" ><i class="fa fa-eye" aria-hidden="true"></i> View Schedule</span>
+                    </a>
+
+                    <a href="/CCswab/{{l.key()}}">
+                        <span style="height: 30px; font-size: .9vw;border-radius: 15px"  class="btn btn-warning btn-m" ><i class="fa fa-plus" aria-hidden="true"></i> Add Schedule</span></a>
+                </td>
+                </form>
+                </td>
+                </tr>
+
+            {% endfor %}
+
+            {% endif %}
+            </tbody>
+
         </table>
+        </table>            </div>
 
+    </section>
+  </div>
 
-</div>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -316,7 +472,20 @@ height:7px;
                   "scrollX": true
             } );
 
-            new $.fn.dataTable.FixedHeader( table );
+        } );
+    </script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
+    <script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
+    <script>
+        $(document).ready(function() {
+              $('#example1').DataTable();
+
         } );
     </script>
 	</div>
@@ -341,6 +510,7 @@ function myFunction6() {
 
 
     </script>
+
 </body>
 {% endblock %}
 </html>

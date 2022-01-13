@@ -306,7 +306,21 @@ legend.scheduler-border {
     font-size: 14px;
 }
 </style>
+<div style="position: absolute; z-index: 5;margin-left: 70%; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container" >
+    <!--flash-->
+    {% for message in get_flashed_messages() %}
+        <script type="text/javascript">
+    Swal.fire({
+  title: "Success!",
+        customClass: 'swal-wide',
+  text: "Update Successfully!",
+  icon: "success",
+  confirmButtonText: "Continue!",
+});
+</script>
 
+    {% endfor %}
+</div>
 	<div style="max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#0f0e0f; background: white" id="dashboard">
 
 	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: 1%; margin-top: 1%">Patient Information > Update</p>
@@ -346,7 +360,7 @@ legend.scheduler-border {
      <div class="col-8" >
 
          <div style="margin-left:9%; margin-right:4%" class = "table-container">
-          <fieldset class="scheduler-border">
+               <fieldset class="scheduler-border">
 <legend class="scheduler-border">Personal Information</legend>
 
  <!-- First row -->
@@ -451,7 +465,7 @@ legend.scheduler-border {
       </div>
 
     <div style="margin-left:9%; margin-right:4%" class = "table-container1">
-           <fieldset class="scheduler-border">
+          <fieldset class="scheduler-border">
 <legend class="scheduler-border">Health Assessment</legend>
 
 
@@ -476,8 +490,7 @@ legend.scheduler-border {
                  {% if p.val().result == "Active" %}
 <select onchange="select()" style="width:85%;  height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
 <option value="{{ p.val().result }}">{{ p.val().result }}</option>
-    <option value="Recovered">Recovered</option>
-                     <option value="Deceased">Deceased</option>
+    <option value="Cleared">Cleared</option>
 
                                               <option value="Close Contact">Close Contact</option>
 
@@ -485,17 +498,7 @@ legend.scheduler-border {
                      <select onchange="select()" style="width:85%;  height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
 <option value="{{ p.val().result }}">{{ p.val().result }}</option>
     <option value="Active">Active</option>
-    <option value="Deceased">Deceased</option>
-                      {% elif p.val().result == "Recovered" %}
-                     <select onchange="select()" style="width:85%;  height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
-<option value="{{ p.val().result }}">{{ p.val().result }}</option>
-    <option value="Active">Active</option>
-    <option value="Deceased">Deceased</option>
-                     {% elif p.val().result == "Deceased" %}
-                     <select onchange="select()" style="width:85%;  height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
-<option value="{{ p.val().result }}">{{ p.val().result }}</option>
-    <option value="Active">Active</option>
-    <option value="Deceased">Deceased</option>
+    <option value="Cleared">Cleared</option>
 
     {% endif %}
 
@@ -649,6 +652,7 @@ legend.scheduler-border {
           value="{{ p.val().securityQues }}">
     </div>
 
+
  <!-- fourth row -->
 
 
@@ -691,7 +695,6 @@ legend.scheduler-border {
         } else if (desired_box === "Recovered") {
            select_1.style.visibility = 'collapse';
                select_2.style.visibility = 'collapse';
-               main_select.style.display=''
             select_3.style.display = 'none';
             str1.style.display = '';
             str2.style.display='none';
