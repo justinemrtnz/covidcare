@@ -116,6 +116,7 @@ def dashboard():
         result4 = db.child("Patients").get()
     if res4.val() == None:
         result8 = 0;
+        res9 = 0;
     else:
         result8 = len(db.child('Close Contact').get().val())
         res9 = db.child("Close Contact").get()
