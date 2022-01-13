@@ -326,14 +326,21 @@ div.shadow1 {
         var wme = window.open("p","","a4");
 
         wme.document.write('<html><title></title>');
-
+ var htmlToPrint = '' +
+        '<style type="text/css">' +
+        'table ,th, td {' +
+        'border:1px solid black;' +
+        'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+        '}' +
+        '</style>';
         wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
         wme.document.write('<center><p><b>Patient Monitoring Record<b></p></center>');
        wme.document.write(document.getElementById("identification").innerHTML);
 
         wme.document.write(document.getElementById("elem").innerHTML);
         wme.document.write(document.getElementById("elem1").innerHTML);
-
+ wme.document.write(htmlToPrint);
         wme.document.write(printme.outerHTML);
         wme.document.close();
         wme.focus();

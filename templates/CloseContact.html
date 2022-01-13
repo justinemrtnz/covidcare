@@ -492,6 +492,14 @@ height:7px;
                var printme1=document.getElementById('example1');
        var e = document.getElementById("print");
        var strUser = e.options[e.selectedIndex].text;
+       var htmlToPrint = '' +
+        '<style type="text/css">' +
+        'table ,th, td {' +
+        'border:1px solid black;' +
+        'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+        '}' +
+        '</style>';
        if (strUser == "Daily") {
            var date = $('#day').val().split('/');
            var year = date[0];
@@ -507,6 +515,7 @@ height:7px;
            var style = "<style>";
            style = style + ".td1 {font-size: 14px !important;}";
            style = style + "</style>";
+            wme.document.write(htmlToPrint);
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
            wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
            wme.document.write('<center><b>' + date + '<br>' + '<br>');
@@ -543,6 +552,7 @@ var date3 =  year1
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
            wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
               wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
+               wme.document.write(htmlToPrint);
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
             wme.document.write(printme1.outerHTML);
@@ -567,6 +577,7 @@ var date3 =  year1
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
            wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
            wme.document.write('<center><b>' + g+ ' ' + result + '<br>' + '<br>');
+            wme.document.write(htmlToPrint);
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
             wme.document.write(printme1.outerHTML);
@@ -592,6 +603,7 @@ var date3 =  year1
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
            wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
            wme.document.write('<center><b>' + g + '<br>' + '<br>');
+            wme.document.write(htmlToPrint);
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
             wme.document.write(printme1.outerHTML);

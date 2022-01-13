@@ -428,12 +428,12 @@ height:7px;
      <table id="example1" style="width:100%; ">
         <thead>
         <tr>
-            <th style="width: 115px">Name</th>
-             <th style="width: 173px">Signs and Symptoms</th>
- <th style="width: 104px">Patient Status</th>
-            <th  style="width: 55px">Sex</th>
+            <th style="width: 114px">Name</th>
+             <th style="width: 194px">Signs and Symptoms</th>
+ <th style="width: 92px" >Patient Status</th>
+            <th  style="width: 54px">Sex</th>
             <th style="width: 36px">Age</th>
-            <th style="width: 88px">Barangay </th>
+            <th style="width: 85px">Barangay </th>
                <th>Date Admitted</th>
         </tr>
         </thead>
@@ -467,8 +467,8 @@ height:7px;
                 {% for l in t %}
                      <td class="td2">{{l.val().patientName}}</td>
 
-                     <td >{{l.val().condition}}/{{l.val().caseStatus}}</td>
-<td>{{l.val().result}}</td>
+                     <td class="td3">{{l.val().condition}}/{{l.val().caseStatus}}</td>
+<td class="td4">{{l.val().result}}</td>
                     <td>{{l.val().sex }}</td>
                     <td>{{l.val().age }}</td>
                     <td >{{l.val().address }}</td>
@@ -654,6 +654,13 @@ function myFunction() {
            var tableSize = $('#example tbody tr').length;
         var e = document.getElementById("print");
 var strUser = e.options[e.selectedIndex].text;
+ var style = "<style>";
+  style = style + ".td1 {display: none !important;}" +
+      "body{font-size:15px !important;}" +
+      ".td2{width: 265px !important;}" +
+      ".td3{width: 200px !important;}" +
+      ".td4{width: 200px !important;}";
+  style = style + "</style>";
 if (strUser == "Daily"){
         var date = $('#day').val().split('/');
 var year = date[0];
@@ -672,11 +679,7 @@ var date1 =  year
             ' border-collapse: collapse; ' +
         '}' +
         '</style>';
-          var style = "<style>";
-  style = style + ".td1 {display: none !important;}" +
-      "body{font-size:15px !important;}" +
-      ".td2{width: 113px !important;}";
-  style = style + "</style>";
+
      wme.document.write('<html><head>');
 
           wme.document.write('</head>');
@@ -717,11 +720,7 @@ var date3 =  year1
             ' border-collapse: collapse; ' +
         '}' +
         '</style>';
-          var style = "<style>";
-        var style = "<style>";
-  style = style + ".td1 {display: none !important;}" +
-      "body{font-size:15px !important;}";
-  style = style + "</style>";
+
 
         var wme = window.open("p","","a4");
         wme.document.write('<html><head>');
@@ -760,11 +759,7 @@ var date3 =  year1
             ' border-collapse: collapse; ' +
         '}' +
         '</style>';
-          var style = "<style>";
-          var style = "<style>";
-  style = style + ".td1 {display: none !important;}" +
-      "body{font-size:15px !important;}";
-  style = style + "</style>";
+
      wme.document.write('<html><head>');
 
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
@@ -802,10 +797,7 @@ var date3 =  year1
         '}' +
         '</style>';
 
-          var style = "<style>";
-  style = style + ".td1 {display: none !important;}" +
-      "body{font-size:15px !important;}";
-  style = style + "</style>";
+
      wme.document.write('<html><head>');
 
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
