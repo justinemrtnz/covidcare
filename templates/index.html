@@ -486,12 +486,12 @@ height:7px;
     </table>
     <div style="display: none">
 <div class="elem" id="elem">
-      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -15%; margin-left: 35%" ></i>
+      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -120px; margin-left: 35%" ></i>
 </div>
         </div>
 <div style="display: none">
 <div class="elem1" id="elem1">
-      <i> <img src="{{url_for('static', filename='DOH.png')}}" class="logo" width="90" height="90" style="position: absolute; alignment: left; margin-top: -15%; margin-left: -50%" ></i>
+      <i> <img src="{{url_for('static', filename='DOH.png')}}" class="logo" width="90" height="90" style="position: absolute; alignment: left; margin-top: -120px; margin-left: -50%" ></i>
 </div>
         </div>
 </div>
@@ -646,78 +646,99 @@ var strUser = e.options[e.selectedIndex].text;
       ".td4{width: 200px !important;}";
   style = style + "</style>";
 if (strUser == "Daily"){
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
         var date = $('#day').val().split('/');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 =  year
+        var year = date[0];
+        var month = date[1];
+        var day = date[2];
+        var date1 = year
 
 
-    var printme=document.getElementById('example');
-        var wme = window.open("p","","a4");
+        var printme = document.getElementById('example');
+        var wme = window.open("p", "", "a4");
         var htmlToPrint = '' +
-        '<style type="text/css">' +
-        'table ,th, td {' +
-        'border:1px solid black;' +
-        'padding:0.2em;' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
             ' border-collapse: collapse; ' +
-        '}' +
-        '</style>';
+            '}' +
+            '</style>';
 
-     wme.document.write('<html><head>');
-
-          wme.document.write('</head>');
-        wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + date1 +'<br>'+'<br>');
-           wme.document.write('<br>');
-                      wme.document.write(style);
-                      wme.document.write(htmlToPrint);
- wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-
-        wme.document.write(printme.outerHTML);
-
-        wme.document.close();
-        wme.focus();
-        wme.print();
-        wme.refresh();
-        wme.close();
-}else if(strUser=="Weekly"){
-     var date = $('#date-start').val().split('/');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = year
-        var date2 = $('#date-stop').val().split('/');
-var year1 = date2[0];
-var month1 = date2[1];
-var day1 = date2[2];
-var date3 =  year1
-      var printme1=document.getElementById('example1');
-    var printme=document.getElementById('example');
- var htmlToPrint = '' +
-        '<style type="text/css">' +
-        'table ,th, td {' +
-        'border:1px solid black;' +
-        'padding:0.2em;' +
-            ' border-collapse: collapse; ' +
-        '}' +
-        '</style>';
-
-
-        var wme = window.open("p","","a4");
         wme.document.write('<html><head>');
 
-          wme.document.write('</head>');
-          wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center>');
-       wme.document.write('<center><b>LIST OF COVID-19 PATIENTS');
-   wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
-           wme.document.write('<br>');
-    wme.document.write(htmlToPrint);
-                    wme.document.write(style);
-  wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
+        wme.document.write('</head>');
+        wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+        wme.document.write('<center><th><b>LIST OF COVID-19 PATIENTS</b><th>');
+        wme.document.write('<center><b>' + date1 + '<br>' + '<br>');
+        wme.document.write('<br>');
+        wme.document.write(style);
+        wme.document.write(htmlToPrint);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
+
+        wme.document.write(printme.outerHTML);
+
+        wme.document.close();
+        wme.focus();
+        wme.print();
+        wme.refresh();
+        wme.close();
+    }
+}else if(strUser=="Weekly"){
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var date = $('#date-start').val().split('/');
+        var year = date[0];
+        var month = date[1];
+        var day = date[2];
+        var date1 = year
+        var date2 = $('#date-stop').val().split('/');
+        var year1 = date2[0];
+        var month1 = date2[1];
+        var day1 = date2[2];
+        var date3 = year1
+        var printme1 = document.getElementById('example1');
+        var printme = document.getElementById('example');
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+            '}' +
+            '</style>';
+
+
+        var wme = window.open("p", "", "a4");
+        wme.document.write('<html><head>');
+
+        wme.document.write('</head>');
+        wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center>');
+        wme.document.write('<center><b>LIST OF COVID-19 PATIENTS');
+        wme.document.write('<center><b>' + 'From ' + date1 + ' ' + ' to ' + date3 + '<br>' + '<br>');
+        wme.document.write('<br>');
+        wme.document.write(htmlToPrint);
+        wme.document.write(style);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
 
 
         wme.document.write(printme.outerHTML);
@@ -727,32 +748,43 @@ var date3 =  year1
         wme.print();
         wme.refresh();
         wme.close();
+    }
 }else if(strUser=="Monthly"){
-      var printme1=document.getElementById('example1');
-      var printme=document.getElementById('example');
-      var e = document.getElementById('list');
-      var f = document.getElementById('year');
-	var result = e.options[e.selectedIndex].text;
-	var g = f.options[f.selectedIndex].text;
-        var wme = window.open("p","","a4");
-         var htmlToPrint = '' +
-        '<style type="text/css">' +
-        'table ,th, td {' +
-        'border:1px solid black;' +
-        'padding:0.2em;' +
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var printme1 = document.getElementById('example1');
+        var printme = document.getElementById('example');
+        var e = document.getElementById('list');
+        var f = document.getElementById('year');
+        var result = e.options[e.selectedIndex].text;
+        var g = f.options[f.selectedIndex].text;
+        var wme = window.open("p", "", "a4");
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
             ' border-collapse: collapse; ' +
-        '}' +
-        '</style>';
+            '}' +
+            '</style>';
 
-     wme.document.write('<html><head>');
+        wme.document.write('<html><head>');
 
-           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
         wme.document.write('<center><th><b>LIST OF COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + g+' '+result+'<br>'+'<br>' );
-            wme.document.write(htmlToPrint);
-                      wme.document.write(style);
- wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
+        wme.document.write('<center><b>' + g + ' ' + result + '<br>' + '<br>');
+        wme.document.write(htmlToPrint);
+        wme.document.write(style);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
 
 
         wme.document.write(printme.outerHTML);
@@ -763,34 +795,44 @@ var date3 =  year1
         wme.refresh();
         wme.close();
 
-
+    }
 }else if(strUser=="General"){
-      var printme1=document.getElementById('example1');
-      var printme=document.getElementById('example');
-      var e = document.getElementById('list');
-      var f = document.getElementById('year');
-	var result = e.options[e.selectedIndex].text;
-	var g = f.options[f.selectedIndex].text;
-        var wme = window.open("p","","a4");
-         var htmlToPrint = '' +
-        '<style type="text/css">' +
-        'table ,th, td {' +
-        'border:1px solid black;' +
-        'padding:0.2em;' +
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var printme1 = document.getElementById('example1');
+        var printme = document.getElementById('example');
+        var e = document.getElementById('list');
+        var f = document.getElementById('year');
+        var result = e.options[e.selectedIndex].text;
+        var g = f.options[f.selectedIndex].text;
+        var wme = window.open("p", "", "a4");
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
             ' border-collapse: collapse; ' +
-        '}' +
-        '</style>';
+            '}' +
+            '</style>';
 
 
-     wme.document.write('<html><head>');
+        wme.document.write('<html><head>');
 
-           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
         wme.document.write('<center><th><b>LIST OF COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + g+'<br>'+'<br>' );
-            wme.document.write(htmlToPrint);
-                      wme.document.write(style);
- wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
+        wme.document.write('<center><b>' + g + '<br>' + '<br>');
+        wme.document.write(htmlToPrint);
+        wme.document.write(style);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
 
 
         wme.document.write(printme.outerHTML);
@@ -800,6 +842,7 @@ var date3 =  year1
         wme.print();
         wme.refresh();
         wme.close();
+    }
 }
 
 

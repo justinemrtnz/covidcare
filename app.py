@@ -848,6 +848,7 @@ def editCC(username):
 
                                                        })
             db.child("Close Contact").child(username).remove()
+            flash('Successfully logged in!', "success")
         return redirect(url_for('CloseContact'))
 
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
