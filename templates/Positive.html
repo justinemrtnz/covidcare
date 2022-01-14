@@ -256,12 +256,12 @@ font-size: 1.6rem;
     width:190px;
         font-size: .8vw;
 }
-    .btn-secondary1{
+      .btn-secondary1{
     height:35px;
     width:130px;
 }
 
-    .button1{
+.button1{
 	display: block;
 	width: 300%;
 	height: 35px;
@@ -277,6 +277,9 @@ font-size: 1.6rem;
 	margin: 1rem 0;
 	cursor: pointer;
 	transition: .5s;
+}
+.button1:hover{
+	background-position: right;
 }
 </style>
 
@@ -449,12 +452,12 @@ font-size: 1.6rem;
     </div>
    <div style="display: none">
 <div class="elem" id="elem">
-      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: right; margin-top: -16%; margin-left: 35%" ></i>
+      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: right; margin-top: -15%; margin-left: 35%" ></i>
 </div>
         </div>
 <div style="display: none">
 <div class="elem1" id="elem1">
-      <i> <img src="{{url_for('static', filename='DOH.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: left; margin-top: -16%; margin-left: -50%" ></i>
+      <i> <img src="{{url_for('static', filename='DOH.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: left; margin-top: -15%; margin-left: -50%" ></i>
 </div>
         </div>
 
@@ -543,11 +546,10 @@ var date3 =  year1
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
            wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
               wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
-           wme.document.write(document.getElementById("elem").innerHTML);
+          wme.document.write(document.getElementById("elem").innerHTML);
+           wme.document.write(document.getElementById("elem1").innerHTML);
             wme.document.write(htmlToPrint);
 
-           wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(printme1.outerHTML)
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
            wme.document.close();
@@ -573,7 +575,8 @@ var date3 =  year1
 
            wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(printme1.outerHTML)
+           wme.document.write(htmlToPrint);
+
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
            wme.document.close();
@@ -598,9 +601,6 @@ var date3 =  year1
            wme.document.write('<center><b>' + g + '<br>' + '<br>');
             wme.document.write(htmlToPrint);
 
-           wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(printme1.outerHTML)
            wme.document.write(printme.outerHTML);
            wme.document.write(style);
            wme.document.close();

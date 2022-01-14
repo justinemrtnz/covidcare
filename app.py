@@ -511,7 +511,7 @@ def edit1(username):
                                                    "NatureOfContact": NatureOfContact,
                                                    "SignAndSymp": SignAndSymp,
                                                    "doConsultation": doConsultation,
-
+                                                    "dateRecovered":today,
                                                    })
             db.child("Active").child(PatientID).remove()
             db.child("Patients").child(username).update({
