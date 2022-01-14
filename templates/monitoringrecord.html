@@ -2,18 +2,17 @@
 <html>
 <head>
 
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Monitoring Record</title>
+
+    <title>Swab Test Schedule</title>
 <link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
           type = "image/icon" class="icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
     <link rel="stylesheet" href=" https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css">
-
-	<title></title>
-
+</script><script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 {% extends 'base.html' %}
 
@@ -26,20 +25,11 @@
         background: #d5f3fe;
         background-size: cover;
     }
-  .swal-wide{
+.swal-wide{
     height:345px !important;
     width: 380px !important;
 
 }
-    .swal2-popup {
-font-size: 1.6rem;
-}
-    *{
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-    }
-
   .table-container {
     margin-top: 2%;
     background-color: white;
@@ -48,33 +38,7 @@ font-size: 1.6rem;
     backgroud-color: white;
     padding: 20px 20px 20px 20px;
 }
-
-    .heading{
-        font-size: 40px;
-        text-align: center;
-        color: black;
-        margin-bottom: 20px;
-    }
-
-    .table-container tbody tr:nth-of-type(even){
-        background-color: #f3f3f3;
-    }
-
-    .table-container tbody tr:last-of-type{
-        border-bottom:  2px solid#009879;
-    }
-
-    .table-container tbody{
-        border-bottom: 1px solid #dddddd;
-    }
-
-    .table-container thead tr{
-        background-color:  #42adf5;
-        color: #ffffff;
-        text-align: left;
-        font-weight: bold;
-    }
-    body {
+body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
@@ -83,10 +47,43 @@ font-size: 1.6rem;
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
-    .
-    td, th {
+    .table-container {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+    .table-container:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .wrapper thead tr{
+        background-color: #42adf5;
+        color: #ffffff;
         text-align: left;
-        padding: 12px;
+        font-weight: bold;
+        height: 40px;
+    }
+
+
+
+    .wrapper thead tbody tr{
+        border-bottom: 1px solid #dddddd;
+    }
+.swal2-popup {
+font-size: 1.6rem;
+}
+   .wrapper thead tbody tr:nth-of-type(even){
+       background-color: #f3f3f3;
+   }
+
+    .wrapper thead tbody tr:last-of-type{
+        border-bottom:  2px solid#009879;
+    }
+
+   td, th {
+
+        text-align: left;
+        padding: 6px;
         font-size: 1vw;
     }
 
@@ -103,33 +100,6 @@ body::-webkit-scrollbar {
         margin-top: -2%;
         float:right;
         margin-right: 6%;
-
-}
-
-
-    .table-container tbody{
-        border-bottom: 1px solid #dddddd;
-}
-    .table-container thead tr{
-        background-color: #42adf5;
-        color: #ffffff;
-        text-align: left;
-    }
-
-    .table-container {
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-    }
-
-    .table-container:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-
-    td, th {
-
-        text-align: left;
-        padding: 6px;
-        font-size: 1vw;
     }
 
 
@@ -153,38 +123,6 @@ div.shadow1 {
   display: inline-block;
   cursor: pointer;
 }
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  visibility: hidden;
-  width: 350px;
-  background-color: white;
-  color: black;
-  text-align: left;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 3;
-  top: 150%;
- left: -900%;
-  margin-left: -80px;
-      overflow-y: scroll !important;
-      max-height: 300px;
-}
-
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  bottom: 350%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
 .popup .popuptext::-webkit-scrollbar
 {
 height:7px;
@@ -204,6 +142,37 @@ height:7px;
 
     webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
+/* The actual popup (appears on top) */
+.popup .popuptext {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  visibility: hidden;
+  width: 350px;
+  background-color: white;
+  color: black;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 3;
+  top: 150%;
+  left: -900%;
+  margin-left: -80px;
+      overflow-y: scroll !important;
+      max-height: 300px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  bottom: 350%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
   visibility: visible;
@@ -221,18 +190,149 @@ height:7px;
   from {opacity: 0;}
   to {opacity:1 ;}
 }
+.swal2-html-container {
+    z-index: 1;
+    justify-content: center;
+    margin: 1em 1.6em 0.3em;
+    padding: 0;
+    overflow: auto;
+    color: #545454;
+    font-size: .925em;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+::selection{
+  background: rgba(23,162,184,0.3);
+}
+.wrapper{
+  max-width: 91%;
+  width: 100%;
+  margin: 40px auto;
+  padding: 25px 30px 30px 30px;
+  border-radius: 10px;
+  background: #fff;
+    font-size: 1vw;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper header{
+  font-size: 30px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+.wrapper nav{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.wrapper nav label{
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  color: #17a2b8;
+  font-size: 17px;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+.wrapper nav label:hover{
+  background: rgba(23,162,184,0.3);
+}
+#home:checked ~ nav label.home,
+#blog:checked ~ nav label.blog,
+#code:checked ~ nav label.code,
+#help:checked ~ nav label.help,
+  #about:checked ~ nav label.about{
+  color: #fff;
+}
+nav label i{
+  padding-right: 7px;
+}
+nav .slider{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: #17a2b8;
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#blog:checked ~ nav .slider{
+  left: 50%;
+}
+#code:checked ~ nav .slider{
+  left: 50%;
+}
+#help:checked ~ nav .slider{
+  left: 60%;
+}
+#about:checked ~ nav .slider{
+  left: 80%;
+}
+section .content{
+  display: none;
+  background: #fff;
+}
+#home:checked ~ section .content-1,
+#blog:checked ~ section .content-2,
+#code:checked ~ section .content-3,
+#help:checked ~ section .content-4,
+#about:checked ~ section .content-5{
+  display: block;
+}
+section .content .title{
+  font-size: 21px;
+  font-weight: 500;
+  margin: 30px 0 10px 0;
+}
+section .content p{
+text-align: justify;
+}
+
 </style>
+
+
+<div style="position: absolute; z-index: 10; margin-left: 60%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container" >
+    <!--flash-->
+    {% for message in get_flashed_messages() %}
+
+        <script type="text/javascript">
+    Swal.fire({
+  title: "Success!",
+        customClass: 'swal-wide',
+  text: "Patient's swab schedule successfully added",
+  icon: "success",
+  confirmButtonText: "Continue!",
+});
+</script>
+    {% endfor %}
+</div>
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: Poppins; color:#0f0e0f; background: white" id="dashboard">
     <nav>
-	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: 1%; margin-top: 1%">Patient Monitoring Record</p><div class="shadow1"><div  class="popup" onclick="myFunction6()"><a class="iconright">
+	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: 1%; margin-top: 1%">Swab Schedule</p><div class="shadow1"><div  class="popup" onclick="myFunction6()"><a class="iconright">
         <i class="fa fa-bell" aria-hidden="true" style="height: 1.5vw; width: 1.5vw"></i></a>
 <span class="popuptext" id="myPopup">
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
       <p  style="font-size: 14px; text-align: left;  margin-top: -1%; margin-bottom: -1%" >Notification</p>
 </div>
-{% if t == 0 %}
+ {% if t == 0 %}
       {% else %}
-    {% for l in t1 %}
+    {% for l in t %}
   {% if a == l.val().estimatedDateRecovery or b == l.val().estimatedDateRecovery or c == l.val().estimatedDateRecovery or d == l.val().estimatedDateRecovery or e == l.val().estimatedDateRecovery %}
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
 <table  id="Table_id">
@@ -255,8 +355,21 @@ height:7px;
     </div></div><div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
 </div>
 
-<div style="margin-left:7%; margin-right:2%" class = "table-container">
-	  <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
+<div class="wrapper" style="margin-left:7%;">
+
+    <input type="radio" name="slider" checked id="home">
+    <input type="radio" name="slider" id="blog">
+
+    <nav>
+      <label for="home" class="home">Monitoring for Active Patients</label>
+      <label for="blog" class="blog">Monitoring for Close Contact</label>
+      <div class="slider"></div>
+    </nav>
+<section>
+      <div class="content content-1" style="margin-top: 1%">
+
+ <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example" class="sortable" style="width:100%">
             <thead>
             <tr>
@@ -276,6 +389,50 @@ height:7px;
 
         {% else %}
             {% for l in t %}
+{% if l.val().result == "Active" or l.val().result == "Recovered" %}
+                <td>{{l.val().patientID}}</td>
+                <td>{{l.val().date}}</td>
+                <td>{{l.val().time}}</td>
+                <td>{{l.val().bodyTemperature}}</td>
+                <td>{{l.val().symptoms}}</td>
+                <td>{{l.val().medicineTaken}}</td>
+
+                <td><a href="/view2/{{l.val().patientID}}">
+                    <span style="height: 30px; border-radius: 15px" class="btn btn-warning btn-m"><i class="fa fa-eye" aria-hidden="true"> </i>View</span>
+                </a>
+                </td>
+                </form>
+                </td>
+                </tr>
+                 {% endif %}
+            {% endfor %}
+
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+      <div class="content content-2" style="margin-top: 1%">
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <table id="example1" class="sortable" style="width:100%">
+            <thead>
+            <tr>
+                <th>Patient ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Body Temperature</th>
+                 <th>Symptoms</th>
+                <th>Medicine</th>
+
+                <th>View Patient Record</th>
+            </tr>
+            </thead>
+
+        <tbody>
+        {% if t == 0 %}
+
+        {% else %}
+            {% for l in t %}
+{% if l.val().result == "Close Contact"%}
 
                 <td>{{l.val().patientID}}</td>
                 <td>{{l.val().date}}</td>
@@ -291,12 +448,14 @@ height:7px;
                 </form>
                 </td>
                 </tr>
+                {% endif %}
             {% endfor %}
 
         {% endif %}
         </tbody>
     </table>
 </div>
+</section>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -306,15 +465,28 @@ height:7px;
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
 
-    <script>
+   <script>
         $(document).ready(function() {
-            var table = $('#example').DataTable( {
-                  "scrollX": true
-            } );
+              $('#example').DataTable();
 
-            new $.fn.dataTable.FixedHeader( table );
         } );
     </script>
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
+    <script>
+        $(document).ready(function() {
+              $('#example1').DataTable();
+
+        } );
+    </script>
+	</div>
+
 <script>
 // When the user clicks on <div>, open the popup
 function myFunction6() {
@@ -322,7 +494,9 @@ function myFunction6() {
   popup.classList.toggle("show");
 }
 </script>
-</div>
+<script>
+    $(".container" ).fadeOut(5000);
+</script>
 <script>
     var tableSize = $('#Table_id tbody tr').length;
     if (tableSize == 0){
@@ -333,9 +507,8 @@ function myFunction6() {
 
 
     </script>
+
 </body>
-
 {% endblock %}
-
 </html>
 

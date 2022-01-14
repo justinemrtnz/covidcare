@@ -385,7 +385,7 @@ text-align: justify;
         {% else %}
 
             {% for l in t %}
-
+{% if l.val().result == "Active" %}
                 <td>{{l.val().patientID }}</td>
                 <td>{{l.val().patientName}}</td>
 
@@ -402,7 +402,7 @@ text-align: justify;
                 </form>
                 </td>
                 </tr>
-
+{% endif %}
             {% endfor %}
 
             {% endif %}
@@ -428,7 +428,7 @@ text-align: justify;
         {% else %}
 
             {% for l in t2 %}
-
+{% if l.val().result == "Active" %}
                 <td>{{l.val().patientID }}</td>
                 <td>{{l.val().patientName}}</td>
 
@@ -445,7 +445,7 @@ text-align: justify;
                 </form>
                 </td>
                 </tr>
-
+{% endif %}
             {% endfor %}
 
             {% endif %}
