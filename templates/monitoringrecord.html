@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Swab Test Schedule</title>
+    <title>Patient Monitoring</title>
 <link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
           type = "image/icon" class="icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -324,7 +324,7 @@ text-align: justify;
 </div>
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: Poppins; color:#0f0e0f; background: white" id="dashboard">
     <nav>
-	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: 1%; margin-top: 1%">Swab Schedule</p><div class="shadow1"><div  class="popup" onclick="myFunction6()"><a class="iconright">
+	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: 1%; margin-top: 1%">Patient Monitoring Record</p><div class="shadow1"><div  class="popup" onclick="myFunction6()"><a class="iconright">
         <i class="fa fa-bell" aria-hidden="true" style="height: 1.5vw; width: 1.5vw"></i></a>
 <span class="popuptext" id="myPopup">
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
@@ -396,6 +396,7 @@ text-align: justify;
                 <td>{{l.val().bodyTemperature}}</td>
                 <td>{{l.val().symptoms}}</td>
                 <td>{{l.val().medicineTaken}}</td>
+
 
                 <td><a href="/view2/{{l.val().patientID}}">
                     <span style="height: 30px; border-radius: 15px" class="btn btn-warning btn-m"><i class="fa fa-eye" aria-hidden="true"> </i>View</span>

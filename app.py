@@ -239,11 +239,11 @@ def Monitoring():
     today4 = datetime.datetime.now() + datetime.timedelta(days=5)
     date4 = today4.strftime('%d %B %Y')
     dateee = db.child("Patients").get()
-    result = db.child("Monitoring Data").get()
+    result = db.child("Patient Monitoring").get()
     if result.val() == None:
         result2 = 0;
     else:
-        result2 = db.child("Monitoring Data").get()
+        result2 = db.child("Patient Monitoring").get()
     return render_template('monitoringrecord.html', t=result2, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, )
 
 
