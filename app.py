@@ -296,7 +296,7 @@ def edit(username):
         else:
             if result == "Close Contact":
                 db.child("Close Contact").child(username).update({
-                    "swabSchedule": swabdate + " " + swabtime,
+                    "swabSchedule": swabdate + " Time: " + swabtime,
                 })
                 ccount_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
@@ -310,7 +310,7 @@ def edit(username):
                 )
             elif result == "Active":
                 db.child("Patients").child(username).update({
-                    "swabSchedule": swabdate + " " + swabtime,
+                    "swabSchedule": swabdate + " Time: " + swabtime,
                 })
                 ccount_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
@@ -347,7 +347,7 @@ def CCswab(username):
         else:
 
             db.child("Close Contact").child(username).update({
-                "swabSchedule": swabdate + " " + swabtime,
+                "swabSchedule": swabdate + " Time: " + swabtime,
             })
 
             ccount_sid = 'ACd129dfc0753b6b00366bbcbfb09286cf'
