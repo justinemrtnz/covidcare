@@ -65,17 +65,17 @@ body::-webkit-scrollbar {
 
 
 
-    .wrapper thead tbody tr{
+    .content thead tbody tr{
         border-bottom: 1px solid #dddddd;
     }
 .swal2-popup {
 font-size: 1.6rem;
 }
-   .wrapper thead tbody tr:nth-of-type(even){
+   .content thead tbody tr:nth-of-type(even){
        background-color: #f3f3f3;
    }
 
-    .wrapper thead tbody tr:last-of-type{
+    .content thead tbody tr:last-of-type{
         border-bottom:  2px solid#009879;
     }
 
@@ -428,7 +428,7 @@ text-align: justify;
         {% else %}
 
             {% for l in t2 %}
-{% if l.val().result == "Active" %}
+{% if l.val().result == "Close Contact" %}
                 <td>{{l.val().patientID }}</td>
                 <td>{{l.val().patientName}}</td>
 

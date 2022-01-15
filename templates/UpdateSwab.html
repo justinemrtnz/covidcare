@@ -349,6 +349,12 @@ legend.scheduler-border {
 
   </div>
     <div class="row" style="display: none">
+     <div class="column" >
+          <label for="result">Patient Status</label>
+        <input readonly="readonly" style="width:85%;  height: 3%;    font-size: 1vw;background: white" type="text" name="result" placeholder="result"
+               class="form-control"
+         value="{{request.form['result'] or p.val().result}}">
+</div>
     <div class="column" >
           <label for="mobile_num">Mobile Number</label>
         <input readonly="readonly" style="width:85%;  height: 3%;    font-size: 1vw;background: white" type="text" name="mobile_num" placeholder="Mobile_num"

@@ -287,28 +287,44 @@ def edit(username):
         swabdate = request.form['date']
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
+        result = request.form['result']
         Mobile_num = request.form['mobile_num']
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
         elif swabdate < today:
             flash("cannot input previous date!", "warning")
         else:
+            if result == "Close Contact":
+                db.child("Close Contact").child(username).update({
+                    "swabSchedule": swabdate + " " + swabtime,
+                })
+                ccount_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                client = Client(ccount_sid, token)
 
-            db.child("Patients").child(username).update({
-                "swabSchedule": swabdate + " " + swabtime,
-            })
+                message = client.messages.create(
+                    to=Mobile_num,
+                    messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
+                    body="Text Notification!  "
+                         "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                )
+            elif result == "Active":
+                db.child("Patients").child(username).update({
+                    "swabSchedule": swabdate + " " + swabtime,
+                })
+                ccount_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                client = Client(ccount_sid, token)
 
-            ccount_sid = 'ACd129dfc0753b6b00366bbcbfb09286cf'
-            token = "ff52ef5cc8831a56791be7e878d90d6b"
-            client = Client(ccount_sid, token)
-
-            message = client.messages.create(
-                to=Mobile_num,
-                from_='+12058583568',
-                body="Text Notification!  "
-                     "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-            )
+                message = client.messages.create(
+                    to=Mobile_num,
+                    messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
+                    body="Text Notification!  "
+                         "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                )
             flash("Schedule successfully added!")
+
+
             return redirect(url_for('Swab'))
 
     orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
@@ -783,6 +799,7 @@ def editCC(username):
         res3=str(res1+1)
         pID = "KP-" + res3;
         swabSchedule = "Your Swab schedule is not yet available"
+
         if result == "Active":
             db.child(result).child(pID).set({"result": result,
                                                    "password": password,
@@ -848,6 +865,13 @@ def editCC(username):
 
                                                        })
             db.child("Close Contact").child(username).remove()
+            db.child("Patient Monitoring").child(PatientID).remove()
+            flash('Successfully logged in!', "success")
+        elif result == "Cleared":
+            db.child("Close Contact").child(username).update({
+                "result": result,
+            })
+            db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
         return redirect(url_for('CloseContact'))
 
