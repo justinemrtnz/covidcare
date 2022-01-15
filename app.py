@@ -366,7 +366,46 @@ def CCswab(username):
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
 
     return render_template("UpdateCCSwab.html", data=orderedDict, error=error)
+@app.route('/view1/<username>', methods=('GET', 'POST'))
+def view1(username):
+    if request.method == 'POST':
+        Pname = request.form['patientName']
+        PatientID = request.form['PatientID']
+        Birthday = request.form['birthday']
+        Age = request.form['age']
+        Sex = request.form['sex']
+        Mobile_num = request.form['mobile_num']
+        Address = request.form['address']
+        Condition = request.form['condition']
+        CaseStatus = request.form['caseStatus']
+        OtherIllness = request.form['otherIllness']
+        EmergencyCPerson = request.form['emergencyCPerson']
+        EmergencyContactNo = request.form['emergencyContact']
+        username = request.form['username']
+        CivilStatus = request.form['civilStatus']
+        result = request.form['result']
 
+        db.child("Close Contact").child(username).update({
+            "result": result,
+            "patientName": Pname,
+            "patientID": PatientID,
+            "birthday": Birthday,
+            "age": Age,
+            "sex": Sex,
+            "mobile_num": Mobile_num,
+            "address": Address,
+            "condition": Condition,
+            "caseStatus": CaseStatus,
+            "otherIllness": OtherIllness,
+            "emergencyCPerson": EmergencyCPerson,
+            "emergencyContact": EmergencyContactNo,
+            "username": username,
+            "civilStatus": CivilStatus,
+        })
+        return redirect(url_for('home'))
+
+    orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
+    return render_template("ViewPatientInfo.html", data=orderedDict)
 @app.route('/viewCC/<username>', methods=('GET', 'POST'))
 def viewCC(username):
     if request.method == 'POST':

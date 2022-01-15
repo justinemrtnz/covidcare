@@ -56,7 +56,7 @@ body::-webkit-scrollbar {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
 
-    .wrapper thead tr{
+    .content thead tr{
         background-color: #42adf5;
         color: #ffffff;
         text-align: left;
@@ -65,19 +65,25 @@ body::-webkit-scrollbar {
 
 
 
-    .content thead tbody tr{
-        border-bottom: 1px solid #dddddd;
+      .content tbody tr:nth-of-type(even){
+        background-color: #f3f3f3;
     }
-.swal2-popup {
-font-size: 1.6rem;
-}
-   .content thead tbody tr:nth-of-type(even){
-       background-color: #f3f3f3;
-   }
 
-    .content thead tbody tr:last-of-type{
+    .content tbody tr:last-of-type{
         border-bottom:  2px solid#009879;
     }
+
+    .content tbody{
+    border-bottom: 1px solid #dddddd;
+}
+
+    .content thead tr{
+        background-color: #42adf5;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
 
    td, th {
 
@@ -407,7 +413,20 @@ text-align: justify;
 
             {% endif %}
             </tbody>
-        </table>      </div>
+        </table>  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
+
+    <script>
+        $(document).ready(function() {
+              $('#example').DataTable();
+
+        } );
+    </script>     </div>
       <div class="content content-2" style="margin-top: 1%">
  <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example1" class="sortable" style="width:100%">
@@ -451,29 +470,8 @@ text-align: justify;
             {% endif %}
             </tbody>
 
-        </table>
+
         </table>            </div>
-
-    </section>
-  </div>
-
-
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
-
-    <script>
-        $(document).ready(function() {
-            var table = $('#example').DataTable( {
-                  "scrollX": true
-            } );
-
-        } );
-    </script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -488,6 +486,12 @@ text-align: justify;
 
         } );
     </script>
+
+    </section>
+  </div>
+
+
+
 	</div>
 
 <script>
