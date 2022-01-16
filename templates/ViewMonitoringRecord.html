@@ -22,6 +22,7 @@
 <body>
 
 <style>
+
 .button {
     border-radius: 25px;
     height: 35px;
@@ -148,19 +149,17 @@ font-size: 1.6rem;
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
-
 div.shadow {
     position:absolute;
     width: 2.5vw;
     height: 2.5vw;
-   top:35px;
-   left:95%;
+    top:30px;
+    left:95%;
     overflow:visible;
 }
-
 div.shadow1 {
     position:absolute;
-    top:13px;
+    top:12px;
     left:93%;
     overflow:visible;
 }
@@ -279,7 +278,7 @@ div.shadow1 {
 </center>
 </div>
 </div>
-<div id="example1">
+<div id="example1" class="example1">
 <center>
 
 	<table  class="content-table" style="width:100%" id="printTable">
@@ -318,12 +317,12 @@ div.shadow1 {
 </div>
 <br><div style="display: none">
 <div class="elem" id="elem">
-      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -27%; margin-left: 86%" ></i>
+      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -15%; margin-left: 86%" ></i>
 </div>
         </div>
 <div style="display: none">
 <div class="elem1" id="elem1">
-      <i> <img src="{{url_for('static', filename='DOH.png')}}"  id="logo" class="logo" width="90" height="90" style="; margin-top: -27%; margin-left: 0%" ></i>
+      <i> <img src="{{url_for('static', filename='DOH.png')}}"  id="logo" class="logo" width="90" height="90" style="; margin-top: -15%; margin-left: 0%" ></i>
 </div>
         </div>
 	</div>
@@ -341,18 +340,23 @@ div.shadow1 {
         wme.document.write('<html><title></title>');
  var htmlToPrint = '' +
         '<style type="text/css">' +
-        'table ,th, td {' +
+        'th, td {' +
         'border:1px solid black;' +
         'padding:0.2em;' +
+     ' border-collapse: collapse; ' +
+        '}' +
+     '.td2{' +
+     'border:0px solid black;' +
+        'padding:0em;' +
             ' border-collapse: collapse; ' +
         '}' +
         '</style>';
         wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
         wme.document.write('<center><p><b>Patient Monitoring Record<b></p></center>');
-       wme.document.write(document.getElementById("identification").innerHTML);
 
         wme.document.write(document.getElementById("elem").innerHTML);
         wme.document.write(document.getElementById("elem1").innerHTML);
+         wme.document.write(document.getElementById("identification").innerHTML);
  wme.document.write(htmlToPrint);
         wme.document.write(printme.outerHTML);
                 wme.document.write(document.getElementById("elem2").innerHTML);
