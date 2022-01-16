@@ -327,7 +327,12 @@ div.shadow1 {
 </div>
         </div>
 	</div>
-
+<div  style="display: none">
+    <div id="elem2" >
+    <p style="margin-left: 70%; margin-top: 5%">____________________</p>
+    <p style="margin-left: 70%">Prepared by:</p>
+         </div>
+</div>
 <script>
    function makepdf(){
         var printme=document.getElementById('printTable');
@@ -350,6 +355,8 @@ div.shadow1 {
         wme.document.write(document.getElementById("elem1").innerHTML);
  wme.document.write(htmlToPrint);
         wme.document.write(printme.outerHTML);
+                wme.document.write(document.getElementById("elem2").innerHTML);
+
         wme.document.close();
         wme.focus();
         wme.print();

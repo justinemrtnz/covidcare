@@ -393,10 +393,10 @@ legend.scheduler-border {
          value="{{request.form['birthday'] or p.val().birthday}}">
 
   </div><div class="column" style="margin-right:5%">
-    <label>Address</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"
+    <label for="civilStatus">civil Status</label>
+        <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="civilStatus" placeholder="civilStatus"
                class="form-control"
-          value=" {{ p.val().housenum }} {{request.form['address'] or p.val().address}}, {{ p.val().city }}, {{ p.val().province }}">
+         value="{{request.form['civilStatus'] or p.val().civilStatus}}">
     </div>
                      <div class="column" style="margin-left: -5%">
      <label  style="  font-size: .9vw;" for="emergencyContact">Emergency Contact Number</label>

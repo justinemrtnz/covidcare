@@ -456,7 +456,12 @@ height:7px;
 </div>
         </div>
 </div>
-
+<div  style="display: none">
+    <div id="elem2" >
+    <p style="margin-left: 70%; margin-top: 5%">____________________</p>
+    <p style="margin-left: 70%">Prepared by:</p>
+         </div>
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -510,6 +515,7 @@ if (strUser == "Daily"){
         wme.document.write(document.getElementById("elem1").innerHTML);
 
         wme.document.write(printme.outerHTML);
+        wme.document.write(document.getElementById("elem2").innerHTML);
 
         wme.document.close();
         wme.focus();
@@ -545,6 +551,8 @@ var date3 =  year1
             wme.document.write(htmlToPrint);
 
            wme.document.write(printme.outerHTML);
+                   wme.document.write(document.getElementById("elem2").innerHTML);
+
            wme.document.write(style);
            wme.document.close();
            wme.focus();
@@ -568,6 +576,7 @@ var date3 =  year1
         wme.document.write(document.getElementById("elem1").innerHTML);
 
         wme.document.write(printme.outerHTML);
+        wme.document.write(document.getElementById("elem2").innerHTML);
 
         wme.document.close();
         wme.focus();
@@ -593,6 +602,8 @@ var date3 =  year1
         wme.document.write(document.getElementById("elem1").innerHTML);
 
         wme.document.write(printme.outerHTML);
+                wme.document.write(document.getElementById("elem2").innerHTML);
+
         wme.document.close();
         wme.focus();
         wme.print();
@@ -622,6 +633,8 @@ var date3 =  year1
   wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);wme.document.write(printme.outerHTML);
         wme.document.write(printme.outerHTML);
+                wme.document.write(document.getElementById("elem2").innerHTML);
+
 wme.document.write(style);
         wme.document.close();
         wme.focus();

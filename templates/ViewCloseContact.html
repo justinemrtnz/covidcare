@@ -393,10 +393,10 @@ legend.scheduler-border {
          value="{{request.form['birthday'] or p.val().birthday}}">
 
   </div><div class="column" style="margin-right:5%">
-    <label>Address</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"
+      <label for="civilStatus">civil Status</label>
+        <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="civilStatus" placeholder="civilStatus"
                class="form-control"
-          value=" {{ p.val().housenum }} {{request.form['address'] or p.val().address}}, {{ p.val().city }}, {{ p.val().province }}">
+         value="{{request.form['civilStatus'] or p.val().civilStatus}}">
     </div>
                      <div class="column" style="margin-left: -5%">
      <label  style="  font-size: .9vw;" for="emergencyContact">Emergency Contact Number</label>
@@ -511,25 +511,22 @@ legend.scheduler-border {
 
 
           </div>
-            <div class="row">
-            <div class="column"  id="cod1" style="display: none">
-                    <label for="dateandtime">Date and Time of Death</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="caseStatus" id="caseStatus1"
-               class="form-control"
-         value="{{request.form['DTofDeath'] or p.val().DTofDeath}}">
+            <div class="row" style="margin-left: 25%">
+
+    <div class="column" id="cod" style="visibility: collapse; " >
+     <label  for="CauseofDeath" style="margin-left: -40%" >Cause of Death</label>
+          <input  id="CauseofDeath" style="width:98%;margin-left: -6%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
+               class="form-control"></div>
+                  <div class="column"  id="cod1" style="visibility: collapse">
+                    <label for="dateandtime" style="margin-left: -27%">Date and Time of Death</label>
+        <input style="width:98%;  height: 2%; margin-left: 7%;font-size: 1vw; background: white" type="datetime-local" id="dateandtime" name="dateandtime" class="form-control" id="dateandtime">
 
       </div>
-    <div class="column" id="cod" style="display: none">
-     <label  for="CauseofDeath">Cause of Death</label>
-           <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="caseStatus" id="caseStatus1"
-               class="form-control"
-         value="{{request.form['CauseOfDeath'] or p.val().CauseOfDeath}}">
                 <div class="column">
                      <label class="show_button" for="check" style="margin-left: 91%; margin-top: 5%"> Update</label>
                 </div>
 
           </div>
-            </div>
           </fieldset></div></div>
 
  <!-- fourth row -->
