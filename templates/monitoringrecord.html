@@ -367,16 +367,16 @@ text-align: justify;
 
  <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example" class="sortable" style="width:100%">
-            <thead>
+          <thead>
             <tr>
-                <th>Patient ID</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Body Temperature</th>
-                 <th>Symptoms</th>
-                <th>Medicine</th>
+                <th style="font-size: .95vw; width: 8%">Patient ID</th>
+                <th style="font-size: .95vw">Date</th>
+                <th style="font-size: .95vw">Time</th>
+                <th style="font-size: .95vw; width: 14%">Body Temperature</th>
+                 <th style="font-size: .95vw">Symptoms</th>
+                <th style="font-size: .95vw">Medicine</th>
 
-                <th>View Patient Record</th>
+                <th style="font-size: .8vw">View Patient Record</th>
             </tr>
             </thead>
 
@@ -386,12 +386,12 @@ text-align: justify;
         {% else %}
             {% for l in t %}
 {% if l.val().result == "Active" or l.val().result == "Recovered" %}
-                <td>{{l.val().patientID}}</td>
-                <td>{{l.val().date}}</td>
-                <td>{{l.val().time}}</td>
-                <td>{{l.val().bodyTemperature}}</td>
-                <td>{{l.val().symptoms}}</td>
-                <td>{{l.val().medicineTaken}}</td>
+              <td  style="font-size: .95vw; width: 8%">{{l.val().patientID}}</td>
+                <td  style="font-size: .95vw">{{l.val().date}}</td>
+                <td  style="font-size: .95vw">{{l.val().time}}</td>
+                <td  style="font-size: .95vw; width: 14%">{{l.val().bodyTemperature}}</td>
+                <td  style="font-size: .9vw">{{l.val().symptoms}}</td>
+                <td  style="font-size: .9vw">{{l.val().medicineTaken}}</td>
 
 
                 <td><a href="/view2/{{l.val().patientID}}">
@@ -413,14 +413,14 @@ text-align: justify;
         <table id="example1" class="sortable" style="width:100%">
             <thead>
             <tr>
-                <th>Patient ID</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Body Temperature</th>
-                 <th>Symptoms</th>
-                <th>Medicine</th>
+                <th style="font-size: .95vw; width: 8%">Patient ID</th>
+                <th style="font-size: .95vw">Date</th>
+                <th style="font-size: .95vw">Time</th>
+                <th style="font-size: .95vw; width: 14%">Body Temperature</th>
+                 <th style="font-size: .95vw">Symptoms</th>
+                <th style="font-size: .95vw">Medicine</th>
 
-                <th>View Patient Record</th>
+                <th style="font-size: .8vw">View Patient Record</th>
             </tr>
             </thead>
 
@@ -431,12 +431,12 @@ text-align: justify;
             {% for l in t %}
 {% if l.val().result == "Close Contact"%}
 
-                <td>{{l.val().patientID}}</td>
-                <td>{{l.val().date}}</td>
-                <td>{{l.val().time}}</td>
-                <td>{{l.val().bodyTemperature}}</td>
-                <td>{{l.val().symptoms}}</td>
-                <td>{{l.val().medicineTaken}}</td>
+                <td  style="font-size: .95vw; width: 8%">{{l.val().patientID}}</td>
+                <td  style="font-size: .95vw">{{l.val().date}}</td>
+                <td  style="font-size: .95vw">{{l.val().time}}</td>
+                <td  style="font-size: .95vw; width: 14%">{{l.val().bodyTemperature}}</td>
+                <td  style="font-size: .9vw">{{l.val().symptoms}}</td>
+                <td  style="font-size: .9vw">{{l.val().medicineTaken}}</td>
 
                 <td><a href="/view2/{{l.val().patientID}}">
                     <span style="height: 30px; border-radius: 15px" class="btn btn-warning btn-m"><i class="fa fa-eye" aria-hidden="true"> </i>View</span>

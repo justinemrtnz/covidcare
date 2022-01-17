@@ -396,11 +396,11 @@ text-align: justify;
 
             {% for l in t %}
 {% if l.val().result == "Active" %}
-                <td>{{l.val().patientID }}</td>
-                <td>{{l.val().patientName}}</td>
+                <td style="width: 10%">{{l.val().patientID }}</td>
+                <td style="width: 15%">{{l.val().patientName}}</td>
 
- <td>{{l.val().result }}</td>
-                 <td>{{l.val().swabSchedule }}</td>
+ <td > {{l.val().result }}</td>
+                 <td style="font-size: .9vw">{{l.val().swabSchedule }}</td>
                 <td>
                     <a href="/view/{{l.key()}}">
                     <span  style="height: 30px; font-size: .9vw; border-radius: 15px" class="btn btn-warning btn-m" ><i class="fa fa-eye" aria-hidden="true"></i> View Schedule</span>
@@ -452,11 +452,11 @@ text-align: justify;
 
             {% for l in t2 %}
 {% if l.val().result == "Close Contact" %}
-                <td>{{l.val().patientID }}</td>
-                <td>{{l.val().patientName}}</td>
+                <td style="width: 10%">{{l.val().patientID }}</td>
+                <td style="width: 15%">{{l.val().patientName}}</td>
 
- <td>{{l.val().result }}</td>
-                 <td>{{l.val().swabSchedule }}</td>
+ <td > {{l.val().result }}</td>
+                 <td style="font-size: .9vw">{{l.val().swabSchedule }}</td>
                 <td>
                     <a href="/viewCCswab/{{l.key()}}">
                     <span  style="height: 30px; font-size: .9vw; border-radius: 15px" class="btn btn-warning btn-m" ><i class="fa fa-eye" aria-hidden="true"></i> View Schedule</span>
