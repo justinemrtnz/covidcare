@@ -308,6 +308,7 @@ def edit(username):
                     body="Text Notification!  "
                          "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
                 )
+                return redirect(url_for('Swab'))
             elif result == "Active":
                 db.child("Patients").child(username).update({
                     "swabSchedule": swabdate + " Time: " + swabtime,
@@ -323,8 +324,6 @@ def edit(username):
                          "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
                 )
             flash("Schedule successfully added!")
-
-
             return redirect(url_for('Swab'))
 
     orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
