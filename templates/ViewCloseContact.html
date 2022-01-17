@@ -4,14 +4,15 @@
 
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Patient Information</title>
-<link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
+    <title>View Close Contact</title>
+    <link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
           type = "image/icon" class="icon">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
     <link rel="stylesheet" href=" https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css">
-<
+      <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<title>Patient Information</title>
 
 </head>
@@ -23,26 +24,30 @@
 
 
 <style>
-  html{
+    html{
          overflow-y: scroll;
     }
 body{
     overflow-y:scroll;
 }
- .alert{
-  background: greenyellow;
-  padding: 20px 40px;
-  min-width: 420px;
-  position: absolute;
-  right: 0;
-  top: 10px;
-  border-radius: 4px;
-  border-left: 8px solid #ffa502;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
+.datee {
+    display: block;
+    width: 85%;
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-
 @keyframes show_slide {
   0%{
     transform: translateX(100%);
@@ -73,8 +78,7 @@ body{
   }
 }
 
-       .row {
-  margin-left:15%;
+       .row {margin-left:15%;
 }
 
 .column {
@@ -91,7 +95,7 @@ body{
         font-family: 'Poppins';
         font-size: 1vw;
  }input {
-               margin-left: 35%;
+ margin-left: 35%;
  font-family: 'Poppins', sans-serif;
 
    }
@@ -105,7 +109,11 @@ body{
         transition: 0.3s;
         border-radius: 10px;backgroud-color: white;
     }
-
+.table-container1{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border-radius: 10px;backgroud-color: white;
+    }
     label{
         font-size: 1vm;
     }
@@ -117,6 +125,9 @@ body{
     .table-container:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
+    .table-container1:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
 
   .table-container {
     margin-top: 2%;
@@ -125,6 +136,14 @@ body{
     border-radius: 10px;
     backgroud-color: white;
     padding: 20px 20px 20px 20px;
+}
+  .table-container1{
+    margin-top: 2%;
+    background-color: white;
+    font-size: .8vw;
+    border-radius: 10px;
+    backgroud-color: white;
+    padding: 20px 20px 30px 20px;
 }
   body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -143,12 +162,7 @@ body::-webkit-scrollbar {
     margin-top:-50%;
     margin-left:-50%;
 }
-    .txtright{
-        margin-top: -2%;
-        float:right;
-        margin-right: 6%;
 
-}
 div.shadow {
     position:absolute;
     width: 2.5vw;
@@ -164,35 +178,34 @@ div.shadow1 {
     overflow:visible;
 }
 
+
 .alert_box {
     position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50% , -50%);
 }
+
 .show_button{
-  position: absolute;
-  top: 75%;
-  left: 53.5%;
-  transform: translate(-50% , -50%);
-}
-.show_button{
-  height: 30px;
-    width: 110px;
-  padding: 0 30px;
-  font-size: 1vw;
-  font-weight: 400;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  color: #fff;
-  line-height: 30px;
-  background: #2980b9;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+ display: block;
+	width: 100px;
+	height: 35px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+    padding: 5px 18px ;
+	background-image: linear-gradient(to right, #42adf5, deepskyblue, skyblue);
+	background-size: 200%;
+	font-size: 16px;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
 }
 .show_button:hover{
-  background: #2573a7;
+  background-position: right;
 }
 .background{
   position: absolute;
@@ -215,7 +228,7 @@ div.shadow1 {
   max-width: 450px;
   width: 100%;
   border-radius: 5px;
-  z-index: 5;
+  z-index: 100;
   opacity: 0;
   pointer-events: none;
   transform: translate(-50% , -50%) scale(0.97);
@@ -258,10 +271,10 @@ div.shadow1 {
   display: inline-flex;
   height: 45px;
   padding: 0 55px;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 21px;
+  font-weight: 300;
   cursor: pointer;
-  line-height: 55px;
+  line-height: 45px;
   outline: none;
   margin: 0 20px;
   border: none;
@@ -281,27 +294,41 @@ div.shadow1 {
 .btns label:last-child:hover{
   background: #d9210d;
 }
-fieldset.scheduler-border {
-    border: solid 2px gray !important;
-    padding: 0 10px 10px 10px;
-    border-bottom: none;
-}
 input:hover, textarea:hover, select:hover {
       outline: none;
       border: 1px solid #095484;
       background: #e6eef7;
       }
+fieldset.scheduler-border {
+    border: solid 2px gray !important;
+    padding: 0 10px 10px 10px;
+    border-bottom: none;
+}
+
 legend.scheduler-border {
     width: auto !important;
     border: none;
     font-size: 14px;
 }
 </style>
+<div style="position: absolute; z-index: 5;margin-left: 70%; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container" >
+    <!--flash-->
+    {% for message in get_flashed_messages() %}
+        <script type="text/javascript">
+    Swal.fire({
+  title: "Success!",
+        customClass: 'swal-wide',
+  text: "Update Successfully!",
+  icon: "success",
+  confirmButtonText: "Continue!",
+});
+</script>
 
-	<div style=" max-width:2000px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#0f0e0f; background: white" id="dashboard">
-    <nav>
+    {% endfor %}
+</div>
+	<div style="max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#0f0e0f; background: white" id="dashboard">
 
-	<p style="alignment: left; margin-left:110px; font-size: 1vw;margin-bottom: .5%;margin-top: .5%; font-weight: 500">Close Contact > View</p>
+	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%">Close Contact > View</p>
         <div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
 	</div>
 
@@ -309,15 +336,26 @@ legend.scheduler-border {
 
 
 
-<!--flash-->
-  {% for message in get_flashed_messages() %}
-        <div class="alert alert-danger alert-dismissible" role="alert" style="min-height: 100%; width:80%">
-  {{message}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true"></span>
-  </button>
-</div>
-    {% endfor %}
+
+<div class="container">
+      <input type="checkbox" id="check">
+      <div class="background"></div>
+      <div class="alert_box">
+        <div class="icon">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </div>
+        <header>Confirm</header>
+        <p>Are you sure want to update the patient status?</p>
+        <div class="btns"> <button style="margin-left: -100%; margin-top: -7%; width: 140px"
+         type="submit"
+         class="btn btn-primary btn-lg"
+         value="Update" >Yes</button>
+         <label style="margin-left: 2%; margin-top: -1.65%; width: 140px; position: absolute; text-align: center"
+         for="check">No</label>
+        </div>
+      </div>
+    </div>
+<div class="textbox">
 
 <div class="textbox">
 
@@ -523,7 +561,7 @@ legend.scheduler-border {
 
       </div>
                 <div class="column">
-                     <label class="show_button" for="check" style="margin-left: 91%; margin-top: 5%"> Update</label>
+
                 </div>
 
           </div>

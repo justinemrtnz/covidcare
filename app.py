@@ -907,9 +907,7 @@ def editCC(username):
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
         elif result == "Cleared":
-            db.child("Close Contact").child(username).update({
-                "result": result,
-            })
+            db.child("Close Contact").child(username).remove()
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
         return redirect(url_for('CloseContact'))
