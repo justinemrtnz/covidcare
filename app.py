@@ -298,14 +298,14 @@ def edit(username):
                 db.child("Close Contact").child(username).update({
                     "swabSchedule": swabdate + " Time: " + swabtime,
                 })
-                ccount_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(ccount_sid, token)
+                client = Client(count_sid, token)
 
                 message = client.messages.create(
                     to=Mobile_num,
                     messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
-                    body="Text Notification!  "
+                    body="Text Notification!  \n"
                          "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
                 )
                 return redirect(url_for('Swab'))
@@ -313,14 +313,14 @@ def edit(username):
                 db.child("Patients").child(username).update({
                     "swabSchedule": swabdate + " Time: " + swabtime,
                 })
-                ccount_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(ccount_sid, token)
+                client = Client(count_sid, token)
 
                 message = client.messages.create(
                     to=Mobile_num,
                     messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
-                    body="Text Notification!  "
+                    body="Text Notification! \n"
                          "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
                 )
             flash("Schedule successfully added!")
@@ -349,14 +349,14 @@ def CCswab(username):
                 "swabSchedule": swabdate + " Time: " + swabtime,
             })
 
-            ccount_sid = 'ACd129dfc0753b6b00366bbcbfb09286cf'
-            token = "ff52ef5cc8831a56791be7e878d90d6b"
-            client = Client(ccount_sid, token)
+            count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+            token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+            client = Client(count_sid, token)
 
             message = client.messages.create(
                 to=Mobile_num,
-                from_='+12058583568',
-                body="Text Notification!  "
+                messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
+                body="Text Notification!  \n"
                      "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
             )
             flash("Schedule successfully added!")
