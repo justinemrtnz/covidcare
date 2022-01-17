@@ -488,20 +488,11 @@ legend.scheduler-border {
 </div>
 <div class="column" >
          <label for="result">Patient Status</label>
-                 {% if p.val().result == "Active" %}
-<select onchange="select()" style="width:85%;  margin-left: 35%;  height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
-<option value="{{ p.val().result }}">{{ p.val().result }}</option>
-    <option value="Cleared">Cleared</option>
-
-                                              <option value="Close Contact">Close Contact</option>
-
-                       {% elif p.val().result == "Close Contact" %}
                      <select onchange="select()" style="width:85%;   margin-left: 35%; height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
 <option value="{{ p.val().result }}">{{ p.val().result }}</option>
     <option value="Active">Active</option>
     <option value="Cleared">Cleared</option>
 
-    {% endif %}
 
 </select>
     </div>
@@ -671,53 +662,6 @@ legend.scheduler-border {
   </div>
 
 </div></form>
-<script>
-    function select() {
-
-
-        var main_select = document.getElementById("result");
-        var select_1 = document.getElementById("cod");
-          var select_2 = document.getElementById("cod1");
-           var select_3 = document.getElementById("Condition");
-         var str1 = document.getElementById("condition1");
-         var str2 = document.getElementById("caseStatus");
-                  var str3 = document.getElementById("caseStatus1");
-
-
-        var desired_box = main_select.options[main_select.selectedIndex].value;
-        if (desired_box === "Active") {
-               select_1.style.visibility = 'collapse';
-               select_2.style.visibility = 'collapse';
-                select_3.style.display = '';
-                str1.style.display='none';
-                str2.style.display='';
-                str3.style.display='none';
-
-        } else if (desired_box === "Recovered") {
-           select_1.style.visibility = 'collapse';
-               select_2.style.visibility = 'collapse';
-            select_3.style.display = 'none';
-            str1.style.display = '';
-            str2.style.display='none';
-            str3.style.display='';
-        } else if (desired_box === "Deceased") {
-            select_1.style.visibility = '';
-                select_2.style.visibility = '';
-                select_3.style.display = 'none';
-                  str1.style.display = '';
-                  str2.style.display='none';
-                str3.style.display='';
-        }
-        else if (desired_box === "Close Contact") {
-            select_1.style.visibility = 'collapse';
-               select_2.style.visibility = 'collapse';
-            select_3.style.display = 'none';
-            str1.style.display = ''; str2.style.display='none';
-                str3.style.display='';
-
- }
-    }
-</script>
 
 </body>
 {% endblock %}
