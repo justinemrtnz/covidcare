@@ -1,11 +1,8 @@
 import json
 from datetime import datetime
 import sys
-import pendulum
 import pyrebase
 import datetime
-import smtplib
-import os
 from twilio.rest import Client
 
 firebaseConfig = {
