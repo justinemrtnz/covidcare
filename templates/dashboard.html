@@ -444,7 +444,7 @@ height:7px;
     {% endfor %}
 </div>
 <div class="shadow1"><div  class="popup" onclick="myFunctions()"><a class="iconright">
-        <i class="fa fa-bell" aria-hidden="true" style="height: 1.5vw; width: 1.5vw"></i><i class="fa fa-circle" aria-hidden="true" id="notif" style="font-size: 0.5em;   color: red; margin-top: -5%"></i></a>
+        <i class="fa fa-bell" aria-hidden="true" style="height: 1.5vw; width: 1.5vw"></i></a>
 <span class="popuptext" id="myPopup">
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
       <p  style="font-size: 14px; text-align: left;  margin-top: -1%; margin-bottom: -1%" >Notification</p>
@@ -508,12 +508,13 @@ height:7px;
     <div class="col-md-3 market-update-gd" style="width: 20%">
       <div class="market-update-block clr-block-1">
         <div class="col-md-8 market-update-left" onclick="document.getElementById('hide1').style.display='block'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none'; document.getElementById('active').style.display='block';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';">
-         <h3 style="font-size: .899vw">Active</h3>
+         <h3>Active</h3>
          {% if t5 == None %}
 	<h3>0</h3>
 {% else %}
 	 <h3>{{ t5 }}</h3>
 {% endif %}
+        <br>
         </div>
         <div class="col-md-3 market-update-right">
         <i class="fa fa-check" aria-hidden="true"></i>
@@ -525,13 +526,13 @@ height:7px;
       <div class="market-update-block clr-block-2">
         <div class="col-md-8 market-update-left" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='block';document.getElementById('hide3').style.display='none';document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='block';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';">
 
-  <h3 style="font-size: .899vw">Recovered</h3>
+  <h3>Recovered</h3>
 {% if t2 == None %}
 	<h3>0</h3>
 {% else %}
 	 <h3>{{ t2 }}</h3>
 {% endif %}
-
+<br>
         </div>
         <div class="col-md-3 market-update-right">
         <i class="fa fa-medkit" aria-hidden="true">
@@ -544,7 +545,7 @@ height:7px;
   <div class="col-md-3 market-update-gd" style="width: 20%">
       <div class="market-update-block clr-block-3">
         <div class="col-md-8 market-update-left" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='block'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='block';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';">
-             <h3 style="font-size: .899vw">Deceased</h3>
+             <h3>Deceased</h3>
 
          {% if t1 == None %}
 	<h3>0</h3>
@@ -552,7 +553,7 @@ height:7px;
 	 <h3>{{ t1 }}</h3>
 {% endif %}
 
-
+<br>
         </div>
         <div class="col-md-3 market-update-right">
                      <i class="fa fa-times" aria-hidden="true"></i>
@@ -565,12 +566,14 @@ height:7px;
       <div class="market-update-block clr-block-5">
           <div class="col-md-8 market-update-left" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none';document.getElementById('hide4').style.display='block'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='block';">
 
-         <h3 style="font-size: .8vw">Close Contact</h3>
+         <h3>Close</h3>
+          <h3 style="margin-top: -10px">Contact</h3>
          {% if t7 == None %}
 	<h3>0</h3>
 {% else %}
 	 <h3>{{ t7 }}</h3>
 {% endif %}
+
         </div>
         <div class="col-md-3 market-update-right">
            <i class="fa fa-handshake-o" aria-hidden="true"></i>
@@ -583,7 +586,7 @@ height:7px;
       <div class="col-md-3 market-update-gd" style="width: 20%">
       <div class="market-update-block clr-block-4">
         <div class="col-md-8 market-update-left">
-         <h3 style="font-size: .76vw">Confirmed Cases</h3>
+         <h3>Confirmed Cases</h3>
          {% if t5 == None %}
 	<h3>0</h3>
 {% else %}
