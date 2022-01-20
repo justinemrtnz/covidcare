@@ -522,9 +522,8 @@ legend.scheduler-border {
     <option value="Deceased">Deceased</option>
                      {% elif p.val().result == "Deceased" %}
                      <select onchange="select()" style="width:85%;  margin-left: 35%; height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
-<option value="{{ p.val().result }}">{{ p.val().result }}</option>
-    <option value="Active">Active</option>
-    <option value="Deceased">Deceased</option>
+<option value="Deceased">{{ p.val().result }}</option>
+
 
     {% endif %}
 
