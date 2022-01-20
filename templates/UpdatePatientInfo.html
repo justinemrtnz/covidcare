@@ -308,7 +308,43 @@ legend.scheduler-border {
     font-size: 14px;
 }
 </style>
+     <div >
+        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+            {% if errors %}
+                {%- for message in errors %}s
+<script type="text/javascript">
+    Swal.fire({
+  title: "Failed!",
+  text: "Login Failed!",
+        customClass: 'swal-wide',
+  icon: "error",
+        confirmButtonColor: "#3b83dc",
+ confirmButtonText: "Continue!",
+});
+</script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
 
+    <div>
+        {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
+    Swal.fire({
+  title: "Failed!",
+  text: "Login Failed!",
+        customClass: 'swal-wide',
+  icon: "error",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
+});
+</script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
 	<div style="max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#0f0e0f; background: white" id="dashboard">
 
 	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%">Patient Information > Update</p>
@@ -454,6 +490,8 @@ legend.scheduler-border {
 
 
 <i style="position: absolute; pointer-events: none ; margin-left: 4%"> <img src="{{url_for('static', filename='health.png')}}" class="icon" width="30%" height="30%"  style="margin-top: 13%"></i>
+                                <label class="show_button" for="check" style="margin-left: 91%; "> Update</label>
+
           <div class="row" >
   <div class="column" >
         <label for="dateAdmitted" style="    font-size: 1vw;">Date Admitted</label>
@@ -567,12 +605,15 @@ legend.scheduler-border {
           <input  id="CauseofDeath" style="width:98%;margin-left: -6%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
                class="form-control"></div>
                   <div class="column"  id="cod1" style="visibility: collapse">
-                    <label for="dateandtime" style="margin-left: -27%">Date and Time of Death</label>
-        <input style="width:98%;  height: 2%; margin-left: 7%;font-size: 1vw; background: white" type="datetime-local" id="dateandtime" name="dateandtime" class="form-control" id="dateandtime">
+                    <label for="date" style="margin-left: -27%">Date of Death</label>
+        <input style="width:98%;  height: 2%; margin-left: 7%;font-size: 1vw; background: white" type="date" id="date" name="date" class="form-control" id="date">
+
+      </div> <div class="column"  id="cod2" style="visibility: collapse">
+                    <label for="time" style="margin-left: -14%"> Time of Death</label>
+        <input style="width:98%;  height: 2%; margin-left: 21%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
 
       </div>
                 <div class="column">
-                     <label class="show_button" for="check" style="margin-left: 91%; margin-top: 5%"> Update</label>
                 </div>
 
           </div>
@@ -664,6 +705,7 @@ legend.scheduler-border {
         var main_select = document.getElementById("result");
         var select_1 = document.getElementById("cod");
           var select_2 = document.getElementById("cod1");
+          var select_4 = document.getElementById("cod2");
            var select_3 = document.getElementById("Condition");
          var str1 = document.getElementById("condition1");
          var str2 = document.getElementById("caseStatus");
@@ -678,6 +720,7 @@ legend.scheduler-border {
                 str1.style.display='none';
                 str2.style.display='';
                 str3.style.display='none';
+                              select_4.style.visibility = 'collapse';
 
         } else if (desired_box === "Recovered") {
            select_1.style.visibility = 'collapse';
@@ -687,6 +730,8 @@ legend.scheduler-border {
             str1.style.display = '';
             str2.style.display='none';
             str3.style.display='';
+                                          select_4.style.visibility = 'collapse';
+
         } else if (desired_box === "Deceased") {
             select_1.style.visibility = '';
                 select_2.style.visibility = '';
@@ -694,10 +739,14 @@ legend.scheduler-border {
                   str1.style.display = '';
                   str2.style.display='none';
                 str3.style.display='';
+                                              select_4.style.visibility = '';
+
         }
         else if (desired_box === "Close Contact") {
             select_1.style.visibility = 'collapse';
                select_2.style.visibility = 'collapse';
+                              select_4.style.visibility = 'collapse';
+
             select_3.style.display = 'none';
             str1.style.display = ''; str2.style.display='none';
                 str3.style.display='';

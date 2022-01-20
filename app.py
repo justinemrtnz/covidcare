@@ -491,7 +491,7 @@ def view2(PatientID):
 
 @app.route('/edit1/<username>', methods=('GET', 'POST'))
 def edit1(username):
-    from datetime import datetime
+    from datetime import datetime, timedelta
     dt = datetime.today().strftime("%B %d, %Y %H:%M:%S")
 
     today = datetime.today().strftime('%d %B %Y ')
@@ -601,7 +601,10 @@ def edit1(username):
 
         elif result == "Deceased":
             COD = request.form['CauseofDeath']
-            dateandtime = request.form['dateandtime']
+            dateandtime = request.form['date']
+            dateandtime1 = request.form['time']
+            ate_time_obj = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%d %B %Y ')
+
             db.child(result).child(PatientID).set({"result": result,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
@@ -620,11 +623,12 @@ def edit1(username):
                                                    "emergencyContact": emergencyContact,
                                                    "username": username,
                                                    "civilStatus": CivilStatus,
-                                                   "dayDied": today4,
                                                    "dateAdmitted": dateAdmitted,
-                                                   "dateDied": today,
+                                                   "dateDied": ate_time_obj,
+                                                   "dayDied": ate_time_obj,
+
                                                    "CauseOfDeath": COD,
-                                                   "DTofDeath": dateandtime,
+                                                   "DTofDeath": dateandtime + "Time: " + dateandtime1,
                                                    "PIcontact": PIcontact,
                                                    "NatureOfContact": NatureOfContact,
                                                    "SignAndSymp": SignAndSymp,
@@ -634,6 +638,8 @@ def edit1(username):
             db.child("Active").child(PatientID).remove()
             db.child("Patients").child(username).update({
                 "result": result,
+                "dateDied": ate_time_obj,
+                "dayDied": ate_time_obj,
                 "CauseOfDeath": COD,
                 "patientName": Pname,
                 "patientID": PatientID,
@@ -657,7 +663,7 @@ def edit1(username):
                 "SignAndSymp": SignAndSymp,
                 "doConsultation": doConsultation,
                 "NatureOfContact": NatureOfContact,
-                "DTofDeath": dateandtime,
+                "DTofDeath": dateandtime + "Time: " + dateandtime1,
             })
         elif result == "Active":
             db.child(result).child(PatientID).set({"result": result,
