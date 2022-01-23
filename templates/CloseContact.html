@@ -278,6 +278,7 @@ height:7px;
    height:34px;
     width:190px;
         font-size: .8vw;
+        margin-left: -1%;
 
 }
     .btn-secondary1{
@@ -351,7 +352,7 @@ height:7px;
          <i style="padding-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
          </div>
     </div>
- <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups" >
+ <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups"  style="margin-left: -.65%">
 
   <div class="btn-group mr-2" role="group" aria-label="First group" >
       <p style="font-size: .8vw; margin-bottom: -1px;display: none " id="day1">Date</p>
@@ -366,50 +367,13 @@ height:7px;
     <input  style="display: none" id="date-stop" type="date" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
   </div>
 
-
-      <div class="btn-group mr-2" role="group" aria-label="Second group">
-       <p style="font-size: .8vw; margin-bottom: -1px;display:none;" id="year1">Year</p>
-        <select  style="display: none"  id="year"  name="year" onchange="myFunction2()" class='form-control btn-secondary' >
-     <option > Year</option>
-<option value="2020">2020</option>
-    <option value="2021">2021</option>
-    <option value="2022">2022</option>
-    <option value="2023">2023</option>
-    <option value="2024">2025</option>
-    <option value="2026">2026</option>
-    <option value="2027">2027</option>
-    <option value="2028">2028</option>
-     <option value="2029">2029</option>
-
-</select>
-  </div>
-
-  <div class="btn-group" role="group" aria-label="Third group" >
-      <p style="font-size: .8vw; margin-bottom: -1px; display:none;" id="list1">Month</p>
-      <select  style="display: none" id="list"  name="result" onchange="myFunction()" class='form-control btn-secondary' >
-     <option value=" ">Month</option>
-<option value="January">January</option>
-    <option value="February">February</option>
-    <option value="March">March</option>
-    <option value="April">April</option>
-    <option value="May">May</option>
-    <option value="June">June</option>
-    <option value="July">July</option>
-    <option value="August">August</option>
-    <option value="September">September</option>
-     <option value="October">October</option>
-<option value="November">November</option>
-<option value="December">December</option>
-</select>
-  </div>
       <div class="btn-group mr-2" role="group" aria-label="First group" >
-      <p style="font-size: .8vw; margin-bottom: -1px">Report Type</p>
+      <p style="font-size: .8vw; margin-bottom: -1px; ">Report Type</p>
            <select  id="print"  name="print" class='form-control btn-secondary' onchange="select()" >
      <option value="Report">---</option>
 <option value="Daily">Daily</option>
     <option value="Weekly">Weekly</option>
-    <option value="Monthly">Monthly</option>
-    <option value="General">General</option>
+
 
 </select>
     </button>
