@@ -300,10 +300,10 @@ def edit(username):
                 client = Client(count_sid, token)
 
                 message = client.messages.create(
-                    messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
+                    from_='+1 903 493 9890',
                     to=Mobile_num,
                     body="Text Notification!  \n"
-                         "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
                 )
                 return redirect(url_for('Swab'))
             elif result == "Active":
@@ -315,10 +315,10 @@ def edit(username):
                 client = Client(count_sid, token)
 
                 message = client.messages.create(
-                    messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
+                    from_='+1 903 493 9890',
                     to=Mobile_num,
-                    body="Text Notification!  \n"
-                         "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                    body="Text Notification!\n"
+                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
                 )
             flash("Schedule successfully added!")
             return redirect(url_for('Swab'))
@@ -351,10 +351,10 @@ def CCswab(username):
             client = Client(count_sid, token)
 
             message = client.messages.create(
-                messaging_service_sid='MG4d0dca8117cc86d69359a45a251af1ba',
+                from_='+1 903 493 9890',
                 to=Mobile_num,
                 body="Text Notification!  \n"
-                     "RHU Kalayaan has set a date for your swab test! \n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                     "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
             )
             flash("Schedule successfully added!")
             return redirect(url_for('Swab'))
