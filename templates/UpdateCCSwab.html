@@ -24,19 +24,22 @@
 
 <body>
 <div style="position: absolute; z-index: 10; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container1" >
-    <!--flash-->
-    {% for message in get_flashed_messages() %}
-       <script type="text/javascript">
+     {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
     Swal.fire({
   title: "Failed!",
+  text: "Phone Number Cannot Reach",
         customClass: 'swal-wide',
-  text: "Set Schedule Failed",
   icon: "error",
-  confirmButtonText: "Retry!",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
 });
 </script>
-
-    {% endfor %}
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
 </div>
 <style>
      .row {
@@ -411,7 +414,10 @@ legend.scheduler-border {
  <script>
     $(".container1" ).fadeOut(5000);
 </script>
-
+<script>
+    var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("date")[0].setAttribute('min', today);
+</script>
 </body>
 
 {% endblock %}

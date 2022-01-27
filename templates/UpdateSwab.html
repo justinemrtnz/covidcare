@@ -24,19 +24,22 @@
 
 <body>
 <div style="position: absolute; z-index: 10; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container1" >
-    <!--flash-->
-    {% for message in get_flashed_messages() %}
-       <script type="text/javascript">
+     {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
     Swal.fire({
   title: "Failed!",
+  text: "Phone Number Cannot Reach",
         customClass: 'swal-wide',
-  text: "Set Schedule Failed",
   icon: "error",
-  confirmButtonText: "Retry!",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
 });
 </script>
-
-    {% endfor %}
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
 </div>
 <style>
      .row {
@@ -375,7 +378,7 @@ legend.scheduler-border {
        <div class="row"><div class="column" style="margin-right:5%; margin-top: 1%">
      <b><label for="time">Time</label></b>
 
-        <input  style="width:60%;  height: 2%;   font-size: 1vw; background: white"  type="time" id="time"name="time" placeholder="Click to select date"
+        <input  style="width:60%;  height: 2%;   font-size: 1vw; background: white"  type="time" id="time"name="time"  placeholder="Click to select time"
                class="form-control1">
 
 </div>
@@ -417,9 +420,16 @@ legend.scheduler-border {
  <script>
     $(".container1" ).fadeOut(5000);
 </script>
-
+<script>
+    var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("date")[0].setAttribute('min', today);
+</script>
 </body>
+<script>
+        var  a= document.getElementsByName("mobile_num")[0].value;
 
+
+</script>
 {% endblock %}
 </html>
 

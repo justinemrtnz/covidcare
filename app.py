@@ -4,7 +4,7 @@ import sys
 import pyrebase
 import datetime
 from twilio.rest import Client
-
+from twilio.base.exceptions import TwilioRestException
 firebaseConfig = {
     "apiKey": "AIzaSyCVRu69_Bg7MsVgq-Ti1mZUhj-NrUT6PwU",
     "authDomain": "covidmonitoring-a3d96.firebaseapp.com",
@@ -277,20 +277,23 @@ def Swab():
 
 @app.route('/edit/<username>', methods=('GET', 'POST'))
 def edit(username):
-    from datetime import datetime
+    import datetime
+
     error = None
 
     if request.method == 'POST':
         swabdate = request.form['date']
-        today = datetime.today().strftime('%Y-%m-%d')
+        today = datetime.datetime.now() + datetime.timedelta(days=1)
+        date = today.strftime('%Y-%m-%d')
         swabtime = request.form['time']
         result = request.form['result']
         Mobile_num = request.form['mobile_num']
+        from datetime import datetime
         ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
 
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
-        elif swabdate < today:
+        elif swabdate < date:
             flash("cannot input previous date!", "warning")
         else:
             if result == "Close Contact":
@@ -301,13 +304,21 @@ def edit(username):
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
                 client = Client(count_sid, token)
 
-                message = client.messages.create(
-                    from_='+1 903 493 9890',
-                    to=Mobile_num,
-                    body="Text Notification!  \n"
-                         "RHU Kalayaan has set a date for your swab test!\nPlease check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-                )
-                return redirect(url_for('Swab'))
+                try:
+                    count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                    token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                    client = Client(count_sid, token)
+
+                    message = client.messages.create(
+                        from_='+19034939890',
+                        to=Mobile_num,
+                        body="Text Notification!  \n"
+                             "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                    )
+                    flash("Schedule successfully added!")
+                    return redirect(url_for('Swab'))
+                except TwilioRestException as e:
+                    flash("Phone Number Cannot reach", "danger")
             elif result == "Active":
                 db.child("Patients").child(username).update({
                     "swabSchedule": swabdate + " Time: " + ate_time_obj1,
@@ -316,33 +327,43 @@ def edit(username):
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
                 client = Client(count_sid, token)
 
-                message = client.messages.create(
-                    from_='+1 903 493 9890',
-                    to=Mobile_num,
-                    body="Text Notification!\n"
-                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-                )
-            flash("Schedule successfully added!")
-            return redirect(url_for('Swab'))
+                try:
+                    count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                    token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                    client = Client(count_sid, token)
+
+                    message = client.messages.create(
+                        from_='+19034939890',
+                        to=Mobile_num,
+                        body="Text Notification!  \n"
+                             "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                    )
+                    flash("Schedule successfully added!")
+                    return redirect(url_for('Swab'))
+                except TwilioRestException as e:
+                    flash("Phone Number Cannot reach", "danger")
 
     orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
 
     return render_template("UpdateSwab.html", data=orderedDict, error=error)
 @app.route('/CCswab/<username>', methods=('GET', 'POST'))
 def CCswab(username):
-    from datetime import datetime
+    import datetime
     error = None
 
     if request.method == 'POST':
+        today = datetime.datetime.now() + datetime.timedelta(days=1)
+        date = today.strftime('%Y-%m-%d')
         swabdate = request.form['date']
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
         Mobile_num = request.form['mobile_num']
+        from datetime import datetime
         ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
 
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
-        elif swabdate < today:
+        elif swabdate < date:
             flash("cannot input previous date!", "warning")
         else:
 
@@ -350,18 +371,21 @@ def CCswab(username):
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
 
-            count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-            token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-            client = Client(count_sid, token)
+            try:
+                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                client = Client(count_sid, token)
 
-            message = client.messages.create(
-                from_='+1 903 493 9890',
-                to=Mobile_num,
-                body="Text Notification!  \n"
-                     "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-            )
-            flash("Schedule successfully added!")
-            return redirect(url_for('Swab'))
+                message = client.messages.create(
+                    from_='+19034939890',
+                    to=Mobile_num,
+                    body="Text Notification!  \n"
+                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                )
+                flash("Schedule successfully added!")
+                return redirect(url_for('Swab'))
+            except TwilioRestException as e:
+                flash("Phone Number Cannot reach", "danger")
 
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
 
@@ -604,13 +628,15 @@ def edit1(username):
             })
 
         elif result == "Deceased":
+            today0 = datetime.today().strftime('%m/%d/%Y')
             COD = request.form['CauseofDeath']
             dateandtime = request.form['date']
+
             dateandtime1 = request.form['time']
             ate_time_obj = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%d %B %Y ')
             ate_time_obj2 = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%m/%B/%Y')
-
             ate_time_obj1 = datetime.strptime(dateandtime1,  '%H:%M').strftime('%I:%M %p')
+
             db.child(result).child(PatientID).set({"result": result,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
