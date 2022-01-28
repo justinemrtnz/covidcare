@@ -14,13 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
+
 </head>
 
 <body>
 <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 <div class="sidebar">
     <div class="logo-details">
-        <i> <img src="{{url_for('static', filename='icon3.png')}}" class="icon" width="50" height="50" style="margin-top: .8%; margin-left: 20%"></i>
+        <i> <img src="{{url_for('static', filename='icon3.png')}}" class="icon" width="60%" height="60%" style="margin-top: .8%; margin-left: 20%"></i>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
 
@@ -88,11 +89,33 @@
        </a>
             <span class="tooltip">Close Contact</span>
         </li>
+         <li>
+            <a href="{{url_for('Probable')}}">
+
+             <i class="fa fa-search-plus" aria-hidden="true"></i>
+                <span class="links_name">Probable</span></a>
+       </a>
+            <span class="tooltip">Probable</span>
+        </li>
+         <li>
+            <a href="{{url_for('Suspected')}}">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+
+                <span class="links_name">Suspected</span></a>
+       </a>
+            <span class="tooltip">Suspected</span>
+        </li>
+
 
 
        <li class="profile">
 
-         <a onclick="click1()"><i  class="click123 fa fa-sign-out" aria-hidden="true" aria-hidden="true"></i> <span  class="links_name">Logout</span></a> <span class="tooltip">Logout</span>
+         <a onclick="click1()">
+             <i  class="click123 fa fa-sign-out" aria-hidden="true" aria-hidden="true"></i>
+             <span  class="links_name">Logout</span>
+         </a>
+           <span class="tooltip">Logout</span>
+
        </li>
     </ul>
 </div>
