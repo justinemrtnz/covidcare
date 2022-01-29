@@ -651,7 +651,7 @@ var date1 =  year
 
           wme.document.write('</head>');
         wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF CLOSE CONTACT</b><th>');
+        wme.document.write('<center><th><b>LIST OF PROBABLE PATIENTS</b><th>');
         wme.document.write('<center><b>' + date1 +'<br>'+'<br>');
            wme.document.write('<br>');
                       wme.document.write(style);
@@ -706,7 +706,7 @@ var date1 =  year
 
         wme.document.write('</head>');
         wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center>');
-        wme.document.write('<center><th><b>LIST OF CLOSE CONTACT</b><th>');
+        wme.document.write('<center><th><b>LIST OF PROBABLE PATIENTS</b><th>');
         wme.document.write('<center><b>' + 'From ' + date1 + ' ' + ' to ' + date3 + '<br>' + '<br>');
         wme.document.write('<br>');
         wme.document.write(htmlToPrint);
@@ -726,7 +726,7 @@ var date1 =  year
     }
 }else if(strUser=="Monthly"){
     var item =  document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
-    if (item === "<center>No records of Close Contact</center>"){
+    if (item === "<center>No records of PROBABLE PATIENTS</center>"){
        Swal.fire({
   title: "Failed!",
         customClass: 'swal-wide',
@@ -754,7 +754,7 @@ var date1 =  year
         wme.document.write('<html><head>');
 
         wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF CLOSE CONTACT</b><th>');
+        wme.document.write('<center><th><b>LIST OF PROBABLE PATIENTS</b><th>');
         wme.document.write('<center><b>' + g + ' ' + result + '<br>' + '<br>');
         wme.document.write(htmlToPrint);
         wme.document.write(style);
@@ -803,7 +803,7 @@ var date1 =  year
         wme.document.write('<html><head>');
 
         wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF CLOSE CONTACT</b><th>');
+        wme.document.write('<center><th><b>LIST OF PROBABLE PATIENTS</b><th>');
         wme.document.write('<center><b>' + g + '<br>' + '<br>');
         wme.document.write(htmlToPrint);
         wme.document.write(style);

@@ -23,7 +23,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
-database = {'admin': 'admin123', 'rhuadmin': 'rhu123', 'rhuKalayaan': 'kalayaan123'}
+database = {'admin': 'admin123', 'rhuadmin': 'rhu123', 'rhuKalayaan': 'kalayaan123', 'longostracer':'longos4015','sjuanTracer':'sanjuan4015', 'santoniotracer':'sanantonio4015','kalayaantracer':'kalayaan4015'}
 
 
 @app.route('/')
