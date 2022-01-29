@@ -41,13 +41,28 @@
             {% endif %}
         {% endwith %}
 </div>
+<div style="position: absolute; z-index: 10; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container1" >
+     {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
+    Swal.fire({
+  title: "Failed!",
+  text: "Date must be 1 day advance. Please try again!",
+        customClass: 'swal-wide',
+  icon: "error",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
+});
+</script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+</div>
 <style>
      .row {
-   margin-top: -1%;
-  margin-left:7%;
-  margin-right:-.5%;
-          margin-bottom:-10px;
-}
+         margin: -1% -.5% -10px 7%;
+     }
  input:hover, textarea:hover, select:hover {
       outline: none;
       border: 1px solid #095484;
