@@ -350,11 +350,11 @@ height:7px;
   </div>
      <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none" id="date-start1">
       <p style="font-size: .8vw; margin-bottom: -1px; " >Start Date</p>
-    <input     id="date-start"  type="text" value="11/26/2021"  class='form-control btn-secondary' >
+    <input     id="date-start"  type="date" value="11/26/2021"  class='form-control btn-secondary' >
   </div>
       <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none"  id="date-stop1">
       <p style="font-size: .8vw; margin-bottom: -1px;">Start End</p>
-    <input id="date-stop" type="text" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
+    <input id="date-stop" type="date" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
   </div>
 
 
@@ -578,25 +578,21 @@ function myFunction1() {
 </script>
 <script>
 function myFunction5() {
-  var input, input1,input2,input3, filter, table, tr, td, i;
-  var date = $('#day').val().split('-');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = month + "/" + day + "/" + year
-  filter =date1.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[7];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
+    var From = $('#From').val();
+    var to = $('#to').val();
+    if (From != '' && to != '') {
+        $.ajax({
+            url: "/range",
+            method: "POST",
+            data: {From: From, to: to},
+            success: function (data) {
+                $('#example').html(data);
+                $('#example').append(data.htmlresponse);
+            }
+        });
+    } else {
+
     }
-  }
 }
 </script>
 <script>
@@ -927,17 +923,24 @@ var date2 = month1 + "/" + day1 + "/" + year1
   input_stopDate = new Date(date2);
 
 
+  // only process table body rows, ignoring footer/headers
   const tr = document.querySelectorAll("#example tbody tr")
+
   for (let i = 0; i < tr.length; i++) {
+    // ensure we have a relevant td
     let td = tr[i].getElementsByTagName("td");
-    if (!td || !td[7]) continue;
+    if (!td || !td[8]) continue;
 
-    let td_date = new Date(td[7].textContent);
+    // you need to get the text and convert to date
+    let td_date = new Date(td[8].textContent);
 
+    // now you can compare dates correctly
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
+        // show the row by setting the display property
         tr[i].style.display = '';
       } else {
+        // hide the row by setting the display property
         tr[i].style.display = 'none';
       }
     }
