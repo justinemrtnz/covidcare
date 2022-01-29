@@ -406,7 +406,7 @@ height:7px;
             <tbody>
 
             {% if t == 0 %}
-                <td colspan="6"><center>No records of Close Contact</center></td>
+                <td colspan="7"><center>No records of Probable Patients</center></td>
             {% else %}
                 {% for l in t %}
                       <td>{{l.val().patientName}}</td>
@@ -465,11 +465,23 @@ height:7px;
 
 
 <script>
-       $(document).ready(function() {
-              $('#example').DataTable();
+        var tableSize2 = $('#example tbody tr').length;
+
+        $(document).ready(function() {
+              $('#example').DataTable({
+                 scrollY:        '60vh',
+        scrollCollapse: true,
+        paging:         false,
+
+"oLanguage": {
+               "sInfo" : "Showing "+tableSize2+" entries",// text you want show for info section
+            },
+              });
+
 
         } );
-</script>
+
+    </script>
 </div>
 
 

@@ -34,6 +34,12 @@
 #hide4{
     display: none;
 }
+#hide5{
+    display: none;
+}
+#hide6{
+    display: none;
+}
 #deceased{
      display: none;
 }
@@ -44,6 +50,12 @@
      display: none;
 }
 #active{
+     display: none;
+}
+#Probable{
+     display: none;
+}
+#Suspected{
      display: none;
 }
   *{
@@ -124,7 +136,7 @@ tr:nth-child(even) {
 }
 
 .market-update-block {
-    padding: 3.5em 3.5em;
+    padding: 2em 3.5em;
     background: #999;
 }
 
@@ -137,7 +149,7 @@ tr:nth-child(even) {
 .market-update-block h4 {
     font-size: 1.2em;
     color: #0f5298;
-    margin: 0.3em 0em;
+    margin: 0em 0em;
     font-family: "Poppins";
 
     }
@@ -145,7 +157,7 @@ tr:nth-child(even) {
 .market-update-block p {
     color: #0f5298;
     font-size: 0.8em;
-    line-height: 1.8em;
+    line-height: 1em;
 }
 
 .market-update-block.clr-block-1 {
@@ -262,7 +274,33 @@ tr:nth-child(even) {
     }
      .market-update-right i.fa.fa-handshake-o {
        font-size: 2.6vw;
-      color: yellowgreen;
+      color: #de6f37;
+     width: 4vw;
+      height: 4vw;
+      background: white;
+      text-align: center;
+      border-radius: 49px;
+      -webkit-border-radius: 49px;
+      -moz-border-radius: 49px;
+      -o-border-radius: 49px;
+      line-height: 1.5em;
+    }
+     .market-update-right i.fa.fa-search-plus {
+       font-size: 2.6vw;
+      color: #942929;
+     width: 4vw;
+      height: 4vw;
+      background: white;
+      text-align: center;
+      border-radius: 49px;
+      -webkit-border-radius: 49px;
+      -moz-border-radius: 49px;
+      -o-border-radius: 49px;
+      line-height: 1.5em;
+    }
+      .market-update-right i.fa.fa-question-circle {
+       font-size: 2.6vw;
+      color:  #228065;
      width: 4vw;
       height: 4vw;
       background: white;
@@ -498,14 +536,81 @@ height:7px;
   <nav>
 	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%; font-weight: 500">Dashboard > Close Contact</p><div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
 	</div>
+    <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#4d004d; background: white" id="Probable">
+  <nav>
+	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%; font-weight: 500">Dashboard > Probable</p><div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
+	</div>
+    <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#4d004d; background: white" id="Suspected">
+  <nav>
+	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%; font-weight: 500">Dashboard > Suspected</p><div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
+	</div>
 
 
 </div>
+{% if t8 == 0 %}
 
+      {% else %}
+
+                {% for a in t8 %}
+  {% if "Close Contact" == a.val().result %}
+<div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f; display: none ">
+<table  id="Table_id1">
+    <tbody>
+     <tr>
+      <p style="font-size: 12px; font-weight: bold" class="tb">  {{ a.val().patientID}} recovery is near! </p>
+    <p style="font-size: 12px; font-style: italic">Expected date of recovery: {{ a.val().estimatedDateRecovery }}  </p>
+     </tr>
+    </tbody>
+    </table>
+</div>
+
+  {% endif %}
+                {% endfor %}
+{% endif %}
+{% if t10 == 0 %}
+
+      {% else %}
+
+                {% for a in t10 %}
+  {% if "Probable" == a.val().result %}
+<div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f; display: none ">
+<table  id="Table_id2">
+    <tbody>
+     <tr>
+      <p style="font-size: 12px; font-weight: bold" class="tb">  {{ a.val().patientID}} recovery is near! </p>
+    <p style="font-size: 12px; font-style: italic">Expected date of recovery: {{ a.val().estimatedDateRecovery }}  </p>
+     </tr>
+    </tbody>
+    </table>
+</div>
+
+  {% endif %}
+                {% endfor %}
+{% endif %}
+{% if t12 == 0 %}
+
+      {% else %}
+
+                {% for a in t12 %}
+  {% if "Suspected" == a.val().result %}
+<div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f; display: none ">
+<table  id="Table_id3">
+    <tbody>
+     <tr>
+      <p style="font-size: 12px; font-weight: bold" class="tb">  {{ a.val().patientID}} recovery is near! </p>
+    <p style="font-size: 12px; font-style: italic">Expected date of recovery: {{ a.val().estimatedDateRecovery }}  </p>
+     </tr>
+    </tbody>
+    </table>
+</div>
+
+  {% endif %}
+                {% endfor %}
+{% endif %}
 <div style=" max-width:2000px;">
-<div style="margin-left:5%; margin-right:1%; margin-top: 1.5%; height: 20%" >
+<div style="margin-left:5%; margin-right:1%; margin-top: 1.5%; height: 0%" >
   <div class="market-updates" >
-    <div class="col-md-3 market-update-gd" style="width: 20%" onclick="document.getElementById('hide1').style.display='block'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none'; document.getElementById('active').style.display='block';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';">
+    <div class="col-md-3 market-update-gd" style="width: 25%" onclick="document.getElementById('hide1').style.display='block'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none'; document.getElementById('active').style.display='block';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';document.getElementById('hide5').style.display='none';document.getElementById('hide6').style.display='none';document.getElementById('Probable').style.display='none';document.getElementById('Suspected').style.display='none';">
       <div class="market-update-block clr-block-1">
         <div class="col-md-8 market-update-left" >
          <h3>Active</h3>
@@ -522,7 +627,7 @@ height:7px;
         <div class="clearfix"> </div>
       </div>
     </div>
-    <div class="col-md-3 market-update-gd" style="width: 20%" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='block';document.getElementById('hide3').style.display='none';document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='block';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';">
+    <div class="col-md-3 market-update-gd" style="width: 25%" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='block';document.getElementById('hide3').style.display='none';document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='block';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';document.getElementById('hide5').style.display='none';document.getElementById('hide6').style.display='none';document.getElementById('Probable').style.display='none';document.getElementById('Suspected').style.display='none';">
       <div class="market-update-block clr-block-2">
         <div class="col-md-8 market-update-left" >
 
@@ -542,7 +647,7 @@ height:7px;
         <div class="clearfix"> </div>
       </div>
     </div>
-  <div class="col-md-3 market-update-gd" style="width: 20%" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='block'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='block';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';">
+  <div class="col-md-3 market-update-gd" style="width: 25%" onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='block'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='block';document.getElementById('CContact').style.display='none';document.getElementById('hide4').style.display='none';document.getElementById('hide5').style.display='none';document.getElementById('hide6').style.display='none';document.getElementById('Probable').style.display='none';document.getElementById('Suspected').style.display='none';">
       <div class="market-update-block clr-block-3">
         <div class="col-md-8 market-update-left">
              <h3>Deceased</h3>
@@ -561,31 +666,11 @@ height:7px;
         <div class="clearfix"> </div>
       </div>
     </div>
-   <div class="col-md-3 market-update-gd" style="width: 20%"onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none';document.getElementById('hide4').style.display='block'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='block';">
-      <div class="market-update-block clr-block-5">
-          <div class="col-md-8 market-update-left" >
-
-         <h3>Close</h3>
-          <h3 style="margin-top: -10px">Contact</h3>
-         {% if t7 == None %}
-	<h3>0</h3>
-{% else %}
-	 <h3>{{ t7 }}</h3>
-{% endif %}
-
-        </div>
-        <div class="col-md-3 market-update-right">
-           <i class="fa fa-handshake-o" aria-hidden="true"></i>
-
-
-        </div>
-        <div class="clearfix"> </div>
-      </div>
-    </div>
-      <div class="col-md-3 market-update-gd" style="width: 20%">
+  <div class="col-md-3 market-update-gd" style="width: 25%">
       <div class="market-update-block clr-block-4">
         <div class="col-md-8 market-update-left">
-         <h3>Confirmed Cases</h3>
+         <h3>Confirmed</h3>
+        <h3 style="margin-top: -10px">Cases</h3>
          {% if t5 == None %}
 	<h3>0</h3>
 {% else %}
@@ -601,6 +686,96 @@ height:7px;
 
       </div>
     </div>
+
+
+    <div class="clearfix"> </div>
+
+  </div>
+</div>
+</div>
+
+<div style=" max-width:2000px;">
+<div style="margin-left:5%; margin-right:1%; margin-top: 1.5%; height: 0%" >
+  <div class="market-updates" >
+      <div class="col-md-3 market-update-gd" style="width: 25%"onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none';document.getElementById('hide4').style.display='block'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='block';document.getElementById('hide5').style.display='none';document.getElementById('hide6').style.display='none';document.getElementById('Probable').style.display='none';document.getElementById('Suspected').style.display='none';">
+      <div class="market-update-block clr-block-5">
+          <div class="col-md-8 market-update-left" >
+
+         <h3>Close</h3>
+          <h3 style="margin-top: -10px">Contact</h3>
+         {% if t7 == None %}
+	<h3>0</h3>
+{% else %}
+	 <h3 id="notif2">{{ t7 }}</h3>
+{% endif %}
+
+        </div>
+        <div class="col-md-3 market-update-right">
+           <i class="fa fa-handshake-o" aria-hidden="true"></i>
+
+
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+      <div class="col-md-3 market-update-gd" style="width: 25%"onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none';document.getElementById('hide4').style.display='none'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide5').style.display='block';document.getElementById('hide6').style.display='none';document.getElementById('Probable').style.display='block';document.getElementById('Suspected').style.display='none';">
+      <div class="market-update-block clr-block-2">
+        <div class="col-md-8 market-update-left" >
+
+  <h3>Probable</h3>
+{% if t9 == None %}
+	<h3>0</h3>
+{% else %}
+	 <h3 id="notif3">{{ t9 }}</h3>
+{% endif %}
+<br>
+        </div>
+        <div class="col-md-3 market-update-right">
+                     <i class="fa fa-search-plus" aria-hidden="true"></i>
+
+        </i>
+        </div>
+
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+      <div class="col-md-3 market-update-gd" style="width: 25%"onclick="document.getElementById('hide1').style.display='none'; document.getElementById('dashboard').style.display='none'; document.getElementById('hide2').style.display='none';document.getElementById('hide3').style.display='none';document.getElementById('hide4').style.display='none'; document.getElementById('active').style.display='none';document.getElementById('recovered').style.display='none';document.getElementById('deceased').style.display='none';document.getElementById('CContact').style.display='none';document.getElementById('hide5').style.display='none';document.getElementById('hide6').style.display='block';document.getElementById('Probable').style.display='none';document.getElementById('Suspected').style.display='block';">
+
+      <div class="market-update-block clr-block-3">
+        <div class="col-md-8 market-update-left">
+             <h3>Suspected</h3>
+
+         {% if t11 == None %}
+	<h3>0</h3>
+{% else %}
+	 <h3 id="notif4">{{ t11 }}</h3>
+{% endif %}
+
+<br>
+        </div>
+        <div class="col-md-3 market-update-right">
+                      <i class="fa fa-question-circle" aria-hidden="true"></i>
+
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+
+<div class="table1" style="width: 21.5%; position: absolute;font-size: .9vw; margin-left:71.5%; margin-right:2%;margin-top: -.1% ">
+    <div>
+        <p>
+             <span style="margin-left: 30%"><i class="fa fa-calendar" aria-hidden="true"></i> <span id="date" style="font-size: 1.2vw"></span></span><br>
+            <span style="margin-left: 30%"><i class="fa fa-clock-o" aria-hidden="true"  style="margin-bottom: 5%"></i></i> <span id="span" style="font-size: 1.2vw"></span></span><br>
+            <span><i class="fa fa-hospital-o" aria-hidden="true" style="margin-bottom: 2%"></i> Municipal Health Office</span><br>
+              <span>  <i class="fa fa-map-marker" aria-hidden="true" style="margin-bottom: 2%"></i>  Purok 1 Brgy. San Juan Kalayaan, Laguna</span><br>
+              <span> <i class="fa fa-mobile" aria-hidden="true" style="margin-bottom: 2%"></i>  0933 347 5786</span><br>
+             <span> <i class="fa fa-phone" aria-hidden="true" style="margin-bottom: 2%"></i> 501 7753</span><br>
+             <span> <i class="fa fa-facebook-official" aria-hidden="true" style="margin-bottom: 2%"></i> @rhukalayaan.laguna</span><br>
+
+        </p>
+    </div>
+</div>
+
     <div class="clearfix"> </div>
 
   </div>
@@ -799,6 +974,7 @@ height:7px;
 
 {% else %}
 	   {% for l in t8 %}
+           {% if "Close Contact" == l.val().result %}
                   <td>{{l.val().result}}</td>
 
                 <td>{{l.val().patientID }}</td>
@@ -807,6 +983,7 @@ height:7px;
 
 
 		    </form></td></tr>
+           {% endif %}
             {% endfor %}
             {% endif %}
 
@@ -830,22 +1007,129 @@ height:7px;
 </div>
 </div>
 </div>
+<div class="column"  style="margin-left:5.5%; margin-right:22%"  id="hide5">
+<div class="table1">
+   <h1 style="font-size:1.5em;">Probable</h1>
+<div style=" font-size: 0.9vw;">
+     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <table id="example5" class="sortable" style="width:100%">
+            <thead>
+            <tr>
+                <th> Patient Status</th>
+                <th>Patient ID</th>
+                    <th>Name</th>
+
+                <th>Date Admitted</th>
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+{% if t10 == 0 %}
+
+{% else %}
+	   {% for l in t10 %}
+                  <td>{{l.val().result}}</td>
+
+                <td>{{l.val().patientID }}</td>
+            <td>{{l.val().patientName}}</td>
+
+
+                    <td>{{l.val().dateAdmitted }}</td>
+
+		    </form></td></tr>
+            {% endfor %}
+            {% endif %}
+
+            </tbody>
+        </table>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
+    <script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
+    <script>
+        $(document).ready(function() {
+              $('#example5').DataTable();
+
+
+        } );
+    </script>
+</div>
+</div>
+</div>
+<div class="column"  style="margin-left:5.5%; margin-right:22%"  id="hide6">
+<div class="table1">
+   <h1 style="font-size:1.5em;">Suspected</h1>
+<div style=" font-size: 0.9vw;">
+     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <table id="example6" class="sortable" style="width:100%">
+            <thead>
+            <tr>
+                <th> Patient Status</th>
+                <th>Patient ID</th>
+                    <th>Name</th>
+                <th>Date Admitted</th>
+
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+{% if t12 == 0 %}
+
+{% else %}
+	   {% for l in t12 %}
+                  <td>{{l.val().result}}</td>
+
+                <td>{{l.val().patientID }}</td>
+            <td>{{l.val().patientName}}</td>
+                                    <td>{{l.val().dateAdmitted }}</td>
+
+
+		    </form></td></tr>
+            {% endfor %}
+            {% endif %}
+
+            </tbody>
+        </table>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
+    <script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
+    <script>
+        $(document).ready(function() {
+              $('#example6').DataTable();
+
+
+        } );
+    </script>
+</div>
+</div>
+</div>
  </div>
 
-<div class="table1" style="width: 21.5%; position: absolute;font-size: .9vw; margin-left:76.5%; margin-right:2%;">
-    <div>
-        <p>
-             <span style="margin-left: 30%"><i class="fa fa-calendar" aria-hidden="true"></i> <span id="date" style="font-size: 1.2vw"></span></span><br>
-            <span style="margin-left: 30%"><i class="fa fa-clock-o" aria-hidden="true"  style="margin-bottom: 5%"></i></i> <span id="span" style="font-size: 1.2vw"></span></span><br>
-            <span><i class="fa fa-hospital-o" aria-hidden="true" style="margin-bottom: 2%"></i> Municipal Health Office</span><br>
-              <span>  <i class="fa fa-map-marker" aria-hidden="true" style="margin-bottom: 2%"></i>  Purok 1 Brgy. San Juan Kalayaan, Laguna</span><br>
-              <span> <i class="fa fa-mobile" aria-hidden="true" style="margin-bottom: 2%"></i>  0933 347 5786</span><br>
-             <span> <i class="fa fa-phone" aria-hidden="true" style="margin-bottom: 2%"></i> 501 7753</span><br>
-             <span> <i class="fa fa-facebook-official" aria-hidden="true" style="margin-bottom: 2%"></i> @rhukalayaan.laguna</span><br>
 
-        </p>
-    </div>
 </div>
+
+
+
+</div>
+ </div>
+
+
 </div>
     </div>
     </div>
@@ -955,6 +1239,27 @@ $(function() {
     }else {
  $("#notif1").hide();
     }
+
+
+    </script>
+    <script>
+    var tableSize = $('#Table_id1 tbody tr').length;
+    var notif = document.getElementById("notif2")
+    notif.textContent = tableSize
+
+
+    </script>
+    <script>
+    var tableSize = $('#Table_id2 tbody tr').length;
+    var notif = document.getElementById("notif3")
+    notif.textContent = tableSize
+
+
+    </script>
+     <script>
+    var tableSize = $('#Table_id3 tbody tr').length;
+    var notif = document.getElementById("notif4")
+    notif.textContent = tableSize
 
 
     </script>

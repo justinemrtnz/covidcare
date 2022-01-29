@@ -75,6 +75,9 @@ def dashboard():
     res2 = db.child("Deceased").get()
     res3 = db.child("Active").get()
     res4 = db.child("Close Contact").get()
+    res5 = db.child("probable").get()
+    res6 = db.child("Suspected").get()
+
     today = datetime.datetime.now() + datetime.timedelta(days=1)
     date = today.strftime('%d %B %Y')
     today1 = datetime.datetime.now() + datetime.timedelta(days=2)
@@ -86,6 +89,18 @@ def dashboard():
     today4 = datetime.datetime.now() + datetime.timedelta(days=5)
     date4 = today4.strftime('%d %B %Y')
     dateee = db.child("Patients").get()
+    if res5.val() == None:
+        result10=0;
+        result11 = 0;
+    else:
+        result10 = len(db.child('probable').get().val());
+        result11 = db.child("probable").get();
+    if res6.val() == None:
+        result12 = 0;
+        result13 = 0;
+    else:
+        result12 = len(db.child('Suspected').get().val());
+        result13 = db.child("Suspected").get();
     if res.val() == None:
         result2 = 0;
         result5 = 0;
@@ -119,7 +134,7 @@ def dashboard():
         res9 = db.child("Close Contact").get()
 
     return render_template('dashboard.html', t1=result, t5=result3, t2=result2, t3=result5, t4=result6, ta=result4,
-                           t6=result7, a=date, b=date1, c=date2, d=date3, e=date4, t7=result8, t8=res9)
+                           t6=result7, a=date, b=date1, c=date2, d=date3, e=date4, t7=result8, t8=res9, t9 = result10,t10 = result11, t11 = result12 , t12 = result13)
 
 
 @app.route('/Positive')
@@ -306,20 +321,32 @@ def Swab():
     dateee = db.child("Patients").get()
     result = db.child("Patients").get()
     result2 = db.child("Close Contact").get()
+    result3 = db.child("probable").get()
+    result4 = db.child("Suspected").get()
+    if result3.val() == None:
+        res3 = 0;
+    else:
+        res3 = db.child("probable").get()
+    if result4.val() == None:
+        res4 = 0;
+    else:
+        res4 = db.child("Suspected").get()
+
+
     if result.val() == None:
         res = 0;
         if result2.val() == None:
             res1 = 0;
         else:
             res1 = db.child("Close Contact").get()
-        return render_template('swab.html', t=res, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, t2=res1)
+        return render_template('swab.html', t=res, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, t2=res1 , t3 = res3, t4 = res4)
     else:
         res = db.child("Patients").get();
         if result2.val() == None:
             res1 = 0;
         else:
             res1 = db.child("Close Contact").get()
-        return render_template('swab.html', t=res, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, t2=res1)
+        return render_template('swab.html', t=res, t1=dateee, a=date, b=date1, c=date2, d=date3, e=date4, t2=res1 , t3 = res3 ,t4 = res4)
 
 
 @app.route('/edit/<username>', methods=('GET', 'POST'))
@@ -399,10 +426,11 @@ def CCswab(username):
         today = datetime.datetime.now() + datetime.timedelta(days=1)
         date = today.strftime('%Y-%m-%d')
         swabdate = request.form['date']
+        from datetime import datetime
+
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
         Mobile_num = request.form['mobile_num']
-        from datetime import datetime
         ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
 
         if swabdate == "" or swabtime == "":
@@ -434,6 +462,95 @@ def CCswab(username):
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
 
     return render_template("UpdateCCSwab.html", data=orderedDict, error=error)
+@app.route('/Pswab/<username>', methods=('GET', 'POST'))
+def Pswab(username):
+    import datetime
+    error = None
+
+    if request.method == 'POST':
+        today = datetime.datetime.now() + datetime.timedelta(days=1)
+        date = today.strftime('%Y-%m-%d')
+        swabdate = request.form['date']
+        from datetime import datetime
+
+        today = datetime.today().strftime('%Y-%m-%d')
+        swabtime = request.form['time']
+        Mobile_num = request.form['mobile_num']
+        ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
+
+        if swabdate == "" or swabtime == "":
+            flash("Please input date and time!", "danger")
+        elif swabdate < date:
+            flash("cannot input previous date!", "warning")
+        else:
+
+            db.child("probable").child(username).update({
+                "swabSchedule": swabdate + " Time: " + ate_time_obj1,
+            })
+
+            try:
+                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                client = Client(count_sid, token)
+
+                message = client.messages.create(
+                    from_='+19034939890',
+                    to=Mobile_num,
+                    body="Text Notification!  \n"
+                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                )
+                flash("Schedule successfully added!")
+                return redirect(url_for('Swab'))
+            except TwilioRestException as e:
+                flash("Phone Number Cannot reach", "danger")
+
+    orderedDict = db.child("probable").order_by_key().equal_to(username).limit_to_first(1).get()
+
+    return render_template("UpdateCCSwab.html", data=orderedDict, error=error)
+@app.route('/Sswab/<username>', methods=('GET', 'POST'))
+def Sswab(username):
+    import datetime
+    error = None
+
+    if request.method == 'POST':
+        today = datetime.datetime.now() + datetime.timedelta(days=1)
+        date = today.strftime('%Y-%m-%d')
+        swabdate = request.form['date']
+        today = datetime.today().strftime('%Y-%m-%d')
+        swabtime = request.form['time']
+        Mobile_num = request.form['mobile_num']
+        from datetime import datetime
+        ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
+
+        if swabdate == "" or swabtime == "":
+            flash("Please input date and time!", "danger")
+        elif swabdate < date:
+            flash("cannot input previous date!", "warning")
+        else:
+
+            db.child("Suspected").child(username).update({
+                "swabSchedule": swabdate + " Time: " + ate_time_obj1,
+            })
+
+            try:
+                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                client = Client(count_sid, token)
+
+                message = client.messages.create(
+                    from_='+19034939890',
+                    to=Mobile_num,
+                    body="Text Notification!  \n"
+                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+                )
+                flash("Schedule successfully added!")
+                return redirect(url_for('Swab'))
+            except TwilioRestException as e:
+                flash("Phone Number Cannot reach", "danger")
+    orderedDict = db.child("Suspected").order_by_key().equal_to(username).limit_to_first(1).get()
+
+    return render_template("UpdateCCSwab.html", data=orderedDict, error=error)
+
 @app.route('/view1/<username>', methods=('GET', 'POST'))
 def view1(username):
     if request.method == 'POST':
@@ -683,9 +800,13 @@ def edit1(username):
         SignAndSymp = request.form['SignAndSymp']
         doConsultation = request.form['doConsultation']
         result = request.form['result']
-
+        antigenres = request.form['antigenres']
+        Dantigen = request.form['Dantigen']
         if result == "Recovered":
             db.child(result).child(PatientID).set({"result": result,
+                                                   "antigenres": antigenres,
+                                                   "Dantigen": Dantigen,
+
                                                    "password": password,
                                                    "security": security,
                                                    "securityQues": securityQues,
@@ -720,6 +841,8 @@ def edit1(username):
             db.child("Active").child(PatientID).remove()
             db.child("Patients").child(username).update({
                 "result": result,
+                "antigenres": antigenres,
+                "Dantigen": Dantigen,
                 "password": password,
                 "security": security,
                 "securityQues": securityQues,
@@ -763,6 +886,8 @@ def edit1(username):
             ate_time_obj1 = datetime.strptime(dateandtime1,  '%H:%M').strftime('%I:%M %p')
 
             db.child(result).child(PatientID).set({"result": result,
+                                                   "antigenres": antigenres,
+                                                   "Dantigen": Dantigen,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
                                                    "birthday": Birthday,
@@ -795,7 +920,9 @@ def edit1(username):
             db.child("Patients").child(username).update({
                 "result": result,
                 "dateDied": ate_time_obj,
-                                                   "dayDied": ate_time_obj2,
+                "dayDied": ate_time_obj2,
+                "antigenres": antigenres,
+                "Dantigen": Dantigen,
                 "CauseOfDeath": COD,
                 "patientName": Pname,
                 "patientID": PatientID,
@@ -833,6 +960,8 @@ def edit1(username):
                                                    "patientID": PatientID,
                                                    "birthday": Birthday,
                                                    "age": Age,
+                                                   "antigenres": antigenres,
+                                                   "Dantigen": Dantigen,
                                                    "sex": Sex,
                                                    "mobile_num": Mobile_num,
                                                    "address": Address,
@@ -856,7 +985,7 @@ def edit1(username):
 
                                                    })
             db.child("Recovered").child(PatientID).remove()
-            db.child("Close Contact").child(PatientID).remove()
+
             db.child("Patients").child(username).update({
                 "result": result,
                 "password": password,
@@ -867,6 +996,8 @@ def edit1(username):
                 "estimatedDateRecovery": estimatedDateRecovery,
                 "patientName": Pname,
                 "patientID": PatientID,
+                "antigenres": antigenres,
+                "Dantigen": Dantigen,
                 "birthday": Birthday,
                 "age": Age,
                 "sex": Sex,
@@ -994,7 +1125,8 @@ def editCC(username):
         res3=str(res1+1)
         pID = "KP-" + res3;
         swabSchedule = "Your Swab schedule is not yet available"
-
+        antigenres = request.form['antigenres']
+        Dantigen = request.form['Dantigen']
         if result == "Active":
             db.child(result).child(pID).set({"result": result,
                                                    "password": password,
@@ -1006,6 +1138,8 @@ def editCC(username):
                                                    "patientID": pID,
                                                    "birthday": Birthday,
                                                    "age": Age,
+                                             "antigenres": antigenres,
+                                             "Dantigen": Dantigen,
                                                    "sex": Sex,
                                                    "mobile_num": Mobile_num,
                                                    "address": Address,
@@ -1038,6 +1172,8 @@ def editCC(username):
                                                        "birthday": Birthday,
                                                        "age": Age,
                                                        "sex": Sex,
+                                                      "antigenres": antigenres,
+                                                      "Dantigen": Dantigen,
                                                        "mobile_num": Mobile_num,
                                                        "address": Address,
                                                        "housenum": housenum,
@@ -1063,11 +1199,44 @@ def editCC(username):
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
         elif result == "Cleared":
-            db.child("Close Contact").child(username).remove()
+            db.child("Close Contact").child(username).set({"result": result,
+                                                           "password": password,
+                                                           "security": security,
+                                                           "securityQues": securityQues,
+                                                           "swabSchedule": swabSchedule,
+                                                           "dayAdmitted": dayAdmitted,
+                                                           "patientName": Pname,
+                                                           "patientID": PatientID,
+                                                           "birthday": Birthday,
+                                                           "age": Age,
+                                                           "antigenres": antigenres,
+                                                            "Dantigen": Dantigen,
+                                                           "sex": Sex,
+                                                           "mobile_num": Mobile_num,
+                                                           "address": Address,
+                                                           "housenum": housenum,
+                                                           "city": city,
+                                                           "province": province,
+                                                           "condition": Condition,
+                                                           "caseStatus": CaseStatus,
+                                                           "otherIllness": OtherIllness,
+                                                           "emergencyCPerson": EmergencyCPerson,
+                                                           "emergencyContact": emergencyContact,
+                                                           "username": username,
+                                                           "civilStatus": CivilStatus,
+                                                           "dateAdmitted": today,
+                                                           "PIncontact": PIcontact,
+                                                           "NatureOfContact": NatureOfContact,
+                                                           "SignAndSymp": SignAndSymp,
+                                                           "doConsultation": doConsultation,
+                                                           "estimatedDateRecovery": date,
+
+                                                           })
+
             db.child("Patient Monitoring").child(PatientID).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child(PatientID).remove()
-            flash('Successfully logged in!', "success")
+            flash('Successfully ', "success")
         return redirect(url_for('CloseContact'))
 
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
@@ -1115,6 +1284,8 @@ def editS(username):
         securityQues = request.form['securityQues']
         res3=str(res1+1)
         pID = "KP-" + res3;
+        antigenres = request.form['antigenres']
+        Dantigen = request.form['Dantigen']
         swabSchedule = "Your Swab schedule is not yet available"
 
         if result == "Active":
@@ -1129,6 +1300,8 @@ def editS(username):
                                                    "birthday": Birthday,
                                                    "age": Age,
                                                    "sex": Sex,
+                                             "antigenres": antigenres,
+                                             "Dantigen": Dantigen,
                                                    "mobile_num": Mobile_num,
                                                    "address": Address,
                                                    "housenum": housenum,
@@ -1160,6 +1333,8 @@ def editS(username):
                                                        "birthday": Birthday,
                                                        "age": Age,
                                                        "sex": Sex,
+                                                      "antigenres": antigenres,
+                                                      "Dantigen": Dantigen,
                                                        "mobile_num": Mobile_num,
                                                        "address": Address,
                                                        "housenum": housenum,
@@ -1180,12 +1355,45 @@ def editS(username):
                                                       "estimatedDateRecovery": date,
 
                                                        })
-            db.child("Close Contact").child(username).remove()
+            db.child("Suspected").child(username).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
         elif result == "Cleared":
-            db.child("Suspected").child(username).remove()
+            db.child("Suspected").child(username).set({"result": result,
+                                                      "password": password,
+                                                      "security": security,
+                                                      "securityQues": securityQues,
+                                                      "swabSchedule": swabSchedule,
+                                                      "dayAdmitted": dayAdmitted,
+                                                      "patientName": Pname,
+                                                      "patientID": pID,
+                                                      "birthday": Birthday,
+                                                      "age": Age,
+                                                      "sex": Sex,
+                                                      "antigenres": antigenres,
+                                                      "Dantigen": Dantigen,
+                                                      "mobile_num": Mobile_num,
+                                                      "address": Address,
+                                                      "housenum": housenum,
+                                                      "city": city,
+                                                      "province": province,
+                                                      "condition": Condition,
+                                                      "caseStatus": CaseStatus,
+                                                      "otherIllness": OtherIllness,
+                                                      "emergencyCPerson": EmergencyCPerson,
+                                                      "emergencyContact": emergencyContact,
+                                                      "username": username,
+                                                      "civilStatus": CivilStatus,
+                                                      "dateAdmitted": today,
+                                                      "PIncontact": PIcontact,
+                                                      "NatureOfContact": NatureOfContact,
+                                                      "SignAndSymp": SignAndSymp,
+                                                      "doConsultation": doConsultation,
+                                                      "estimatedDateRecovery": date,
+
+                                                      })
+
             db.child("Patient Monitoring").child(PatientID).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child(PatientID).remove()
@@ -1236,6 +1444,8 @@ def editP(username):
         password = request.form['password']
         security = request.form['security']
         securityQues = request.form['securityQues']
+        antigenres = request.form['antigenres']
+        Dantigen = request.form['Dantigen']
         res3=str(res1+1)
         pID = "KP-" + res3;
         swabSchedule = "Your Swab schedule is not yet available"
@@ -1256,6 +1466,8 @@ def editP(username):
                                                    "address": Address,
                                                    "housenum": housenum,
                                                    "city": city,
+                                             "antigenres": antigenres,
+                                             "Dantigen": Dantigen,
                                                    "province": province,
                                                    "condition": Condition,
                                                    "caseStatus": CaseStatus,
@@ -1283,6 +1495,8 @@ def editP(username):
                                                        "birthday": Birthday,
                                                        "age": Age,
                                                        "sex": Sex,
+                                                      "antigenres": antigenres,
+                                                      "Dantigen": Dantigen,
                                                        "mobile_num": Mobile_num,
                                                        "address": Address,
                                                        "housenum": housenum,
@@ -1303,12 +1517,43 @@ def editP(username):
                                                       "estimatedDateRecovery": date,
 
                                                        })
-            db.child("Close Contact").child(username).remove()
+            db.child("probable").child(username).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
         elif result == "Cleared":
-            db.child("probable").child(username).remove()
+            db.child("probable").child(username).set({"result": result,
+                                                      "password": password,
+                                                      "security": security,
+                                                      "securityQues": securityQues,
+                                                      "swabSchedule": swabSchedule,
+                                                      "dayAdmitted": dayAdmitted,
+                                                      "patientName": Pname,
+                                                      "patientID": pID,
+                                                      "birthday": Birthday,
+                                                      "age": Age,
+                                                      "antigenres": antigenres,
+                                                      "Dantigen": Dantigen,
+                                                      "sex": Sex,
+                                                      "mobile_num": Mobile_num,
+                                                      "address": Address,
+                                                      "housenum": housenum,
+                                                      "city": city,
+                                                      "province": province,
+                                                      "condition": Condition,
+                                                      "caseStatus": CaseStatus,
+                                                      "otherIllness": OtherIllness,
+                                                      "emergencyCPerson": EmergencyCPerson,
+                                                      "emergencyContact": emergencyContact,
+                                                      "username": username,
+                                                      "civilStatus": CivilStatus,
+                                                      "dateAdmitted": today,
+                                                      "PIncontact": PIcontact,
+                                                      "NatureOfContact": NatureOfContact,
+                                                      "SignAndSymp": SignAndSymp,
+                                                      "doConsultation": doConsultation,
+                                                      "estimatedDateRecovery": date,
+                                                      })
             db.child("Patient Monitoring").child(PatientID).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child(PatientID).remove()

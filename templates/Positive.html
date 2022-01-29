@@ -467,12 +467,23 @@ font-size: 1.6rem;
 
 
 <script>
+        var tableSize2 = $('#example tbody tr').length;
+
         $(document).ready(function() {
-              $('#example').DataTable();
+              $('#example').DataTable({
+                 scrollY:        '60vh',
+        scrollCollapse: true,
+        paging:         false,
+
+"oLanguage": {
+               "sInfo" : "Showing "+tableSize2+" entries",// text you want show for info section
+            },
+              });
+
 
         } );
+
     </script>
-</div>
 
 
 <script>

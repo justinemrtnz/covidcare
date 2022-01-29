@@ -460,10 +460,22 @@ font-size: 1.6rem;
 
 
 <script>
+        var tableSize2 = $('#example tbody tr').length;
+
         $(document).ready(function() {
-              $('#example').DataTable();
+              $('#example').DataTable({
+                 scrollY:        '60vh',
+        scrollCollapse: true,
+        paging:         false,
+
+"oLanguage": {
+               "sInfo" : "Showing "+tableSize2+" entries",// text you want show for info section
+            },
+              });
+
 
         } );
+
     </script>
 </div>
 
@@ -750,6 +762,10 @@ var year = date[0];
 var month = date[1];
 var day = date[2];
 var date1 = month + "/" + day + "/" + year
+  input = document.getElementById("week");
+    input3 = document.getElementById("day");
+  input1 = document.getElementById("year");
+ input2 = document.getElementById("list");
   filter =date1.toUpperCase();
   table = document.getElementById("example");
   tr = table.getElementsByTagName("tr");

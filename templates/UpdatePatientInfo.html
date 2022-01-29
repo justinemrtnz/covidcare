@@ -597,25 +597,69 @@ legend.scheduler-border {
 
 
           </div>
-            <div class="row" style="margin-left: 25%">
+           <div class="row">
+              <div class="column">
+     <label  style="  font-size: .9vw;" for="Dantigen">Date of Antigen</label>
+        <input readonly="readonly" style=" width:85%;  margin-left: 35%; height: 3%;      font-size: 1vw; background: white" type="text" name="Dantigen" placeholder="Date of Antigen"
+               class="form-control"
+         value="{{request.form['Dantigen'] or p.val().Dantigen}}" >
 
-    <div class="column" id="cod" style="visibility: collapse; " >
-     <label  for="CauseofDeath" style="margin-left: -40%" >Cause of Death</label>
-          <input  id="CauseofDeath" style="width:98%;margin-left: -6%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
+</div>
+                 <div class="column" >
+                    <label for="antigenres">Antigen Result</label>
+        <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
+               class="form-control"
+         value="{{request.form['antigenres'] or p.val().antigenres}}">
+      </div>
+{% if p.val().result == "Deceased" %}
+               <div class="column" id="cod"  >
+     <label  for="CauseofDeath" >Cause of Death</label>
+          <input  id="CauseofDeath" style="width:85%; margin-left: 35%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
                class="form-control"></div>
-                  <div class="column"  id="cod1" style="visibility: collapse">
-                    <label for="date" style="margin-left: -27%">Date of Death</label>
-        <input style="width:98%;  height: 1%; margin-left: 7%;font-size: 1vw; background: white" type="date" id="date" name="date" class="form-control" id="date">
+                {% else %}
+               <div class="column" id="cod" style="visibility: collapse; " >
+     <label  for="CauseofDeath" >Cause of Death</label>
+                    <input  id="CauseofDeath" style="width:85%; margin-left: 35%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
+               class="form-control"></div>
+ {% endif %}
 
-      </div> <div class="column"  id="cod2" style="visibility: collapse">
-                    <label for="time" style="margin-left: -14%"> Time of Death</label>
-        <input style="width:98%;  height: 1%; margin-left: 21%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
+
+          </div>
+               {% if p.val().result == "Deceased" %}
+            <div class="row" style="margin-left: 22%">
+
+
+                  <div class="column"  id="cod1" >
+                    <label for="date" style="margin-left: -27%">Date of Death</label>
+        <input style="width:93%;  height: 1%; margin-left: 7%;font-size: 1vw; background: white" type="date" id="date" name="date" class="form-control" id="date">
+
+      </div> <div class="column"  id="cod2" >
+                    <label for="time" style="margin-left: -18%"> Time of Death</label>
+        <input style="width:93%;  height: 1%; margin-left: 17%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
 
       </div>
                 <div class="column">
                 </div>
 
           </div>
+           {% else %}
+               <div class="row" style="margin-left: 22%">
+
+
+                    <div class="column"  id="cod1"  style="visibility: collapse">
+                    <label for="date" style="margin-left: -27%">Date of Death</label>
+        <input style="width:93%;  height: 1%; margin-left: 7%;font-size: 1vw; background: white" type="date" id="date" name="date" class="form-control" id="date">
+
+      </div><div class="column"  id="cod2" style="visibility: collapse">
+                    <label for="time" style="margin-left: -18%"> Time of Death</label>
+        <input style="width:93%;  height: 1%; margin-left: 17%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
+
+      </div>
+                <div class="column">
+                </div>
+
+          </div>
+           {% endif %}
           </fieldset></div>
      <br></div>
 
