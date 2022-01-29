@@ -350,11 +350,11 @@ height:7px;
   </div>
      <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none" id="date-start1">
       <p style="font-size: .8vw; margin-bottom: -1px; " >Start Date</p>
-    <input     id="date-start"  type="date" value="11/26/2021"  class='form-control btn-secondary' >
+    <input     id="date-start"  type="text" value="11/26/2021"  class='form-control btn-secondary' >
   </div>
       <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none"  id="date-stop1">
       <p style="font-size: .8vw; margin-bottom: -1px;">Start End</p>
-    <input id="date-stop" type="date" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
+    <input id="date-stop" type="text" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
   </div>
 
 
@@ -506,6 +506,17 @@ height:7px;
 
         } );
     </script>
+<script>
+        $(document).ready(function() {
+              $.datepicker.setDefaults({
+                  dateFormat:'dd MMMM yyyy'
+              });
+              $(function (){
+                  $("#date-start").datepicker();
+                  $("#date-stop").datepicker();
+              });
+        } );
+    </script>
 
 
 <script>
@@ -567,25 +578,21 @@ function myFunction1() {
 </script>
 <script>
 function myFunction5() {
-  var input, input1,input2,input3, filter, table, tr, td, i;
-  var date = $('#day').val().split('-');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = month + "/" + day + "/" + year
-  filter =date1.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[7];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
+    var From = $('#From').val();
+    var to = $('#to').val();
+    if (From != '' && to != '') {
+        $.ajax({
+            url: "/range",
+            method: "POST",
+            data: {From: From, to: to},
+            success: function (data) {
+                $('#example').html(data);
+                $('#example').append(data.htmlresponse);
+            }
+        });
+    } else {
+
     }
-  }
 }
 </script>
 <script>
