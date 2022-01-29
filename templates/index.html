@@ -916,17 +916,24 @@ var date2 = month1 + "/" + day1 + "/" + year1
   input_stopDate = new Date(date2);
 
 
+  // only process table body rows, ignoring footer/headers
   const tr = document.querySelectorAll("#example tbody tr")
+
   for (let i = 0; i < tr.length; i++) {
+    // ensure we have a relevant td
     let td = tr[i].getElementsByTagName("td");
-    if (!td || !td[7]) continue;
+    if (!td || !td[8]) continue;
 
-    let td_date = new Date(td[7].textContent);
+    // you need to get the text and convert to date
+    let td_date = new Date(td[8].textContent);
 
+    // now you can compare dates correctly
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
+        // show the row by setting the display property
         tr[i].style.display = '';
       } else {
+        // hide the row by setting the display property
         tr[i].style.display = 'none';
       }
     }
