@@ -422,6 +422,10 @@ height:7px;
 
         <table id="example"  style="width:100%">
         <thead>
+        <tr style="display: none">
+        <td rowspan="2">1</td>
+        <td>2.1</td>
+        </tr>
         <tr>
             <th>Name</th>
 
@@ -505,13 +509,11 @@ height:7px;
 
         $(document).ready(function() {
               $('#example').DataTable({
-                 scrollY:        '60vh',
+                    "orderCellsTop": true,
+                 scrollY:       '60vh',
         scrollCollapse: true,
         paging:         false,
 
-"oLanguage": {
-               "sInfo" : "Showing "+tableSize2+" entries",// text you want show for info section
-            },
               });
 
 
