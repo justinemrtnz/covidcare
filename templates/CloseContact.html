@@ -219,6 +219,25 @@ height:7px;
 
     webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
+.scrollit::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar-thumb
+{   border-radius: 5px;
+	background-color: lightgray;
+	border: 2px solid lightgray;
+}
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
   visibility: visible;
@@ -275,6 +294,17 @@ height:7px;
     width:130px;
 }
 
+.scrollit {
+    overflow-y: scroll !important;
+     overflow-x: hidden !important;
+max-height: 68vh !important;
+
+}
+ .scrollit  {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+}
 
 .column {
   float: left;
@@ -381,15 +411,13 @@ height:7px;
 <div style="margin-left:7%; margin-right:2%; width: 90.9%" class ="table-container" id="table-container">
     <div id="example1">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <div class="scrollit">
         <table id="example" class="sortable" style="width:100%">
 
 
 
 
- <thead> <tr style="display: none">
-        <td rowspan="2">1</td>
-        <td>2.1</td>
-        </tr>
+ <thead>
             <tr>
                 <th>Name</th>
             <th>Patient Status</th>
@@ -440,6 +468,7 @@ height:7px;
             </tbody>
         </table>
     </div>
+    </div>
    <div style="display: none">
 <div class="elem" id="elem">
       <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: right; margin-top: -120px; margin-left: 35%" ></i>
@@ -472,16 +501,10 @@ height:7px;
 
         $(document).ready(function() {
               $('#example').DataTable({
-                 scrollY:        '60vh',
-        scrollCollapse: true,
+
         paging:         false,
-
-"oLanguage": {
-               "sInfo" : "Showing "+tableSize2+" entries",// text you want show for info section
-            },
+                  info:false
               });
-
-
         } );
 
     </script>

@@ -26,6 +26,37 @@
     width: 380px !important;
 
 }
+.scrollit::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar-thumb
+{   border-radius: 5px;
+	background-color: lightgray;
+	border: 2px solid lightgray;
+}.scrollit {
+    overflow-y: scroll !important;
+     overflow-x: hidden !important;
+max-height: 68vh !important;
+
+}
+ .scrollit  {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+}
+
+
     .swal2-popup {
 font-size: 1.6rem;
 }
@@ -419,13 +450,11 @@ height:7px;
 <div style="margin-left:7%; margin-right:2%;width: 90.9%" class ="table-container" id="hide" >
 
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
-
+<div class="scrollit">
         <table id="example"  style="width:100%">
+
         <thead>
-        <tr style="display: none">
-        <td rowspan="2">1</td>
-        <td>2.1</td>
-        </tr>
+
         <tr>
             <th>Name</th>
 
@@ -478,6 +507,7 @@ height:7px;
             {% endif %}
         </tbody>
     </table>
+</div>
     <div style="display: none">
 <div class="elem" id="elem">
       <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -120px; margin-left: 35%" ></i>
@@ -509,14 +539,10 @@ height:7px;
 
         $(document).ready(function() {
               $('#example').DataTable({
-                    "orderCellsTop": true,
-                 scrollY:       '60vh',
-        scrollCollapse: true,
+
         paging:         false,
-
+                  info:false
               });
-
-
         } );
 
     </script>

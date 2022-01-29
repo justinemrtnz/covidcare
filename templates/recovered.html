@@ -266,6 +266,35 @@ font-size: 1.6rem;
     .column {
   float: left;
   width: 50%;
+}.scrollit {
+    overflow-y: scroll !important;
+     overflow-x: hidden !important;
+max-height: 68vh !important;
+
+}
+ .scrollit  {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+}
+ .scrollit::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar-thumb
+{   border-radius: 5px;
+	background-color: lightgray;
+	border: 2px solid lightgray;
 }
 </style>
 
@@ -386,15 +415,13 @@ font-size: 1.6rem;
 <div style="margin-left:7%; margin-right:2%;width: 90.9%;" class ="table-container" id="table-container">
     <div id="example1">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+     <div class="scrollit">
         <table id="example" class="sortable" style="width:100%">
 
 
 
 
- <thead> <tr style="display: none">
-        <td rowspan="2">1</td>
-        <td>2.1</td>
-        </tr>
+ <thead>
             <tr>
                 <th>Name</th>
 
@@ -434,6 +461,7 @@ font-size: 1.6rem;
             {% endif %}
             </tbody>
         </table>
+     </div>
     </div>
 
    <div style="display: none">
@@ -462,21 +490,16 @@ font-size: 1.6rem;
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
 
 
+
 <script>
         var tableSize2 = $('#example tbody tr').length;
 
         $(document).ready(function() {
               $('#example').DataTable({
-                 scrollY:        '60vh',
-        scrollCollapse: true,
+
         paging:         false,
-
-"oLanguage": {
-               "sInfo" : "Showing "+tableSize2+" entries",// text you want show for info section
-            },
+                  info:false
               });
-
-
         } );
 
     </script>
