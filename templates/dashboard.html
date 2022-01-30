@@ -21,7 +21,35 @@
 {% block content %}
 <body>
 <style media="screen">
+.scrollit::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 5px;
+}
 
+.scrollit::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar-thumb
+{   border-radius: 5px;
+	background-color: lightgray;
+	border: 2px solid lightgray;
+}.scrollit {
+    overflow-y: scroll !important;
+     overflow-x: hidden !important;
+max-height: 35vh !important;
+
+}
+ .scrollit  {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+}
 #hide1{
     display: none;
 }
@@ -790,6 +818,7 @@ height:7px;
    <h1  style="font-size: 1.5em;" >Active Patients</h1>
   <div style=" font-size: 0.9vw;">
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+  <div class="scrollit">
         <table id="example2" class="sortable" style="width:100%">
             <thead>
             <tr>
@@ -819,6 +848,7 @@ height:7px;
              {% endif %}
             </tbody>
         </table>
+  </div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -842,6 +872,7 @@ height:7px;
    <h1 style="   font-size: 1.5em;">Recovered Patients</h1>
 <div style=" font-size: 0.9vw">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<div class="scrollit">
         <table id="example1" class="sortable" style="width:100%">
             <thead>
             <tr>
@@ -874,6 +905,7 @@ height:7px;
             {% endif %}
             </tbody>
         </table>
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -897,6 +929,7 @@ height:7px;
 <div class="table1">
    <h1 style="font-size:1.5em;">Deceased Patients</h1>
 <div style=" font-size: 0.9vw;">
+<div class="scrollit">
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example3" class="sortable" style="width:100%">
             <thead>
@@ -931,6 +964,7 @@ height:7px;
 
             </tbody>
         </table>
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -953,6 +987,7 @@ height:7px;
 <div class="table1">
    <h1 style="font-size:1.5em;">Close Contact</h1>
 <div style=" font-size: 0.9vw;">
+<div class="scrollit">
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example4" class="sortable" style="width:100%">
             <thead>
@@ -989,6 +1024,7 @@ height:7px;
 
             </tbody>
         </table>
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -1011,6 +1047,7 @@ height:7px;
 <div class="table1">
    <h1 style="font-size:1.5em;">Probable</h1>
 <div style=" font-size: 0.9vw;">
+<div class="scrollit">
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example5" class="sortable" style="width:100%">
             <thead>
@@ -1045,6 +1082,7 @@ height:7px;
 
             </tbody>
         </table>
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -1067,6 +1105,7 @@ height:7px;
 <div class="table1">
    <h1 style="font-size:1.5em;">Suspected</h1>
 <div style=" font-size: 0.9vw;">
+<div class="scrollit">
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table id="example6" class="sortable" style="width:100%">
             <thead>
@@ -1101,6 +1140,7 @@ height:7px;
 
             </tbody>
         </table>
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
