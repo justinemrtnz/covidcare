@@ -24,9 +24,7 @@
 
 
 <style>
-    html{
-         overflow-y: scroll;
-    }
+
 body{
     overflow-y:scroll;
 }
@@ -148,9 +146,7 @@ body{
   overflow-y: scroll;
 }
 
-body::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
+
 .imgright{
       float: right;
       position:relative;
@@ -490,7 +486,7 @@ legend.scheduler-border {
 
 
 <i style="position: absolute; pointer-events: none ; margin-left: 4%"> <img src="{{url_for('static', filename='health.png')}}" class="icon" width="30%" height="30%"  style="margin-top: 13%"></i>
-                                <label class="show_button" for="check" id="asd" name="update" style="margin-left: 91%; "> Update</label>
+
 
           <div class="row" >
   <div class="column" >
@@ -639,6 +635,7 @@ legend.scheduler-border {
 
       </div>
                 <div class="column">
+                     <label class="show_button" for="check" id="asd" name="update" style="margin-left: 91%; "> Update</label>
                 </div>
 
           </div>
@@ -655,8 +652,11 @@ legend.scheduler-border {
         <input style="width:93%;  height: 1%; margin-left: 17%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
 
       </div>
-                <div class="column">
+               <div class="column">
+                     <label class="show_button" for="check" id="asd" name="update" style="margin-left: 91%; "> Update</label>
                 </div>
+
+
 
           </div>
            {% endif %}

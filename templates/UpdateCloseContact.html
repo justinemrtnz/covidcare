@@ -152,9 +152,7 @@ body{
   overflow-y: scroll;
 }
 
-body::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
+
 .imgright{
       float: right;
       position:relative;
@@ -564,20 +562,24 @@ legend.scheduler-border {
 
 
           </div>
-            <div class="row">
+                <div class="row">
+              <div class="column">
+     <label  style="  font-size: .9vw;" for="Dantigen">Date of Antigen</label>
+        <input readonly="readonly" style=" width:85%;  margin-left: 35%; height: 3%;      font-size: 1vw; background: white" type="text" name="Dantigen" placeholder="Date of Antigen"
+               class="form-control"
+         value="{{request.form['Dantigen'] or p.val().Dantigen}}" >
 
-    <div class="column" id="cod" style="visibility: collapse">
-     <label  for="CauseofDeath">Cause of Death</label>
-          <input  id="CauseofDeath" style="width:85%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
-               class="form-control"></div>
-                  <div class="column"  id="cod1" style="visibility: collapse">
-                    <label for="dateandtime">Date and Time of Death</label>
-        <input style="width:85%;  height: 3%; font-size: 1vw; background: white" type="datetime-local" id="dateandtime" name="dateandtime" class="form-control" id="dateandtime">
-
+</div>
+                 <div class="column" >
+                    <label for="antigenres">Antigen Result</label>
+        <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
+               class="form-control"
+         value="{{request.form['antigenres'] or p.val().antigenres}}">
       </div>
-                <div class="column">
+<div class="column">
                      <label class="show_button" for="check" style="margin-left: 91%; margin-top: 5%"> Update</label>
                 </div>
+
 
           </div>
           </fieldset></div>

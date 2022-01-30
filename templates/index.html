@@ -66,9 +66,6 @@ body {
   overflow-y: scroll;
 }
 
-body::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
 
 /* other styling */
 
@@ -237,6 +234,9 @@ div.shadow1 {
 height:7px;
     width: 4px;
 
+}
+.hideElement {
+  display: none;
 }
 .popup .popuptext::-webkit-scrollbar-track
 {
@@ -475,8 +475,9 @@ height:7px;
             {% if t == 0 %}
             {% else %}
                 {% for l in t %}
-                     <td class="td2">{{l.val().patientName}}</td>
 
+
+              <td class="td2">{{l.val().patientName}}</td>
                      <td class="td3">{{l.val().condition}}/{{l.val().caseStatus}}</td>
 <td class="td4">{{l.val().result}}</td>
                     <td>{{l.val().sex }}</td>
@@ -507,6 +508,10 @@ height:7px;
             {% endif %}
         </tbody>
     </table>
+
+</div>
+<div class="hideElement" id="noResult">
+  Result not found
 </div>
     <div style="display: none">
 <div class="elem" id="elem">
@@ -617,7 +622,7 @@ function myFunction1() {
 }
 </script>
 <script>
-function myFunction5() {
+function myFunction() {
   var input, input1,input2,input3, filter, table, tr, td, i;
   var date = $('#day').val().split('-');
 var year = date[0];
@@ -643,6 +648,47 @@ var date1 = month + "/" + day + "/" + year
   }
 }
 
+</script>
+<script>
+    function myFunction5() {
+        var input, input1,input2,input3, filter, table, tr, td, i;
+  var date = $('#day').val().split('-');
+var year = date[0];
+var month = date[1];
+var day = date[2];
+var date1 = month + "/" + day + "/" + year
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter =date1.toUpperCase();
+  ul = document.getElementById("example");
+  li = ul.getElementsByTagName("tr");
+  for (i = 0; i < li.length; i++) {
+      td = li[i].getElementsByTagName("td")[7];
+      if (td) {
+          if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+              li[i].classList.remove('hideElement');
+          } else {
+              li[i].classList.add('hideElement');
+          }
+      }
+  }
+  // Calling function to decide if no result div need to be shown or not
+  // passing the total `li` element.Ideally this should be total li
+  // which are child of ul in consideration
+  displayNoResult(li.length)
+}
+function displayNoResult(allLI) {
+  // get all the li which have hideElement as class
+  // if this is equal to the number of li that infers that all li are
+  // having hideElement  class, which also infers that there is no matched
+  // result. In that case so the div for no result
+  var hiddenLILength = document.querySelectorAll('li.hideElement');
+  if (allLI  === hiddenLILength.length) {
+    document.getElementById('noResult').classList.remove('hideElement')
+  } else {
+    document.getElementById('noResult').classList.add('hideElement')
+  }
+}
 </script>
 <script>
 function myFunction2() {

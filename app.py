@@ -375,12 +375,9 @@ def edit(username):
                     "swabSchedule": swabdate + " Time: " + ate_time_obj1,
                 })
                 count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                token = "bccf6c57f2ab96799982b8a10516943f"
                 client = Client(count_sid, token)
 
-                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(count_sid, token)
 
                 message = client.messages.create(
                     from_='+19034939890',
@@ -396,16 +393,12 @@ def edit(username):
                     "swabSchedule": swabdate + " Time: " + ate_time_obj1,
                 })
                 count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+                token = "bccf6c57f2ab96799982b8a10516943f"
                 client = Client(count_sid, token)
 
-
-                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(count_sid, token)
 
                 message = client.messages.create(
-                     from_='+19034939890',
+                    from_='+19034939890',
                     to=Mobile_num,
                     body="Text Notification!  \n"
                              "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
@@ -443,21 +436,20 @@ def CCswab(username):
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
 
-            try:
-                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(count_sid, token)
 
-                message = client.messages.create(
-                    from_='+19034939890',
-                    to=Mobile_num,
-                    body="Text Notification!  \n"
-                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-                )
-                flash("Schedule successfully added!")
-                return redirect(url_for('Swab'))
-            except TwilioRestException as e:
-                flash("Phone Number Cannot reach", "danger")
+            count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+            token = "bccf6c57f2ab96799982b8a10516943f"
+            client = Client(count_sid, token)
+
+            message = client.messages.create(
+                from_='+19034939890',
+                to=Mobile_num,
+                body="Text Notification!  \n"
+                        "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+            )
+            flash("Schedule successfully added!")
+            return redirect(url_for('Swab'))
+
 
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
 
@@ -488,21 +480,20 @@ def Pswab(username):
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
 
-            try:
-                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(count_sid, token)
 
-                message = client.messages.create(
-                    from_='+19034939890',
-                    to=Mobile_num,
-                    body="Text Notification!  \n"
-                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-                )
-                flash("Schedule successfully added!")
-                return redirect(url_for('Swab'))
-            except TwilioRestException as e:
-                flash("Phone Number Cannot reach", "danger")
+            count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+            token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+            client = Client(count_sid, token)
+
+            message = client.messages.create(
+                from_='+19034939890',
+                to=Mobile_num,
+                body="Text Notification!  \n"
+                     "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+            )
+            flash("Schedule successfully added!")
+            return redirect(url_for('Swab'))
+
 
     orderedDict = db.child("probable").order_by_key().equal_to(username).limit_to_first(1).get()
 
@@ -532,21 +523,20 @@ def Sswab(username):
             db.child("Suspected").child(username).update({
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
-            try:
-                count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
-                token = "f91d6a88ac84a1f2834b340c67d7fa4c"
-                client = Client(count_sid, token)
 
-                message = client.messages.create(
-                    from_='+19034939890',
-                    to=Mobile_num,
-                    body="Text Notification!  \n"
-                         "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
-                )
-                flash("Schedule successfully added!")
-                return redirect(url_for('Swab'))
-            except TwilioRestException as e:
-                flash("Phone Number Cannot reach", "danger")
+            count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
+            token = "f91d6a88ac84a1f2834b340c67d7fa4c"
+            client = Client(count_sid, token)
+
+            message = client.messages.create(
+                 from_='+19034939890',
+                 to=Mobile_num,
+                body="Text Notification!  \n"
+                      "RHU Kalayaan has set a date for your swab test!\n Please check it on the COVID CARE Kalayaan mobile application to see the schedule. Thank you, and be safe!",
+            )
+            flash("Schedule successfully added!")
+            return redirect(url_for('Swab'))
+
     orderedDict = db.child("Suspected").order_by_key().equal_to(username).limit_to_first(1).get()
 
     return render_template("UpdateCCSwab.html", data=orderedDict, error=error)
@@ -917,7 +907,7 @@ def edit1(username):
 
             dateandtime1 = request.form['time']
             ate_time_obj = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%d %B %Y ')
-            ate_time_obj2 = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%m/%B/%Y')
+            ate_time_obj2 = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%m/%d/%Y')
             ate_time_obj1 = datetime.strptime(dateandtime1,  '%H:%M').strftime('%I:%M %p')
 
             db.child(result).child(PatientID).set({"result": result,

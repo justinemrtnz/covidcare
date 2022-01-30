@@ -34,9 +34,6 @@ body {
   overflow-y: scroll;
 }
 
-body::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
 
 /* other styling */
 
@@ -919,6 +916,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
 
 
   const tr = document.querySelectorAll("#example tbody tr")
+
   for (let i = 0; i < tr.length; i++) {
     let td = tr[i].getElementsByTagName("td");
     if (!td || !td[7]) continue;
@@ -930,10 +928,12 @@ var date2 = month1 + "/" + day1 + "/" + year1
         tr[i].style.display = '';
       } else {
         tr[i].style.display = 'none';
+
       }
     }
 
   }
+
 }
 </script>
 <script>
