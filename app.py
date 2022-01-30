@@ -516,10 +516,11 @@ def Sswab(username):
         today = datetime.datetime.now() + datetime.timedelta(days=1)
         date = today.strftime('%Y-%m-%d')
         swabdate = request.form['date']
+        from datetime import datetime
+
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
         Mobile_num = request.form['mobile_num']
-        from datetime import datetime
         ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
 
         if swabdate == "" or swabtime == "":
@@ -531,7 +532,6 @@ def Sswab(username):
             db.child("Suspected").child(username).update({
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
-
             try:
                 count_sid = 'ACc026937f5ed784bc4e05c210c1c00b77'
                 token = "f91d6a88ac84a1f2834b340c67d7fa4c"
