@@ -510,8 +510,7 @@ height:7px;
     </table>
 
 </div>
-<div class="hideElement" id="noResult">
-  Result not found
+<div class="hideElement" id="noResult"><center>No Record Available</center>
 </div>
     <div style="display: none">
 <div class="elem" id="elem">
@@ -672,21 +671,15 @@ var date1 = month + "/" + day + "/" + year
           }
       }
   }
-  // Calling function to decide if no result div need to be shown or not
-  // passing the total `li` element.Ideally this should be total li
-  // which are child of ul in consideration
   displayNoResult(li.length)
 }
 function displayNoResult(allLI) {
-  // get all the li which have hideElement as class
-  // if this is equal to the number of li that infers that all li are
-  // having hideElement  class, which also infers that there is no matched
-  // result. In that case so the div for no result
-  var hiddenLILength = document.querySelectorAll('li.hideElement');
-  if (allLI  === hiddenLILength.length) {
-    document.getElementById('noResult').classList.remove('hideElement')
-  } else {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  if ( 0 === hiddenLILength.length) {
     document.getElementById('noResult').classList.add('hideElement')
+  } else{
+      document.getElementById('noResult').classList.remove('hideElement')
   }
 }
 </script>

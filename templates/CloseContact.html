@@ -185,7 +185,9 @@ div.shadow1 {
       max-height: 300px;
 }
 
-
+.hideElement {
+  display: none;
+}
 /* Popup arrow */
 .popup .popuptext::after {
   content: "";
@@ -465,6 +467,8 @@ max-height: 68vh !important;
             </tbody>
         </table>
     </div>
+    <div class="hideElement" id="noResult"><center>No Record Available</center>
+</div>
     </div>
    <div style="display: none">
 <div class="elem" id="elem">
@@ -566,25 +570,37 @@ function myFunction1() {
 }
 </script>
 <script>
-function myFunction5() {
-  var input, input1,input2,input3, filter, table, tr, td, i;
+    function myFunction5() {
+        var input, input1,input2,input3, filter, table, tr, td, i;
   var date = $('#day').val().split('-');
 var year = date[0];
 var month = date[1];
 var day = date[2];
 var date1 = month + "/" + day + "/" + year
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
   filter =date1.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[7];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+  ul = document.getElementById("example");
+  li = ul.getElementsByTagName("tr");
+  for (i = 0; i < li.length; i++) {
+      td = li[i].getElementsByTagName("td")[6];
+      if (td) {
+          if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+              li[i].classList.remove('hideElement');
+          } else {
+              li[i].classList.add('hideElement');
+          }
       }
-    }
+  }
+  displayNoResult(li.length)
+}
+function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  if ( 0 === hiddenLILength.length) {
+    document.getElementById('noResult').classList.add('hideElement')
+  } else{
+      document.getElementById('noResult').classList.remove('hideElement')
   }
 }
 </script>
