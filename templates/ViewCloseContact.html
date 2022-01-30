@@ -4,7 +4,7 @@
 
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Close Contact</title>
+    <title>View Patient Information</title>
     <link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
           type = "image/icon" class="icon">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
     <link rel="stylesheet" href=" https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css">
       <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<title>Patient Information</title>
+	<title>Close Contact</title>
 
 </head>
 {% extends 'base.html' %}
@@ -78,7 +78,8 @@ body{
   }
 }
 
-       .row {margin-left:15%;
+       .row {
+  margin-left:15%;
 }
 
 .column {
@@ -91,14 +92,10 @@ body{
         overflow-y:scroll;
     overflow: hidden;
 }label{
-        margin-left: 35%;
+        padding-left: 35%;
         font-family: 'Poppins';
         font-size: 1vw;
- }input {
- margin-left: 35%;
- font-family: 'Poppins', sans-serif;
-
-   }
+ }
   select{
          margin-left: 35%;
  font-family: 'Poppins';
@@ -311,24 +308,46 @@ legend.scheduler-border {
     font-size: 14px;
 }
 </style>
-<div style="position: absolute; z-index: 5;margin-left: 70%; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container" >
-    <!--flash-->
-    {% for message in get_flashed_messages() %}
-        <script type="text/javascript">
+     <div >
+        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+            {% if errors %}
+                {%- for message in errors %}s
+<script type="text/javascript">
     Swal.fire({
-  title: "Success!",
+  title: "Failed!",
+  text: "Login Failed!",
         customClass: 'swal-wide',
-  text: "Update Successfully!",
-  icon: "success",
-  confirmButtonText: "Continue!",
+  icon: "error",
+        confirmButtonColor: "#3b83dc",
+ confirmButtonText: "Continue!",
 });
 </script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
 
-    {% endfor %}
-</div>
+    <div>
+        {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
+    Swal.fire({
+  title: "Failed!",
+  text: "Login Failed!",
+        customClass: 'swal-wide',
+  icon: "error",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
+});
+</script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
 	<div style="max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: verdana; color:#0f0e0f; background: white" id="dashboard">
 
-	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%">Close Contact > View</p>
+	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%">Patient Information > Close Contact</p>
         <div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
 	</div>
 
@@ -357,37 +376,37 @@ legend.scheduler-border {
     </div>
 <div class="textbox">
 
-<div class="textbox">
-
 
 {% for p in data %}
 
-    <form method="POST" action="/viewCC/{{p.key()}}">
+    <form method="POST" action="/edit1/{{p.key()}}">
+
      <div class="col-8" >
-        <div style="margin-left:9%; margin-right:4%" class = "table-container">
-             <fieldset class="scheduler-border">
+
+         <div style="margin-left:9%; margin-right:4%" class = "table-container">
+          <fieldset class="scheduler-border">
 <legend class="scheduler-border">Personal Information</legend>
 
  <!-- First row -->
-<i style="position: absolute; margin-top: 1%; margin-left: 4%"> <img src="{{url_for('static', filename='patientinfo.png')}}" class="icon" width="30%" height="30%" style="margin-top: 5%"></i>
+<i style="position: absolute; pointer-events: none ;margin-top: 1%; margin-left: 4%"> <img src="{{url_for('static', filename='patientinfo.png')}}" class="icon" width="30%" height="30%" style="margin-top: 5%"></i>
 
 <div class="row" >
   <div class="column">
     <label for="patientID">Patient ID</label>
-        <input  readonly="readonly" style="width:85%;  height: 3%;     font-size: 1vw; background: white" type="text" name="patientID" placeholder="PatientID"
+        <input  readonly="readonly" style="width:85%;margin-left: 35%;  height: 3%;     font-size: 1vw; background: white" type="text" name="patientID" placeholder="PatientID"
                class="form-control"
                value="{{request.form['patientID'] or p.val().patientID}}" >
   </div>
      <div class="column" >
             <label for="sex">Sex</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw;background: white" type="text" name="sex" placeholder="Sex"
+        <input readonly="readonly" style="width:85%;margin-left: 35%;  height: 3%;      font-size: 1vw;background: white" type="text" name="sex" placeholder="Sex"
                class="form-control"
          value="{{request.form['sex'] or p.val().sex}}">
 
 
   </div><div class="column" style="margin-right:5%">
     <label>Address</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"
+        <input readonly="readonly" style="width:85%; margin-left: 35%; height: 3%;      font-size: 1vw; background: white"
                class="form-control"
           value=" {{ p.val().housenum }} {{request.form['address'] or p.val().address}}, {{ p.val().city }}, {{ p.val().province }}">
     </div>
@@ -402,20 +421,20 @@ legend.scheduler-border {
 <div class="row">
     <div class="column">
         <label for="patientName">Name</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw; background: white"type="text" name="patientName" placeholder="Patient Name"
+        <input readonly="readonly" style="width:85%;margin-left: 35%;  height: 3%;       font-size: 1vw; background: white"type="text" name="patientName" placeholder="Patient Name"
                class="form-control"
                value="{{request.form['patientName'] or p.val().patientName}}">
   </div>
      <div class="column" >
           <label for="mobile_num">Mobile Number</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;    font-size: 1vw;background: white" type="text" name="mobile_num" placeholder="Mobile_num"
+        <input readonly="readonly" style="width:85%;margin-left: 35%;  height: 3%;    font-size: 1vw;background: white" type="text" name="mobile_num" placeholder="Mobile_num"
                class="form-control"
          value="{{request.form['mobile_num'] or p.val().mobile_num}}">
 
 
 </div>   <div class="column" >
       <label style="  font-size: .9vw;" for="emergencyCPerson">Emergency Contact Person</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw;background: white" type="text" name="emergencyCPerson" placeholder="EmergencyCPerson"
+        <input readonly="readonly" style="width:85%;margin-left: 35%;  height: 3%;      font-size: 1vw;background: white" type="text" name="emergencyCPerson" placeholder="EmergencyCPerson"
                class="form-control"
          value="{{request.form['emergencyCPerson'] or p.val().emergencyCPerson}}">
 
@@ -426,19 +445,19 @@ legend.scheduler-border {
                  <div class="row">
                    <div class="column" >
       <label for="birthday">Birthday</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;    font-size: 1vw;background: white" type="text" name="birthday" placeholder="Birthday"
+        <input readonly="readonly" style="width:85%; margin-left: 35%; height: 3%;    font-size: 1vw;background: white" type="text" name="birthday" placeholder="Birthday"
                class="form-control"
          value="{{request.form['birthday'] or p.val().birthday}}">
 
   </div><div class="column" style="margin-right:5%">
-      <label for="civilStatus">Civil Status</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="civilStatus" placeholder="civilStatus"
+     <label for="civilStatus">Civil Status</label>
+        <input readonly="readonly" style="width:85%; margin-left: 35%; height: 3%;       font-size: 1vw;background: white" type="text" name="civilStatus" placeholder="civilStatus"
                class="form-control"
          value="{{request.form['civilStatus'] or p.val().civilStatus}}">
     </div>
                      <div class="column" style="margin-left: -5%">
      <label  style="  font-size: .9vw;" for="emergencyContact">Emergency Contact Number</label>
-        <input readonly="readonly" style=" width:85%;  height: 3%;      font-size: 1vw; background: white" type="text" name="emergencyContact" placeholder="EmergencyContactNo"
+        <input readonly="readonly" style=" width:85%; margin-left: 35%; height: 3%;      font-size: 1vw; background: white" type="text" name="emergencyContact" placeholder="EmergencyContactNo"
                class="form-control"
          value="{{request.form['emergencyContact'] or p.val().emergencyContact}}" >
 
@@ -447,13 +466,14 @@ legend.scheduler-border {
       <div class="row">
            <div class="column" >
       <label for="age">Age</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="age" placeholder="Age"
+        <input readonly="readonly" style="width:85%;margin-left: 35%;  height: 3%;       font-size: 1vw;background: white" type="text" name="age" placeholder="Age"
                class="form-control"
          value="{{request.form['age'] or p.val().age}}">
   </div>
+
 <div class="column"style="display: none" >
         <label for="username">Username</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw;background: white" type="text" name="username" placeholder="username"
+        <input readonly="readonly" style="width:85%;  margin-left: 35%;height: 3%;      font-size: 1vw;background: white" type="text" name="username" placeholder="username"
                class="form-control"
          value="{{request.form['username'] or p.val().username}}">
 
@@ -463,37 +483,36 @@ legend.scheduler-border {
                   </fieldset>
       </div>
 
-    <div style="margin-left:9%; margin-right:4%" class = "table-container">
-          <fieldset class="scheduler-border">
+    <div style="margin-left:9%; margin-right:4%" class = "table-container1">
+           <fieldset class="scheduler-border">
 <legend class="scheduler-border">Health Assessment</legend>
 
 
 
-<i style="position: absolute;  margin-left: 4%"> <img src="{{url_for('static', filename='health.png')}}" class="icon" width="30%" height="30%"  style="margin-top: 7.5%"></i>
-          <div class="row">
+<i style="position: absolute; pointer-events: none ; margin-left: 4%"> <img src="{{url_for('static', filename='health.png')}}" class="icon" width="30%" height="30%"  style="margin-top: 13%"></i>
+
+
+          <div class="row" >
   <div class="column" >
         <label for="dateAdmitted" style="    font-size: 1vw;">Date Admitted</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw;background: white" type="text" name="dateAdmitted" placeholder="date Admitted"
+        <input readonly="readonly" style="width:85%;  height: 3%;  margin-left: 35%;    font-size: 1vw;background: white" type="text" name="dateAdmitted" placeholder="date Admitted"
                class="form-control"
          value="{{request.form['dateAdmitted'] or p.val().dateAdmitted}}">
 
     </div>
             <div class="column">
      <label  style="  font-size: .9vw;" for="doConsultation">Consultation</label>
-        <input readonly="readonly" style=" width:85%;  height: 3%;      font-size: 1vw; background: white" type="text" name="doConsultation" placeholder="doConsultation"
+        <input readonly="readonly" style=" margin-left: 35%; width:85%;  height: 3%;      font-size: 1vw; background: white" type="text" name="doConsultation" placeholder="doConsultation"
                class="form-control"
          value="{{request.form['doConsultation:'] or p.val().doConsultation}}" >
 </div>
 <div class="column" >
-         <label for="result">Patient Status</label>
-
-<input readonly="readonly" style="width:85%;  height: 3%;     font-size: 1vw; background: white" type="text" name="PIcontact" id="result" placeholder="PIcontact"
+                    <label for="antigenres">Patient Status</label>
+        <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
                class="form-control"
          value="{{request.form['result'] or p.val().result}}">
-          </div>
-</select>
-    </div>
-
+      </div>
+   </div>
 
       <!-- fifth row -->
 
@@ -502,20 +521,26 @@ legend.scheduler-border {
 
           <div class="column">
 <label for="PIcontact">Person Incontact</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;     font-size: 1vw; background: white" type="text" name="PIcontact" placeholder="PIcontact"
+        <input readonly="readonly" style="width:85%;  height: 3%;    margin-left: 35%;  font-size: 1vw; background: white" type="text" name="PIcontact" placeholder="PIcontact"
                class="form-control"
          value="{{request.form['PIncontact:'] or p.val().PIncontact}}">
           </div>
 <div class="column">
      <label  style="  font-size: .9vw;" for="SignAndSymp">Sign and symptoms</label>
-        <input readonly="readonly" style=" width:85%;  height: 3%;      font-size: 1vw; background: white" type="text" name="SignAndSymp" placeholder="SignAndSymp"
+        <input readonly="readonly" style=" width:85%;  height: 3%;   margin-left: 35%;    font-size: 1vw; background: white" type="text" name="SignAndSymp" placeholder="SignAndSymp"
                class="form-control"
          value="{{request.form['SignAndSymp'] or p.val().SignAndSymp}}" >
 
 </div>
          <div class="column" >
     <label for="condition">Condition</label>
-             <input readonly="readonly" style="width:85%;  height: 3%; z-index: 100;   font-size: 1vw; background: white" type="text" name="condition" id="condition1" placeholder="Condition"
+                 <select style="width:85%;  margin-left: 35%; height: 3%; z-index: 100; display: none;  font-size: 1vw;background: white" name="condition" id="Condition" placeholder="Condition" class="form-control ">
+
+    <option value="Symptomatic">Symptomatic</option>
+    <option value="Asymptomatic">Asymptomatic</option>
+                 </select>
+
+             <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%; z-index: 100;   font-size: 1vw; background: white" type="text" name="condition" id="condition1" placeholder="Condition"
                class="form-control"
           value="{{request.form['condition'] or p.val().condition}}">
 
@@ -527,21 +552,27 @@ legend.scheduler-border {
           <div class="row">
               <div class="column">
      <label  style="  font-size: .9vw;" for="NOcontact">Nature of Contact</label>
-        <input readonly="readonly" style=" width:85%;  height: 3%;      font-size: 1vw; background: white" type="text" name="NOcontact" placeholder="NOcontact"
+        <input readonly="readonly" style=" width:85%;  margin-left: 35%; height: 3%;      font-size: 1vw; background: white" type="text" name="NOcontact" placeholder="NOcontact"
                class="form-control"
          value="{{request.form['NatureOfContact'] or p.val().NatureOfContact}}" >
 
 </div>
                  <div class="column" >
                     <label for="otherIllness">Comorbidities</label>
-        <input readonly="readonly" style="width:85%;  height: 3%;     font-size: 1vw; background: white" type="text" name="otherIllness" placeholder="OtherIllness"
+        <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="otherIllness" placeholder="OtherIllness"
                class="form-control"
          value="{{request.form['otherIllness'] or p.val().otherIllness}}">
       </div>
 
                  <div class="column" >
                      <label for="caseStatus">Case Status</label>
-          <input readonly="readonly" style="width:85%;  height: 3%;       font-size: 1vw;background: white" type="text" name="caseStatus" id="caseStatus1" placeholder="CaseStatus"
+                     <select style="width:85%;  margin-left: 35%; height: 3%; z-index: 100; display: none;  font-size: 1vw;background: white" name="caseStatus" id="caseStatus" placeholder="caseStatus" class="form-control ">
+    <option value="Mild">Mild</option>
+    <option value="Moderate">Moderate</option>
+                 </select>
+
+
+          <input readonly="readonly" style="width:85%; margin-left: 35%;  height: 3%;       font-size: 1vw;background: white" type="text" name="caseStatus" id="caseStatus1" placeholder="CaseStatus"
                class="form-control"
          value="{{request.form['caseStatus'] or p.val().caseStatus}}">
       </div>
@@ -549,33 +580,141 @@ legend.scheduler-border {
 
 
           </div>
-            <div class="row" style="margin-left: 25%">
+           <div class="row">
+              <div class="column">
+     <label  style="  font-size: .9vw;" for="Dantigen">Date of Antigen</label>
+        <input readonly="readonly" style=" width:85%;  margin-left: 35%; height: 3%;      font-size: 1vw; background: white" type="text" name="Dantigen" placeholder="Date of Antigen"
+               class="form-control"
+         value="{{request.form['Dantigen'] or p.val().Dantigen}}" >
 
-    <div class="column" id="cod" style="visibility: collapse; " >
-     <label  for="CauseofDeath" style="margin-left: -40%" >Cause of Death</label>
-          <input  id="CauseofDeath" style="width:98%;margin-left: -6%;  height: 3%; font-size: 1vw;background: white" type="text" name="CauseofDeath" placeholder="Cause of Death"
-               class="form-control"></div>
-                  <div class="column"  id="cod1" style="visibility: collapse">
-                    <label for="dateandtime" style="margin-left: -27%">Date and Time of Death</label>
-        <input style="width:98%;  height: 2%; margin-left: 7%;font-size: 1vw; background: white" type="datetime-local" id="dateandtime" name="dateandtime" class="form-control" id="dateandtime">
+</div>
+                 <div class="column" >
+                    <label for="antigenres">Antigen Result</label>
+        <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
+               class="form-control"
+         value="{{request.form['antigenres'] or p.val().antigenres}}">
+      </div>
+{% if p.val().result == "Deceased" %}
+           <div class="column" >
+                    <label for="antigenres">Antigen Result</label>
+        <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
+               class="form-control"
+         value="{{request.form['CauseOfDeath'] or p.val().CauseOfDeath}}">
+      </div>
+                {% else %}
 
+ {% endif %}
+
+
+          </div>
+               {% if p.val().result == "Deceased" %}
+            <div class="row" >
+
+
+                    <div class="column" >
+                    <label for="antigenres" >Date and time of death</label>
+        <input readonly="readonly" style="width:85%;   margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
+               class="form-control"
+         value="{{request.form['DTofDeath'] or p.val().DTofDeath}}">
       </div>
                 <div class="column">
-
                 </div>
 
           </div>
-          </fieldset></div></div>
+           {% else %}
+               <div class="row" style="margin-left: 22%">
+
+
+                    <div class="column"  id="cod1"  style="visibility: collapse">
+                    <label for="date" style="margin-left: -27%">Date of Death</label>
+        <input style="width:93%;  height: 1%; margin-left: 7%;font-size: 1vw; background: white" type="date" id="date" name="date" class="form-control" id="date">
+
+      </div><div class="column"  id="cod2" style="visibility: collapse">
+                    <label for="time" style="margin-left: -18%"> Time of Death</label>
+        <input style="width:93%;  height: 1%; margin-left: 17%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
+
+      </div>
+                <div class="column">
+                </div>
+
+          </div>
+           {% endif %}
+          </fieldset></div>
+     <br></div>
+
+   <div style="display: none">
+    <label for="address">Address</label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white" type="text" name="address" placeholder="address"
+               class="form-control"
+          value="{{request.form['address'] or p.val().address}}">
+    </div>
+              <div style="display: none">
+    <label for="city"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white" type="city" name="city" placeholder="city"
+               class="form-control"
+          value="{{ p.val().city }}">
+    </div>
+                 <div style="display: none">
+    <label for="province"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white" type="province" name="province" placeholder="province"
+               class="form-control"
+          value="{{ p.val().province }}">
+    </div>
+                <div style="display: none">
+    <label for="housenum"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white" type="housenum" name="housenum" placeholder="housenum"
+               class="form-control"
+          value="{{ p.val().housenum }}">
+    </div>
+    <div style="display: none">
+    <label for="dateAdmitted"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="dateAdmitted" placeholder="dateAdmitted"
+               class="form-control"
+          value="{{ p.val().dateAdmitted }}">
+    </div>
+    <div style="display: none">
+    <label for="dayAdmitted"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="dayAdmitted" placeholder="dayAdmitted"
+               class="form-control"
+          value="{{ p.val().dayAdmitted }}">
+    </div>
+    <div style="display: none">
+    <label for="estimatedDateRecovery"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="estimatedDateRecovery" placeholder="estimatedDateRecovery"
+               class="form-control"
+          value="{{ p.val().estimatedDateRecovery }}">
+    </div>
+    <div style="display: none">
+    <label for="password"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="password" placeholder="password"
+               class="form-control"
+          value="{{ p.val().password }}">
+    </div>
+    <div style="display: none">
+    <label for="security"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="security" placeholder="security"
+               class="form-control"
+          value="{{ p.val().security }}">
+    </div>
+     <div style="display: none">
+    <label for="security"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="securityQues" placeholder="securityQues"
+               class="form-control"
+          value="{{ p.val().securityQues }}">
+    </div>
+     <div style="display: none">
+    <label for="Result"></label>
+        <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="Result" placeholder="Result"
+               class="form-control"
+          value="{{ p.val().result }}">
+    </div>
 
  <!-- fourth row -->
 
-<br>
-    <br>
 
     {% endfor %}
 
-<br>
-<br>
+
     </form>
   </div>
 
@@ -588,18 +727,93 @@ legend.scheduler-border {
 
 </div></form>
 <script>
-    var dp=$("#datepicker").datepicker( {
-    format: "mm-yyyy",
-    startView: "months",
-    minViewMode: "months"
-});
 
-dp.on('changeMonth', function (e) {
-   //do something here
-   alert("Month changed");
-});
+    var  a= document.getElementsByName("doConsultation")[0].value;
+    var date = new Date(a)
+    function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+    var today1 = new Date().toISOString().split('T')[0];
+    var dt = new Date();
+
+    var c = formatDate(date)
+     var d = formatDate(dt)
+    document.getElementsByName("date")[0].setAttribute('min', c);
+    document.getElementsByName("date")[0].setAttribute('max', d);
+
 </script>
+<script>
+        var  a= document.getElementsByName("Result")[0].value;
+    if (a === "Deceased"){
+                   var select_3 = document.getElementById("asd");
+                   select_3.style.pointerEvents = 'none';
+    }
+</script>
+<script>
 
+    function select() {
+        var main_select = document.getElementById("result");
+        var select_1 = document.getElementById("cod");
+          var select_2 = document.getElementById("cod1");
+          var select_4 = document.getElementById("cod2");
+           var select_3 = document.getElementById("Condition");
+         var str1 = document.getElementById("condition1");
+         var str2 = document.getElementById("caseStatus");
+                  var str3 = document.getElementById("caseStatus1");
+
+
+        var desired_box = main_select.options[main_select.selectedIndex].value;
+        if (desired_box === "Active") {
+               select_1.style.visibility = 'collapse';
+               select_2.style.visibility = 'collapse';
+                select_3.style.display = '';
+                str1.style.display='none';
+                str2.style.display='';
+                str3.style.display='none';
+                              select_4.style.visibility = 'collapse';
+
+        } else if (desired_box === "Recovered") {
+           select_1.style.visibility = 'collapse';
+               select_2.style.visibility = 'collapse';
+               main_select.style.display=''
+            select_3.style.display = 'none';
+            str1.style.display = '';
+            str2.style.display='none';
+            str3.style.display='';
+                                          select_4.style.visibility = 'collapse';
+
+        } else if (desired_box === "Deceased") {
+            select_1.style.visibility = '';
+                select_2.style.visibility = '';
+                select_3.style.display = 'none';
+                  str1.style.display = '';
+                  str2.style.display='none';
+                str3.style.display='';
+            select_4.style.visibility = '';
+
+        }
+        else if (desired_box === "Close Contact") {
+            select_1.style.visibility = 'collapse';
+               select_2.style.visibility = 'collapse';
+                              select_4.style.visibility = 'collapse';
+
+            select_3.style.display = 'none';
+            str1.style.display = ''; str2.style.display='none';
+                str3.style.display='';
+
+ }
+    }
+</script>
 </body>
 {% endblock %}
 </html>

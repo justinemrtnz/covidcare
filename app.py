@@ -750,7 +750,43 @@ def viewCCswab(username):
 
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
     return render_template("ViewCCSwab.html", data=orderedDict)
+@app.route('/viewSswab/<username>', methods=('GET', 'POST'))
+def viewSswab(username):
+    if request.method == 'POST':
+        pname = request.form['Pname']
+        pID = request.form['PatientID']
+        swab = request.form['swabSchedule']
+        uname = request.form['username']
 
+        db.child("Patients").child(uname).update({
+            "patientName": pname,
+            "patientID": pID,
+            "swabSchedule": swab,
+            "username": uname
+        })
+        return redirect(url_for('Swab'))
+
+    orderedDict = db.child("Suspected").order_by_key().equal_to(username).limit_to_first(1).get()
+    return render_template("ViewSswab.html", data=orderedDict)
+
+@app.route('/viewPswab/<username>', methods=('GET', 'POST'))
+def viewPswab(username):
+    if request.method == 'POST':
+        pname = request.form['Pname']
+        pID = request.form['PatientID']
+        swab = request.form['swabSchedule']
+        uname = request.form['username']
+
+        db.child("Patients").child(uname).update({
+            "patientName": pname,
+            "patientID": pID,
+            "swabSchedule": swab,
+            "username": uname
+        })
+        return redirect(url_for('Swab'))
+
+    orderedDict = db.child("probable").order_by_key().equal_to(username).limit_to_first(1).get()
+    return render_template("ViewPSwab.html", data=orderedDict)
 
 @app.route('/view2/<PatientID>', methods=('GET', 'POST'))
 def view2(PatientID):
@@ -806,7 +842,6 @@ def edit1(username):
             db.child(result).child(PatientID).set({"result": result,
                                                    "antigenres": antigenres,
                                                    "Dantigen": Dantigen,
-
                                                    "password": password,
                                                    "security": security,
                                                    "securityQues": securityQues,

@@ -490,7 +490,6 @@ legend.scheduler-border {
 
 
 <i style="position: absolute; pointer-events: none ; margin-left: 4%"> <img src="{{url_for('static', filename='health.png')}}" class="icon" width="30%" height="30%"  style="margin-top: 13%"></i>
-                                <label class="show_button" for="check" id="asd" name="update" style="margin-left: 91%; "> Update</label>
 
           <div class="row" >
   <div class="column" >
@@ -595,14 +594,14 @@ legend.scheduler-border {
          value="{{request.form['antigenres'] or p.val().antigenres}}">
       </div>
 {% if p.val().result == "Deceased" %}
-           <div class="column" >
+           <div class="column"  >
                     <label for="antigenres">Antigen Result</label>
         <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
                class="form-control"
          value="{{request.form['CauseOfDeath'] or p.val().CauseOfDeath}}">
       </div>
                 {% else %}
-           <div class="column" >
+           <div class="column"style="display: none" >
                     <label for="antigenres">Cause Of Death</label>
         <input readonly="readonly" style="width:85%;  margin-left: 35%; height: 3%;     font-size: 1vw; background: white" type="text" name="antigenres" placeholder="Antigen Result"
                class="form-control"
