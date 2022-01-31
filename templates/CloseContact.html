@@ -469,6 +469,8 @@ max-height: 68vh !important;
     </div>
     <div class="hideElement" id="noResult"><center>No Record Available</center>
 </div>
+   <p id="confirmed" style="margin-top: 2%"> </p>
+<p id="confirmed2" style="margin-top: 2%"> </p>
     </div>
    <div style="display: none">
 <div class="elem" id="elem">
@@ -597,10 +599,18 @@ var date1 = month + "/" + day + "/" + year
 function displayNoResult(allLI) {
 
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
   if ( 0 === hiddenLILength.length) {
     document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
   } else{
       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
   }
 }
 </script>

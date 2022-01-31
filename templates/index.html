@@ -512,6 +512,10 @@ height:7px;
 </div>
 <div class="hideElement" id="noResult"><center>No Record Available</center>
 </div>
+<p id="confirmed" style="margin-top: 2%"> </p>
+<p id="confirmed2" style="margin-top: 2%"> </p>
+
+
     <div style="display: none">
 <div class="elem" id="elem">
       <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -120px; margin-left: 35%" ></i>
@@ -545,7 +549,7 @@ height:7px;
               $('#example').DataTable({
 
         paging:         false,
-                  info:false
+                 info:false,
               });
         } );
 
@@ -676,12 +680,25 @@ var date1 = month + "/" + day + "/" + year
 function displayNoResult(allLI) {
 
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
   if ( 0 === hiddenLILength.length) {
     document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
   } else{
       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
   }
 }
+</script>
+<script>
+    var hiddenLILength = document.querySelectorAll('tr');
+    const  time = document.querySelector('#confirmed2');
+time.textContent = "Showing 1 to " +hiddenLILength.length+ " of " +hiddenLILength.length+ " entries";
 </script>
 <script>
 function myFunction2() {
@@ -1124,7 +1141,17 @@ var data = " ";
 }
 }
 </script>
+<script>
+         const  time = document.querySelector('#confirmed')
 
+        const  t1 = {{ t1 }}
+        const  t2 = {{ t2 }}
+        const  t3 = {{ t5 }}
+const sum = t1 + t2 + t3;
+    time.textContent = sum;
+
+
+    </script>
 </div>
 </body>
 {% endblock %}
