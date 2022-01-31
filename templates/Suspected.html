@@ -206,6 +206,25 @@ height:7px;
     width: 4px;
 
 }
+.scrollit::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar-thumb
+{   border-radius: 5px;
+	background-color: lightgray;
+	border: 2px solid lightgray;
+}
 .popup .popuptext::-webkit-scrollbar-track
 {
     border-radius: 10px;
@@ -289,25 +308,6 @@ max-height: 68vh !important;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
     overflow-y: scroll;
-}
- .scrollit::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-    border-radius: 5px;
-}
-
-.scrollit::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: grey;
-    border-radius: 5px;
-}
-
-.scrollit::-webkit-scrollbar-thumb
-{   border-radius: 5px;
-	background-color: lightgray;
-	border: 2px solid lightgray;
 }
 </style>
 <div style="position: absolute; z-index: 5;margin-left: 70%; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container" >
@@ -451,11 +451,11 @@ max-height: 68vh !important;
 
   <td class="td1" style="display: none">{{l.val().dayAdmitted }}</td>
                     <td class="td1">
-                        <a href="/viewS/{{l.key()}}">
+                        <a href="/viewP/{{l.key()}}">
                         <span style="height: 30px ; font-size: .8vw;  border-radius: 15px;" class="btn btn-warning btn-m"><i class="fa fa-eye" aria-hidden="true"></i> View </span>
                         </a>
 
-                        <a href="/editS/{{l.key()}}">
+                        <a href="/editP/{{l.key()}}">
                             <span style="height: 30px; font-size: .8vw;border-radius: 15px; " class="btn btn-warning btn-m"><i class="fa fa-pencil" aria-hidden="true"></i> Update Patient status</span>
                         </a>
                     </td>
@@ -532,7 +532,7 @@ var h1 = h.options[h.selectedIndex].text;
 
           wme.document.write('</head>');
           wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center>');
-       wme.document.write('<center><b>LIST OF COVID-19 SUSPECTED PATIENTS');
+       wme.document.write('<center><b>LIST OF COVID-19 PATIENTS');
        wme.document.write('<center><b>' + g +' '+ result+'<br>'+'<br>');
 
         wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 140px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 130px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
@@ -573,7 +573,6 @@ function myFunction1() {
 </script>
 <script>
     function myFunction5() {
-        var input, input1,input2,input3, filter, table, tr, td, i;
   var date = $('#day').val().split('-');
 var year = date[0];
 var month = date[1];
@@ -588,16 +587,19 @@ var date1 = month + "/" + day + "/" + year
       td = li[i].getElementsByTagName("td")[7];
       if (td) {
           if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-              li[i].classList.remove('hideElement');
+           li[i].style.display = '';
+               li[i].classList.remove('hideElement');
           } else {
-              li[i].classList.add('hideElement');
+              li[i].style.display = 'none';
+               li[i].classList.add('hideElement');
+
           }
       }
   }
-  displayNoResult(li.length)
+  displayNoResult(li.length-1)
+
 }
 function displayNoResult(allLI) {
-
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
   var hiddenLILength1 = document.querySelectorAll('tr');
      const  time = document.querySelector('#confirmed')
@@ -607,10 +609,9 @@ function displayNoResult(allLI) {
 
     document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
-    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+    time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
   } else{
-
-
+alert("asd")
       document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
@@ -704,7 +705,7 @@ var date1 =  year
 
           wme.document.write('</head>');
         wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF SUSPECTED PATIENTS</b><th>');
+        wme.document.write('<center><th><b>LIST OF Suspected PATIENTS</b><th>');
         wme.document.write('<center><b>' + date1 +'<br>'+'<br>');
            wme.document.write('<br>');
                       wme.document.write(style);
@@ -779,7 +780,7 @@ var date1 =  year
     }
 }else if(strUser=="Monthly"){
     var item =  document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
-    if (item === "<center>No records of Close Contact</center>"){
+    if (item === "<center>No records of SUSPECTED PATIENTS</center>"){
        Swal.fire({
   title: "Failed!",
         customClass: 'swal-wide',
@@ -959,7 +960,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
     // now you can compare dates correctly
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
-
+        // show the row by setting the display property
         tr[i].style.display = '';
                tr[i].classList.remove('hideElement');
           } else {
