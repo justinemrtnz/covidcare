@@ -6,6 +6,29 @@
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
+.scrollit1 {
+    overflow-y: hidden;
+     overflow-x: hidden;
+height: 100vh;
+
+
+}
+ .scrollit1  {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+
+}
+
+.scrollit1::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+  display: none;
+}
+
+
 .swal2-popup {
     display: none;
     position: relative;
