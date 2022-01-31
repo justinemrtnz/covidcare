@@ -652,10 +652,11 @@ legend.scheduler-border {
         <input style="width:93%;  height: 1%; margin-left: 17%;font-size: 1vw; background: white" type="time" id="time" name="time" class="form-control" id="time">
 
       </div>
+                   <div id="button0">
                <div class="column">
                      <label class="show_button" for="check" id="asd" name="update" style="margin-left: 91%; "> Update</label>
                 </div>
-
+</div>
 
 
           </div>
@@ -777,7 +778,9 @@ legend.scheduler-border {
         var  a= document.getElementsByName("Result")[0].value;
     if (a === "Deceased"){
                    var select_3 = document.getElementById("asd");
-                   select_3.style.pointerEvents = 'none';
+                   var select_4 = document.getElementById("result");
+                   select_3.style.display = 'none';
+                    select_4.style.pointerEvents = 'none';
     }
 </script>
 <script>
@@ -791,7 +794,7 @@ legend.scheduler-border {
          var str1 = document.getElementById("condition1");
          var str2 = document.getElementById("caseStatus");
                   var str3 = document.getElementById("caseStatus1");
-
+var str5 = document.getElementById("result");
 
         var desired_box = main_select.options[main_select.selectedIndex].value;
         if (desired_box === "Active") {
@@ -821,6 +824,7 @@ legend.scheduler-border {
                   str2.style.display='none';
                 str3.style.display='';
             select_4.style.visibility = '';
+            jQuery("#result").attr('disabled',true);
 
         }
         else if (desired_box === "Close Contact") {
