@@ -1312,7 +1312,6 @@ def editS(username):
         antigenres = request.form['antigenres']
         Dantigen = request.form['Dantigen']
         swabSchedule = "Your Swab schedule is not yet available"
-
         if result == "Active":
             db.child(result).child(pID).set({"result": result,
                                                    "password": password,
@@ -1380,7 +1379,6 @@ def editS(username):
                                                       "estimatedDateRecovery": date,
 
                                                        })
-            db.child("Suspected").child(username).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")
@@ -1392,7 +1390,7 @@ def editS(username):
                                                       "swabSchedule": swabSchedule,
                                                       "dayAdmitted": dayAdmitted,
                                                       "patientName": Pname,
-                                                      "patientID": pID,
+                                                      "patientID": PatientID,
                                                       "birthday": Birthday,
                                                       "age": Age,
                                                       "sex": Sex,
@@ -1474,7 +1472,7 @@ def editP(username):
         res3=str(res1+1)
         pID = "KP-" + res3;
         swabSchedule = "Your Swab schedule is not yet available"
-        ate_time_obj10 = datetime.strptime(dateAdmitted, '%d %B %Y ').strftime('%m/%d/%Y')
+        ate_time_obj10 = datetime.strptime(dateAdmitted, '%d %B %Y').strftime('%m/%d/%Y')
         if result == "Active":
             db.child(result).child(pID).set({"result": result,
                                                    "password": password,
@@ -1554,7 +1552,7 @@ def editP(username):
                                                       "swabSchedule": swabSchedule,
                                                       "dayAdmitted": ate_time_obj10,
                                                       "patientName": Pname,
-                                                      "patientID": pID,
+                                                      "patientID": PatientID,
                                                       "birthday": Birthday,
                                                       "age": Age,
                                                       "antigenres": antigenres,
