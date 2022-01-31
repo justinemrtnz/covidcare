@@ -677,6 +677,13 @@ function displayNoResult(allLI) {
 }
 </script>
 <script>
+    var hiddenLILength = document.querySelectorAll('tr');
+    var hidd = hiddenLILength.length-1
+    const  time = document.querySelector('#confirmed2');
+time.textContent = "Showing 1 to " +hidd+ " of " +hidd+ " entries";
+</script>
+
+<script>
 function myFunction2() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("year");
@@ -684,43 +691,35 @@ function myFunction2() {
   table = document.getElementById("example");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[7];
+    td = tr[i].getElementsByTagName("td")[6];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = '';
-               tr[i].classList.remove('hideElement');
+         tr[i].classList.remove('hideElement');
+         tr[i].style.display = '';
       } else {
-        tr[i].style.display = 'none';
-               tr[i].classList.add('hideElement');
+                   tr[i].style.display = 'none';
+        tr[i].classList.add('hideElement');
       }
     }
   }
-  displayNoResult(tr.length)
-}
-function displayNoResult(allLI) {
+  displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
 
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
   var hiddenLILength1 = document.querySelectorAll('tr');
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
     var count = hiddenLILength1.length-1
-    var count1 =hiddenLILength1.length - hiddenLILength.length -1
-alert(allLI + "alert1"+hiddenLILength.length)
   if ( allLI === hiddenLILength.length) {
-document.getElementById('noResult').classList.remove('hideElement')
+       document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
-
-
-
   } else{
-
-        document.getElementById('noResult').classList.add('hideElement')
+      document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
-    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
 
   }
-
 }
 </script>
 <script>
@@ -734,11 +733,11 @@ function myFunction() {
     td = tr[i].getElementsByTagName("td")[6];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].classList.remove('hideElement');
-        tr[i].style.display = 'none';
-      } else {
-        tr[i].classList.add('hideElement');
-        tr[i].style.display = 'none';
+        tr[i].style.display = '';
+               tr[i].classList.remove('hideElement');
+          } else {
+              tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
   }
@@ -1068,9 +1067,8 @@ var date2 = month1 + "/" + day1 + "/" + year1
         // show the row by setting the display property
          tr[i].style.display = '';
                tr[i].classList.remove('hideElement');
-      } else {
-        // hide the row by setting the display property
-        tr[i].style.display = 'none';
+          } else {
+              tr[i].style.display = 'none';
                tr[i].classList.add('hideElement');
       }
     }

@@ -1,48 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="jquery-3.3.1.min.js"></script>
-    <title>Deceased Patients</title>
+    <title>Patient Information > Deceased</title>
 <link rel = "icon" href ="{{url_for('static', filename='icon3.png')}}"
           type = "image/icon" class="icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
     <link rel="stylesheet" href=" https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css">
-
-	<title></title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<title>Patient Information</title>
 </head>
 {% extends 'base.html' %}
 
 {% block content %}
 
 <body>
+<!--flash-->
+
 <style>
-    .column {
-    float: left;
-  width: 25%;
-}.hideElement {
-  display: none;
+    .swal-wide{
+    height:345px !important;
+    width: 380px !important;
+
 }
-    .button4 {
-  background-color: white;
-  color: black;
-  border: 2px solid #e7e7e7;
+.scrollit::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 5px;
 }
-    body {
+
+.scrollit::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: grey;
+    border-radius: 5px;
+}
+
+.scrollit::-webkit-scrollbar-thumb
+{   border-radius: 5px;
+	background-color: lightgray;
+	border: 2px solid lightgray;
+}.scrollit {
+    overflow-y: scroll !important;
+     overflow-x: hidden !important;
+max-height: 65vh !important;
+
+}
+ .scrollit  {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+}
+
+
+    .swal2-popup {
+font-size: 1.6rem;
+}
+body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
 }
 
 
-.button4:hover {background-color: lightgray;
-  color: black;}
+/* other styling */
 
+ .column {
+    float: left;
+  width: 25%;
+}
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}
 .button {
   background-color: dodgerblue; /* Green */
   border: none;
@@ -55,18 +90,15 @@
   cursor: pointer;
 
 }
-.column {
-  float: left;
-  width: 50%;
-}
-    body{
+body{
+
+
     background: #d5f3fe;
     background-size: cover;
 }
 
  .table-container {
-
-     background-color: white;
+    background-color: white;
     font-size: 1vw;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -76,56 +108,74 @@
 
 
 
-    .table-container thead tr{
-        background-color: #42adf5;
-        color: #ffffff;
-        text-align: left;
-        font-weight: bold;
-    }
-
-    .table-container {
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-    }
-
-    .table-container:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-   .swal-wide{
-    height:345px !important;
-    width: 380px !important;
-
+.table-container thead tr{
+    background-color: #42adf5;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
 }
-    .swal2-popup {
-font-size: 1.6rem;
+.table-container {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
 }
-   td, th {
+.table-container1 {
+    margin-top: 2%;
+    background-color: white;
+    font-size: 1vw;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    backgroud-color: white;
+    padding: 20px 20px 10px 20px;
+}
+.table-container1:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.table-container1 {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.table-container1:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+td, th {
 
         text-align: left;
-        padding: 5px;
+        padding: 6px;
         font-size: 1vw;
-    }
 
-    .table-container btn{
-        background-color: #009879;
-        color: #ffffff;
     }
+.table-container btn{
+    background-color: deepskyblue;
+    color: #ffffff;
+}
 
-    .imgright{
-        float: right;
-        position:relative;
-        max-width: 2.5vw;
-        max-height: 2.5vw;
-        margin-top:-50%;
-        margin-left:-50%;
-    }
+.imgright{
+    float: right;
+    position:relative;
+    max-width: 2.5vw;
+    max-height: 2.5vw;
+    margin-top:-50%;
+    margin-left:-50%;
+}
 
-    .txtright{
-        margin-top: -2%;
-        float:right;
-        margin-right: 6%;
-    }
+.iconrightn{
+    float: right;
+    position:relative;
+    max-width: 2.5vw;
+    max-height: 2.5vw;
+    margin-top:-50%;
+    margin-left:-50%;
+}
 
+.txtright{
+    margin-top: -2%;
+    float:right;
+    margin-right: 6%;
+}
 
 div.shadow {
     position:absolute;
@@ -161,16 +211,32 @@ div.shadow1 {
   position: absolute;
   z-index: 3;
   top: 150%;
-  left: -900%;
+ left: -900%;
   margin-left: -80px;
       overflow-y: scroll !important;
       max-height: 300px;
+}
+
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  bottom: 350%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 .popup .popuptext::-webkit-scrollbar
 {
 height:7px;
     width: 4px;
 
+}
+.hideElement {
+  display: none;
 }
 .popup .popuptext::-webkit-scrollbar-track
 {
@@ -185,18 +251,6 @@ height:7px;
 
     webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  bottom: 350%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
   visibility: visible;
@@ -214,58 +268,9 @@ height:7px;
   from {opacity: 0;}
   to {opacity:1 ;}
 }
-.table-container1 {
-    margin-top: 2%;
-    background-color: white;
-    font-size: 1vw;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    backgroud-color: white;
-    padding: 20px 20px 10px 20px;
-}
-.table-container1:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-
-.table-container1 {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-.table-container1:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}     .btn-secondary{
-   height:34px;
-    width:190px;
-        font-size: .8vw;
-}
-      .btn-secondary1{
-    height:35px;
-    width:130px;
-}
-.scrollit::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-    border-radius: 5px;
-}
-
-.scrollit::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: grey;
-    border-radius: 5px;
-}
-
-.scrollit::-webkit-scrollbar-thumb
-{   border-radius: 5px;
-	background-color: lightgray;
-	border: 2px solid lightgray;
-}
 .button1{
 	display: block;
-	width: 400%;
+	width: 300%;
 	height: 35px;
 	border-radius: 25px;
 	outline: none;
@@ -283,29 +288,57 @@ height:7px;
 .button1:hover{
 	background-position: right;
 }
-.scrollit {
-    overflow-y: scroll !important;
-     overflow-x: hidden !important;
-max-height: 68vh !important;
+
+@media print {
+* {
+    -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+    color-adjust: exact !important;  /*Firefox*/
+  }
+}
+    .btn-secondary{
+   height:34px;
+    width:190px;
+        font-size: .8vw;
+
 
 }
- .scrollit  {
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll;
+    .btn-secondary1{
+    height:35px;
+    width:130px;
+}
+
+
+.column {
+  float: left;
+  width: 50%;
 }
 </style>
+<div style="position: absolute; z-index: 5;margin-left: 70%; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container" >
+    <!--flash-->
+    {% for message in get_flashed_messages() %}
+        <script type="text/javascript">
+    Swal.fire({
+  title: "Success!",
+        customClass: 'swal-wide',
+  text: "Update Successfully!",
+  icon: "success",
+  confirmButtonText: "Continue!",
+});
+</script>
 
+    {% endfor %}
+</div>
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 3px solid; font-family: Poppins; color:#0f0e0f; background: white" id="dashboard">
     <nav>
-	<p style="alignment: left; margin-left:110px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%">Patient Information > Deceased</p><div class="shadow1"><div  class="popup" onclick="myFunction6()"><a class="iconright">
+	<p style="alignment: left; margin-left:100px; font-size: 1vw; margin-bottom: .5%;margin-top: .5%">Patient Information > Deceased</p><div class="shadow1"><div  class="popup" onclick="myFunctions()"><a class="iconright">
         <i class="fa fa-bell" aria-hidden="true" style="height: 1.5vw; width: 1.5vw"></i></a>
 <span class="popuptext" id="myPopup">
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
       <p  style="font-size: 14px; text-align: left;  margin-top: -1%; margin-bottom: -1%" >Notification</p>
-</div> {% if t == 0 %}
+</div>
+  {% if t == 0 %}
       {% else %}
-    {% for l in t1 %}
+                {% for l in t %}
   {% if a == l.val().estimatedDateRecovery or b == l.val().estimatedDateRecovery or c == l.val().estimatedDateRecovery or d == l.val().estimatedDateRecovery or e == l.val().estimatedDateRecovery %}
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
 <table  id="Table_id">
@@ -320,16 +353,19 @@ max-height: 68vh !important;
 
   {% endif %}
                 {% endfor %}
-{% endif %}
+                    {% endif %}
+
 <span id="notif1" style="font-size: 12px; font-weight: bold; margin-left: 10px">
     No notification
 </span>
+
  </span>
     </div></div><div class="shadow"><img src="{{url_for('static', filename='tin.png')}}" class="imgright"> </a> </div></nav>
 </div>
 
-<div class="table-container1" style="margin-left:7%;width: 90.9% ; ">
-      <div class="row" >
+<div class="table-container1" style="margin-left:7%;width: 90.9% ">
+
+    <div class="row" >
   <div class="column">
      <p style="margin-left: 2%">Deceased Patient</p>
   </div>
@@ -337,24 +373,24 @@ max-height: 68vh !important;
          <i style="padding-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
          </div>
     </div>
-  <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups"  >
+ <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups"  >
 
-  <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none" id="day1">
+  <div class="btn-group mr-2" role="group" aria-label="First group"  style="display: none" id="day1">
       <p style="font-size: .8vw; margin-bottom: -1px;" >Date</p>
-    <input  type="date"  id="day"  name="day" onchange="myFunction5()" class='form-control btn-secondary' >
+    <input   type="date"  id="day"  name="day" onchange="myFunction5()" class='form-control btn-secondary' >
   </div>
-     <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none"  id="date-start1">
-      <p style="font-size: .8vw; margin-bottom: -1px;">Start Date</p>
+     <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none" id="date-start1">
+      <p style="font-size: .8vw; margin-bottom: -1px; " >Start Date</p>
     <input     id="date-start"  type="date" value="11/26/2021"  class='form-control btn-secondary' >
   </div>
-      <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none"id="date-stop1">
-      <p style="font-size: .8vw; margin-bottom: -1px;" >Start End</p>
-    <input   id="date-stop" type="date" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
+      <div class="btn-group mr-2" role="group" aria-label="First group" style="display: none"  id="date-stop1">
+      <p style="font-size: .8vw; margin-bottom: -1px;">Start End</p>
+    <input id="date-stop" type="date" onchange="searchDateAlternative() "  class='form-control btn-secondary' >
   </div>
 
 
-      <div class="btn-group mr-2" role="group" aria-label="Second group" style="display: none"  id="year1">
-       <p style="font-size: .8vw; margin-bottom: -1px;" id="year1">Year</p>
+      <div class="btn-group mr-2" role="group" aria-label="Second group" style="display: none" id="year1">
+       <p style="font-size: .8vw; margin-bottom: -1px;" >Year</p>
         <select   id="year"  name="year" onchange="myFunction2()" class='form-control btn-secondary' >
      <option > Year</option>
 <option value="2020">2020</option>
@@ -371,8 +407,8 @@ max-height: 68vh !important;
   </div>
 
   <div class="btn-group" role="group" aria-label="Third group" style="display: none" id="list1">
-      <p style="font-size: .8vw; margin-bottom: -1px; " id="list1">Month</p>
-      <select   id="list"  name="result" onchange="myFunction()" class='form-control btn-secondary' >
+      <p style="font-size: .8vw; margin-bottom: -1px;" >Month</p>
+      <select  id="list"  name="result" onchange="myFunction()" class='form-control btn-secondary' >
      <option value=" ">Month</option>
 <option value="January">January</option>
     <option value="February">February</option>
@@ -391,7 +427,7 @@ max-height: 68vh !important;
       <div class="btn-group mr-2" role="group" aria-label="First group" >
       <p style="font-size: .8vw; margin-bottom: -1px">Report Type</p>
            <select  id="print"  name="print" class='form-control btn-secondary' onchange="select()" >
-     <option value="Report">--- </option>
+     <option value="Report">---</option>
 <option value="Daily">Daily</option>
     <option value="Weekly">Weekly</option>
     <option value="Monthly">Monthly</option>
@@ -401,21 +437,21 @@ max-height: 68vh !important;
     </button>
 
   </div>
-     <div class="btn-group mr-2" role="group" aria-label="First group" >
-           <button style="margin-bottom: -8px" class="button1 btn-secondary1" onclick="makepdf1()"
+      <div class="btn-group mr-2" role="group" aria-label="First group" >
+           <button style="margin-top: 20%" class="button1 btn-secondary1" onclick="makepdf1()"
             type="button"
-            value="print">Print
+            value="print">PRINT
     </button>
   </div>
 </div>
 
 </div>
 
-<div style="margin-left:7%; margin-right:2%;width: 90.9%; " class ="table-container" id="table-container">
-    <div id="example1">
-    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
-     <div class="scrollit">
-        <table id="example" class="sortable" style="width:100%">
+<div style="margin-left:7%; margin-right:2%;width: 90.9%" class ="table-container" id="hide" >
+
+     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<div class="scrollit">
+       <table id="example" class="sortable" style="width:100%">
 
 
 
@@ -463,19 +499,22 @@ max-height: 68vh !important;
 </div>
             </tbody>
         </table>
-     </div>
-    <div class="hideElement" id="noResult"><center>No Record Available</center>
-</div><p id="confirmed" style="margin-top: 2%"> </p>
+
+</div>
+<div class="hideElement" id="noResult"><center>No Record Available</center>
+</div>
+<p id="confirmed" style="margin-top: 2%"> </p>
 <p id="confirmed2" style="margin-top: 2%"> </p>
-    </div>
-   <div style="display: none">
+
+
+    <div style="display: none">
 <div class="elem" id="elem">
-      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: right; margin-top: -120px; margin-left: 35%" ></i>
+      <i> <img src="{{url_for('static', filename='RHUkalayaan.png')}}" id="logo" class="logo" width="90" height="90" style="position: absolute; alignment: right; margin-top: -120px; margin-left: 35%" ></i>
 </div>
         </div>
 <div style="display: none">
 <div class="elem1" id="elem1">
-      <i> <img src="{{url_for('static', filename='DOH.png')}}" class="icon" width="90" height="90" style="position: absolute; alignment: left; margin-top: -120px; margin-left: -50%" ></i>
+      <i> <img src="{{url_for('static', filename='DOH.png')}}" class="logo" width="90" height="90" style="position: absolute; alignment: left; margin-top: -120px; margin-left: -50%" ></i>
 </div>
         </div>
 </div>
@@ -492,253 +531,65 @@ max-height: 68vh !important;
 <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js  "></script>
-
-
-
-
 <script>
         var tableSize2 = $('#example tbody tr').length;
-
         $(document).ready(function() {
               $('#example').DataTable({
-
         paging:         false,
-                  info:false
+                 info:false,
               });
         } );
-
     </script>
-
-
 <script>
-   function makepdf1() {
-               var printme1=document.getElementById('example1');
-       var e = document.getElementById("print");
-       var strUser = e.options[e.selectedIndex].text;
-       var htmlToPrint = '' +
-        '<style type="text/css">' +
-        'table ,th, td {' +
-        'border:1px solid black;' +
-        'padding:0.2em;' +
-            ' border-collapse: collapse; ' +
-        '}' +
-        '</style>';
-       if (strUser == "Daily") {
-           var date = $('#day').val().split('/');
-           var year = date[0];
-           var month = date[1];
-           var day = date[2];
-           var date1 = year
-           var printme = document.getElementById('example');
-           var e = document.getElementById('list');
-           var f = document.getElementById('year');
-           var result = e.options[e.selectedIndex].text;
-           var g = f.options[f.selectedIndex].text;
-           var wme = window.open("p", "", "a4");
-           var style = "<style>";
-           style = style + ".td1 {font-size: 14px !important;}";
-           style = style + "</style>";
-           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-           wme.document.write('<center><b>' + date + '<br>' + '<br>');
-           wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(htmlToPrint);
-
-           wme.document.write(printme.outerHTML);
-                   wme.document.write(document.getElementById("elem2").innerHTML);
-
-           wme.document.write(style);
-           wme.document.close();
-           wme.focus();
-           wme.print();
-           wme.refresh();
-           wme.close();
-       } else if (strUser == "Weekly") {
-             var date = $('#date-start').val().split('/');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = year
-        var date2 = $('#date-stop').val().split('/');
-var year1 = date2[0];
-var month1 = date2[1];
-var day1 = date2[2];
-var date3 =  year1
-           var printme = document.getElementById('example');
-           var e = document.getElementById('list');
-           var f = document.getElementById('year');
-           var result = e.options[e.selectedIndex].text;
-           var g = f.options[f.selectedIndex].text;
-           var wme = window.open("p", "", "a4");
-           var style = "<style>";
-           style = style + ".td1 {font-size: 14px !important;}";
-           style = style + "</style>";
-           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-              wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
-          wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-            wme.document.write(htmlToPrint);
-
-           wme.document.write(printme.outerHTML);
-                   wme.document.write(document.getElementById("elem2").innerHTML);
-
-           wme.document.write(style);
-           wme.document.close();
-           wme.focus();
-           wme.print();
-           wme.refresh();
-           wme.close();
-
-       } else if (strUser == "Monthly") {
-           var printme = document.getElementById('example');
-           var e = document.getElementById('list');
-           var f = document.getElementById('year');
-           var result = e.options[e.selectedIndex].text;
-           var g = f.options[f.selectedIndex].text;
-           var wme = window.open("p", "", "a4");
-           var style = "<style>";
-           style = style + ".td1 {font-size: 14px !important;}";
-           style = style + "</style>";
-           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-           wme.document.write('<center><b>' + g+ ' ' + result + '<br>' + '<br>');
-            wme.document.write(htmlToPrint);
-
-           wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-           wme.document.write(htmlToPrint);
-
-           wme.document.write(printme.outerHTML);
-                   wme.document.write(document.getElementById("elem2").innerHTML);
-
-           wme.document.write(style);
-           wme.document.close();
-           wme.focus();
-           wme.print();
-           wme.refresh();
-           wme.close();
-
-
-       } else if (strUser == "General") {
-           var printme = document.getElementById('example');
-           var e = document.getElementById('list');
-           var f = document.getElementById('year');
-           var result = e.options[e.selectedIndex].text;
-           var g = f.options[f.selectedIndex].text;
-           var wme = window.open("p", "", "a4");
-           var style = "<style>";
-           style = style + ".td1 {font-size: 14px !important;}";
-           style = style + "</style>";
-           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-           wme.document.write('<center><b>' + g + '<br>' + '<br>');
-            wme.document.write(htmlToPrint);
- wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-           wme.document.write(printme.outerHTML);
-                   wme.document.write(document.getElementById("elem2").innerHTML);
-
-           wme.document.write(style);
-           wme.document.close();
-           wme.focus();
-           wme.print();
-           wme.refresh();
-           wme.close();
-       }
-
-   }
-</script>
-
+        $(document).ready(function() {
+              $.datepicker.setDefaults({
+                  dateFormat:'dd MMMM yyyy'
+              });
+              $(function (){
+                  $("#date-start").datepicker();
+                  $("#date-stop").datepicker();
+              });
+        } );
+    </script>
 <script>
    function makepdf(){
-        var printme=document.getElementById('example');
-      var e = document.getElementById('list');
-      var f = document.getElementById('year');
+ var printme=document.getElementById('example');
+      var e = document.getElementById('year');
+      var f = document.getElementById('list');
+        var h = document.getElementById('week');
+var h1 = h.options[h.selectedIndex].text;
+        var style = "<style>";
+  style = style + ".td1 {display: none !important;}" +
+      "body{font-size:15px !important;}";
+  style = style + "</style>";
 	var result = e.options[e.selectedIndex].text;
 	var g = f.options[f.selectedIndex].text;
         var wme = window.open("p","","a4");
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + result +' '+ g +'<br>'+'<br>');
-        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 155px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
-  wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write('<html><head>');
+
+          wme.document.write('</head>');
+          wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center>');
+       wme.document.write('<center><b>LIST OF COVID-19 PATIENTS');
+       wme.document.write('<center><b>' + g +' '+ result+'<br>'+'<br>');
+
+        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 140px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 130px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
+
+                    wme.document.write(style);
+ wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
         wme.document.write(printme.outerHTML);
 
         wme.document.close();
         wme.focus();
         wme.print();
-         wme.refresh();
+        wme.refresh();
         wme.close();
+
     }
 </script>
-
-<script>
-   function makepdf2(){
-         var date = $('#date-start').val().split('-');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = month + "/" + day + "/" + year
-        var date2 = $('#date-stop').val().split('-');
-var year1 = date2[0];
-var month1 = date2[1];
-var day1 = date2[2];
-var date3 = month1 + "/" + day1 + "/" + year1
-        var printme=document.getElementById('example');
-        var wme = window.open("p","","a4");
-
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
-        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 155px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
-         wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-           wme.document.write(printme.outerHTML);
-
-        wme.document.close();
-        wme.focus();
-        wme.print();
-         wme.refresh();
-        wme.close();
-    }
-</script>
-<script>
-   function makepdf3(){
-           var date = $('#day').val().split('-');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = month + "/" + day + "/" + year
-      var printme=document.getElementById('example');
-        var wme = window.open("p","","a4");
-
-          var style = "<style>";
-  style = style + ".td1 {display: none !important;}";
-  style = style + "</style>";
-
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write(style);
-        wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' +date1+'<br>'+'<br>' );
-        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 155px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
-          wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-        wme.document.write(printme.outerHTML);
-
-        wme.document.close();
-        wme.focus();
-        wme.print();
-         wme.refresh();
-        wme.close();
-    }
-</script>
-
 <script>
 function myFunction1() {
- var input, input1,input2, filter, table, tr, td, i;
+  var input, input1,input2, filter, table, tr, td, i;
   input = document.getElementById("week");
   input1 = document.getElementById("year");
  input2 = document.getElementById("list");
@@ -746,7 +597,7 @@ function myFunction1() {
   table = document.getElementById("example");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
+    td = tr[i].getElementsByTagName("td")[7];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
@@ -774,58 +625,18 @@ var date1 = month + "/" + day + "/" + year
       td = li[i].getElementsByTagName("td")[7];
       if (td) {
           if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-              li[i].classList.remove('hideElement');
+              li[i].style.display = '';
+               li[i].classList.remove('hideElement');
           } else {
-              li[i].classList.add('hideElement');
+              li[i].style.display = 'none';
+               li[i].classList.add('hideElement');
           }
       }
+
   }
-  displayNoResult(li.length)
+ displayNoResult(li.length-1)
 }
 function displayNoResult(allLI) {
-
-  var hiddenLILength = document.querySelectorAll('tr.hideElement');
-  var hiddenLILength1 = document.querySelectorAll('tr');
-     const  time = document.querySelector('#confirmed')
-    const  time1 = document.querySelector('#confirmed2');
-  if ( 0 === hiddenLILength.length) {
-    document.getElementById('noResult').classList.add('hideElement')
-       document.getElementById('confirmed2').classList.add('hideElement')
-    time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
-  } else{
-      document.getElementById('noResult').classList.remove('hideElement')
-             document.getElementById('confirmed2').classList.add('hideElement')
-      time.textContent = "Showing 0 to 0 of 0 entries";
-
-  }
-}
-</script>
-<script>
-// When the user clicks on <div>, open the popup
-function myFunction6() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
-<script>
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("list");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].classList.remove('hideElement');
-      } else {
-        tr[i].classList.add('hideElement');
-      }
-    }
-  }
-  displayNoResult(tr.length-1)
-}function displayNoResult(allLI) {
 
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
   var hiddenLILength1 = document.querySelectorAll('tr');
@@ -836,20 +647,23 @@ function myFunction() {
        document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
+
+
   } else{
       document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
     time.textContent = "Showing 1 to "+count+" of "+count+" entries";
 
+
+
   }
 }
 </script>
 <script>
-// When the user clicks on <div>, open the popup
-function myFunction6() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
+    var hiddenLILength = document.querySelectorAll('tr');
+    var hidd = hiddenLILength.length-1
+    const  time = document.querySelector('#confirmed2');
+time.textContent = "Showing 1 to " +hidd+ " of " +hidd+ " entries";
 </script>
 <script>
 function myFunction2() {
@@ -863,8 +677,47 @@ function myFunction2() {
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].classList.remove('hideElement');
+         tr[i].style.display = '';
       } else {
+                   tr[i].style.display = 'none';
         tr[i].classList.add('hideElement');
+      }
+    }
+  }
+  displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+  if ( allLI === hiddenLILength.length) {
+       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+  } else{
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+  }
+}
+</script>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("list");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = '';
+               tr[i].classList.remove('hideElement');
+          } else {
+              tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
   }
@@ -888,24 +741,274 @@ function myFunction2() {
   }
 }
 </script>
-
 <script>
-// When the user clicks on <div>, open the popup
-function myFunction6() {
+    function makepdf1(){
+           var tableSize = $('#example tbody tr').length;
+        var e = document.getElementById("print");
+var strUser = e.options[e.selectedIndex].text;
+ var style = "<style>";
+  style = style + ".td1 {display: none !important;}" +
+      "body{font-size:15px !important;}" +
+      ".td2{width: 265px !important;}" +
+      ".td3{width: 200px !important;}" +
+      ".td4{width: 200px !important;}";
+  style = style + "</style>";
+if (strUser == "Daily"){
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var date = $('#day').val().split('/');
+        var year = date[0];
+        var month = date[1];
+        var day = date[2];
+        var date1 = year
+
+
+        var printme = document.getElementById('example');
+        var wme = window.open("p", "", "a4");
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+            '}' +
+            '</style>';
+
+        wme.document.write('<html><head>');
+
+        wme.document.write('</head>');
+        wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+        wme.document.write('<center><th><b>LIST OF COVID-19 DECEASED PATIENTS</b><th>');
+        wme.document.write('<center><b>' + date1 + '<br>' + '<br>');
+        wme.document.write('<br>');
+        wme.document.write(style);
+        wme.document.write(htmlToPrint);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
+
+        wme.document.write(printme.outerHTML);
+        wme.document.write(document.getElementById("elem2").innerHTML);
+
+        wme.document.close();
+        wme.focus();
+        wme.print();
+        wme.refresh();
+        wme.close();
+    }
+}else if(strUser=="Weekly"){
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var date = $('#date-start').val().split('/');
+        var year = date[0];
+        var month = date[1];
+        var day = date[2];
+        var date1 = year
+        var date2 = $('#date-stop').val().split('/');
+        var year1 = date2[0];
+        var month1 = date2[1];
+        var day1 = date2[2];
+        var date3 = year1
+        var printme1 = document.getElementById('example1');
+        var printme = document.getElementById('example');
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+            '}' +
+            '</style>';
+
+
+        var wme = window.open("p", "", "a4");
+        wme.document.write('<html><head>');
+
+        wme.document.write('</head>');
+        wme.document.write('<center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center>');
+        wme.document.write('<center><th><b>LIST OF COVID-19 DECEASED PATIENTS</b><th>');
+        wme.document.write('<center><b>' + 'From ' + date1 + ' ' + ' to ' + date3 + '<br>' + '<br>');
+        wme.document.write('<br>');
+        wme.document.write(htmlToPrint);
+        wme.document.write(style);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
+
+
+        wme.document.write(printme.outerHTML);
+        wme.document.write(document.getElementById("elem2").innerHTML);
+
+        wme.document.close();
+        wme.focus();
+        wme.print();
+        wme.refresh();
+        wme.close();
+    }
+}else if(strUser=="Monthly"){
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var printme1 = document.getElementById('example1');
+        var printme = document.getElementById('example');
+        var e = document.getElementById('list');
+        var f = document.getElementById('year');
+        var result = e.options[e.selectedIndex].text;
+        var g = f.options[f.selectedIndex].text;
+        var wme = window.open("p", "", "a4");
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+            '}' +
+            '</style>';
+
+        wme.document.write('<html><head>');
+
+        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+        wme.document.write('<center><th><b>LIST OF COVID-19 DECEASED PATIENTS</b><th>');
+        wme.document.write('<center><b>' + g + ' ' + result + '<br>' + '<br>');
+        wme.document.write(htmlToPrint);
+        wme.document.write(style);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
+
+
+        wme.document.write(printme.outerHTML);
+        wme.document.write(document.getElementById("elem2").innerHTML);
+
+        wme.document.close();
+        wme.focus();
+        wme.print();
+        wme.refresh();
+        wme.close();
+
+    }
+}else if(strUser=="General"){
+     var item = document.getElementById("example").getElementsByTagName("td")[0].innerHTML;
+    if (item === "<center>No records of Close Contact</center>") {
+        Swal.fire({
+            title: "Failed!",
+            customClass: 'swal-wide',
+            text: "Print Failed! Table has no data",
+            icon: "warning",
+            confirmButtonText: "Continue!",
+        });
+    } else {
+        var printme1 = document.getElementById('example1');
+        var printme = document.getElementById('example');
+        var e = document.getElementById('list');
+        var f = document.getElementById('year');
+        var result = e.options[e.selectedIndex].text;
+        var g = f.options[f.selectedIndex].text;
+        var wme = window.open("p", "", "a4");
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table ,th, td {' +
+            'border:1px solid black;' +
+            'padding:0.2em;' +
+            ' border-collapse: collapse; ' +
+            '}' +
+            '</style>';
+
+
+        wme.document.write('<html><head>');
+
+        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+        wme.document.write('<center><th><b>LIST OF COVID-19 DECEASED PATIENTS</b><th>');
+        wme.document.write('<center><b>' + g + '<br>' + '<br>');
+        wme.document.write(htmlToPrint);
+        wme.document.write(style);
+        wme.document.write(document.getElementById("elem").innerHTML);
+        wme.document.write(document.getElementById("elem1").innerHTML);
+
+
+        wme.document.write(printme.outerHTML);
+        wme.document.write(document.getElementById("elem2").innerHTML);
+
+        wme.document.close();
+        wme.focus();
+        wme.print();
+        wme.refresh();
+        wme.close();
+    }
+}
+
+
+    }
+</script>
+<script>
+function refresh() {
+    var table = document.getElementById("example");
+    table.refresh();
+}
+</script>
+<script>
+function myFunctions() {
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
 }
 </script>
 <script>
-    var tableSize = $('#Table_id tbody tr').length;
-    if (tableSize == 0){
-         $("#notif1").show();
-    }else {
- $("#notif1").hide();
+    $(".container" ).fadeOut(5000);
+</script>
+<script>
+    function searchDate() {
+var input_startDate, input_stopDate, table, tr, i;
+var date = $('#date-start').val().split('-');
+var year = date[0];
+var month = date[1];
+var day = date[2];
+var date1 = month + "/" + day + "/" + year
+   var date3 = $('#date-stop').val().split('-');
+var year1 = date3[0];
+var month1 = date3[1];
+var day1 = date3[2];
+var date2 = month1 + "/" + day1 + "/" + year1
+  input_startDate = new Date(date1);
+  input_stopDate = new Date(date2);
+
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    let td_date = new Date(tr[i].getElementsByTagName("td")[7].textContent);
+
+    if (td_date) {
+      if (td_date >= input_startDate && td_date <= input_stopDate) {
+        tr[i].style.display = 'table-row;';
+      } else {
+
+        tr[i].style.display = 'none';
+      }
     }
 
-
-    </script>
+  }
+}
+</script>
 <script>
     function searchDateAlternative() {
   // get the values and convert to date
@@ -938,46 +1041,58 @@ var date2 = month1 + "/" + day1 + "/" + year1
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
         // show the row by setting the display property
-         tr[i].classList.remove('hideElement');
-      } else {
-        // hide the row by setting the display property
-        tr[i].classList.add('hideElement');
+         tr[i].style.display = '';
+               tr[i].classList.remove('hideElement');
+          } else {
+              tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
 
   }
-   displayNoResult(tr.length-1)
-}function displayNoResult(allLI) {
+ displayNoResult(tr.length)
+}
+function displayNoResult(allLI) {
 
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
   var hiddenLILength1 = document.querySelectorAll('tr');
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
     var count = hiddenLILength1.length-1
- var count1 =hiddenLILength1.length - hiddenLILength.length -1
-  if ( allLI === hiddenLILength.length-1) {
+    var count1 =hiddenLILength1.length - hiddenLILength.length -1
 
-       document.getElementById('noResult').classList.remove('hideElement')
+  if ( allLI === hiddenLILength.length) {
+document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
+
+
+
   } else{
 
-      document.getElementById('noResult').classList.add('hideElement')
+        document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
-    time.textContent = "Showing 1 to "+count1+" of "+count+" entries";
+    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
 
   }
 }
 </script>
+<script>
+    var tableSize = $('#Table_id tbody tr').length;
+    if (tableSize == 0){
+         $("#notif1").show();
+    }else {
+ $("#notif1").hide();
+    }
+    </script>
 <script>
     function select()
 {
   var main_select = document.getElementById("print");
   var select_1 = document.getElementById("day");
   var select_2 = document.getElementById("day1");
-  var select_3 = document.getElementById("date-start");
+
   var select_4 = document.getElementById("date-start1");
-  var select_5 = document.getElementById("date-stop");
   var select_6 = document.getElementById("date-stop1");
   var select_7 = document.getElementById("list");
   var select_8 = document.getElementById("list1");
@@ -988,9 +1103,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
   if(desired_box == "Daily") {
     select_1.style.display = '';
       select_2.style.display = '';
-    select_3.style.display = 'none';
      select_4.style.display = 'none';
-      select_5.style.display = 'none';
     select_6.style.display = 'none';
      select_7.style.display = 'none';
       select_8.style.display = 'none';
@@ -999,9 +1112,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
   } else if(desired_box == "Weekly"){
       select_1.style.display = 'none';
       select_2.style.display = 'none';
-    select_3.style.display = '';
      select_4.style.display = '';
-      select_5.style.display = '';
     select_6.style.display = '';
      select_7.style.display = 'none';
       select_8.style.display = 'none';
@@ -1010,9 +1121,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
   }else if(desired_box == "Monthly"){
         select_1.style.display = 'none';
       select_2.style.display = 'none';
-    select_3.style.display = 'none';
      select_4.style.display = 'none';
-      select_5.style.display = 'none';
     select_6.style.display = 'none';
      select_7.style.display = '';
       select_8.style.display = '';
@@ -1021,9 +1130,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
   }else if(desired_box == "General"){
         select_1.style.display = 'none';
       select_2.style.display = 'none';
-    select_3.style.display = 'none';
      select_4.style.display = 'none';
-      select_5.style.display = 'none';
     select_6.style.display = 'none';
      select_7.style.display = 'none';
       select_8.style.display = 'none';
@@ -1032,17 +1139,45 @@ var date2 = month1 + "/" + day1 + "/" + year1
   }else if(desired_box == "Report"){
         select_1.style.display = 'none';
       select_2.style.display = 'none';
-    select_3.style.display = 'none';
      select_4.style.display = 'none';
-      select_5.style.display = 'none';
     select_6.style.display = 'none';
      select_7.style.display = 'none';
       select_8.style.display = 'none';
     select_9.style.display = 'none';
       select_10.style.display = 'none';
+
   }
+    var input, filter, table, tr, td, i;
+var data = " ";
+    filter = data.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+}
 }
 </script>
+<script>
+         const  time = document.querySelector('#confirmed')
+
+        const  t1 = {{ t1 }}
+        const  t2 = {{ t2 }}
+        const  t3 = {{ t5 }}
+const sum = t1 + t2 + t3;
+    time.textContent = sum;
+
+
+    </script>
+</div>
 </body>
 {% endblock %}
 </html>
+

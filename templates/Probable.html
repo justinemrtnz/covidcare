@@ -588,9 +588,12 @@ var date1 = month + "/" + day + "/" + year
       td = li[i].getElementsByTagName("td")[7];
       if (td) {
           if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-              li[i].classList.remove('hideElement');
+           li[i].style.display = '';
+               li[i].classList.remove('hideElement');
           } else {
-              li[i].classList.add('hideElement');
+              li[i].style.display = 'none';
+               li[i].classList.add('hideElement');
+
           }
       }
   }
@@ -603,14 +606,12 @@ function displayNoResult(allLI) {
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
      var count = hiddenLILength1.length-1
-  if ( 1 === hiddenLILength.length) {
-alert(hiddenLILength.length +"alert1 ")
+  if ( 0 === hiddenLILength.length) {
+
     document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
     time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
   } else{
-
-alert(hiddenLILength.length +"alert2 ")
 
       document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
@@ -956,8 +957,10 @@ var date2 = month1 + "/" + day1 + "/" + year1
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
         tr[i].style.display = '';
-      } else {
-        tr[i].style.display = 'none';
+               tr[i].classList.remove('hideElement');
+          } else {
+              tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
 

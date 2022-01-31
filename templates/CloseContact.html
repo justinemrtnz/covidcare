@@ -573,7 +573,6 @@ function myFunction1() {
 </script>
 <script>
     function myFunction5() {
-        var input, input1,input2,input3, filter, table, tr, td, i;
   var date = $('#day').val().split('-');
 var year = date[0];
 var month = date[1];
@@ -588,25 +587,30 @@ var date1 = month + "/" + day + "/" + year
       td = li[i].getElementsByTagName("td")[6];
       if (td) {
           if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-              li[i].classList.remove('hideElement');
+           li[i].style.display = '';
+               li[i].classList.remove('hideElement');
           } else {
-              li[i].classList.add('hideElement');
+              li[i].style.display = 'none';
+               li[i].classList.add('hideElement');
+
           }
       }
   }
-  displayNoResult(li.length)
+  displayNoResult(li.length-1)
+
 }
 function displayNoResult(allLI) {
-
   var hiddenLILength = document.querySelectorAll('tr.hideElement');
   var hiddenLILength1 = document.querySelectorAll('tr');
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
+     var count = hiddenLILength1.length-1
   if ( 0 === hiddenLILength.length) {
     document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
     time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
   } else{
+alert("asd")
       document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
@@ -639,14 +643,17 @@ function myFunction2() {
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
     var count = hiddenLILength1.length-1
+    var count3 = count - hiddenLILength.length
+    var count2 =allLI-1
   if ( allLI === hiddenLILength.length) {
        document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
   } else{
+
       document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
-    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+    time.textContent = "Showing 1 to "+count3+" of "+count+" entries";
 
   }
 }
@@ -960,25 +967,55 @@ var date2 = month1 + "/" + day1 + "/" + year1
   input_stopDate = new Date(date2);
 
 
+  // only process table body rows, ignoring footer/headers
   const tr = document.querySelectorAll("#example tbody tr")
 
   for (let i = 0; i < tr.length; i++) {
+    // ensure we have a relevant td
     let td = tr[i].getElementsByTagName("td");
     if (!td || !td[7]) continue;
 
+    // you need to get the text and convert to date
     let td_date = new Date(td[7].textContent);
 
+    // now you can compare dates correctly
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
+        // show the row by setting the display property
         tr[i].style.display = '';
-      } else {
-        tr[i].style.display = 'none';
-
+               tr[i].classList.remove('hideElement');
+          } else {
+              tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
 
   }
+ displayNoResult(tr.length)
+}
+function displayNoResult(allLI) {
 
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+    var count1 =hiddenLILength1.length - hiddenLILength.length -1
+
+  if ( allLI === hiddenLILength.length) {
+document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
+
+
+  } else{
+
+        document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
+
+  }
 }
 </script>
 <script>
