@@ -1257,9 +1257,6 @@ def editCC(username):
                                                            "estimatedDateRecovery": date,
 
                                                            })
-
-            db.child("Patient Monitoring").child(PatientID).remove()
-            db.child("Self-Monitoring").child(PatientID).remove()
             db.child(PatientID).remove()
             flash('Successfully ', "success")
         return redirect(url_for('CloseContact'))
@@ -1417,8 +1414,7 @@ def editS(username):
 
                                                       })
 
-            db.child("Patient Monitoring").child(PatientID).remove()
-            db.child("Self-Monitoring").child(PatientID).remove()
+
             db.child(PatientID).remove()
             flash('Successfully logged in!', "success")
         return redirect(url_for('Suspected'))
@@ -1577,8 +1573,6 @@ def editP(username):
                                                       "doConsultation": doConsultation,
                                                       "estimatedDateRecovery": date,
                                                       })
-            db.child("Patient Monitoring").child(PatientID).remove()
-            db.child("Self-Monitoring").child(PatientID).remove()
             db.child(PatientID).remove()
             flash('Successfully logged in!', "success")
         return redirect(url_for('Probable'))
