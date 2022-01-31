@@ -1066,6 +1066,7 @@ height:7px;
 
 {% else %}
 	   {% for l in t10 %}
+           {% if l.val().result == "Probable" %}
                   <td>{{l.val().result}}</td>
 
                 <td>{{l.val().patientID }}</td>
@@ -1075,6 +1076,7 @@ height:7px;
                     <td>{{l.val().dateAdmitted }}</td>
 
 		    </form></td></tr>
+           {% endif %}
             {% endfor %}
             {% endif %}
 
@@ -1125,6 +1127,7 @@ height:7px;
 
 {% else %}
 	   {% for l in t12 %}
+             {% if l.val().result == "Suspected" %}
                   <td>{{l.val().result}}</td>
 
                 <td>{{l.val().patientID }}</td>
@@ -1133,6 +1136,8 @@ height:7px;
 
 
 		    </form></td></tr>
+           {% endif %}
+
             {% endfor %}
             {% endif %}
 
