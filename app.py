@@ -363,7 +363,7 @@ def edit(username):
         result = request.form['result']
         Mobile_num = request.form['mobile_num']
         from datetime import datetime
-        ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
+
 
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
@@ -371,6 +371,7 @@ def edit(username):
             flash("cannot input previous date!", "warning")
         else:
             if result == "Close Contact":
+                ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
                 db.child("Close Contact").child(username).update({
                     "swabSchedule": swabdate + " Time: " + ate_time_obj1,
                 })
@@ -389,6 +390,7 @@ def edit(username):
                 return redirect(url_for('Swab'))
 
             elif result == "Active":
+                ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
                 db.child("Patients").child(username).update({
                     "swabSchedule": swabdate + " Time: " + ate_time_obj1,
                 })
@@ -424,14 +426,14 @@ def CCswab(username):
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
         Mobile_num = request.form['mobile_num']
-        ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
+
 
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
         elif swabdate < date:
             flash("cannot input previous date!", "warning")
         else:
-
+            ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
             db.child("Close Contact").child(username).update({
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
@@ -468,14 +470,15 @@ def Pswab(username):
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
         Mobile_num = request.form['mobile_num']
-        ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
+
 
         if swabdate == "" or swabtime == "":
+
             flash("Please input date and time!", "danger")
         elif swabdate < date:
             flash("cannot input previous date!", "warning")
         else:
-
+            ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
             db.child("probable").child(username).update({
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })
@@ -511,14 +514,14 @@ def Sswab(username):
         today = datetime.today().strftime('%Y-%m-%d')
         swabtime = request.form['time']
         Mobile_num = request.form['mobile_num']
-        ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
+
 
         if swabdate == "" or swabtime == "":
             flash("Please input date and time!", "danger")
         elif swabdate < date:
             flash("cannot input previous date!", "warning")
         else:
-
+            ate_time_obj1 = datetime.strptime(swabtime, '%H:%M').strftime('%I:%M %p')
             db.child("Suspected").child(username).update({
                 "swabSchedule": swabdate + " Time: " + ate_time_obj1,
             })

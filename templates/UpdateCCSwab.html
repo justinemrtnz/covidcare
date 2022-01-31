@@ -30,7 +30,7 @@
                   <script type="text/javascript">
     Swal.fire({
   title: "Failed!",
-  text: "Phone Number Cannot Reach",
+  text: "Update Failed",
         customClass: 'swal-wide',
   icon: "error",
          confirmButtonColor: "#3b83dc",
@@ -436,8 +436,17 @@ legend.scheduler-border {
     $(".container1" ).fadeOut(5000);
 </script>
 <script>
-    var today = new Date().toISOString().split('T')[0];
-document.getElementsByName("date")[0].setAttribute('min', today);
+   var dtToday = new Date();
+var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
+var day = dtToday.getDate();
+var year = dtToday.getFullYear();
+if(month < 10)
+   month = '0' + month.toString();
+if(day < 10)
+   day = '0' + day.toString();
+
+var maxDate = year + '-' + month + '-' + day;
+document.getElementsByName("date")[0].setAttribute('min', maxDate);
 </script>
 </body>
 <script>
