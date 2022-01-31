@@ -625,14 +625,33 @@ function myFunction2() {
     td = tr[i].getElementsByTagName("td")[6];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
+        tr[i].classList.remove('hideElement');
       } else {
-        tr[i].style.display = "none";
+        tr[i].classList.add('hideElement');
       }
     }
   }
+  displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+  if ( allLI === hiddenLILength.length) {
+       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+  } else{
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+
+  }
 }
 </script>
+
 
 <script>
 function myFunction() {

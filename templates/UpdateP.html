@@ -478,6 +478,7 @@ legend.scheduler-border {
          value="{{request.form['dateAdmitted'] or p.val().dateAdmitted}}">
 
     </div>
+
             <div class="column">
      <label  style="  font-size: .9vw;" for="doConsultation">Consultation</label>
         <input readonly="readonly" style=" width:85%;   margin-left: 35%; height: 3%;      font-size: 1vw; background: white" type="text" name="doConsultation" placeholder="doConsultation"
@@ -643,8 +644,9 @@ legend.scheduler-border {
     <label for="security"></label>
         <input readonly="readonly" style="width:85%;  height: 3%;      font-size: 1vw; background: white"  name="securityQues" placeholder="securityQues"
                class="form-control"
-          value="{{ p.val().securityQues }}">
+          value="{{ p.val().securityQues }}" >
     </div>
+
 
 
  <!-- fourth row -->
@@ -664,7 +666,6 @@ legend.scheduler-border {
   </div>
 
 </div></form>
-
 </body>
 {% endblock %}
 </html>

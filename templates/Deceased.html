@@ -465,7 +465,8 @@ max-height: 68vh !important;
         </table>
      </div>
     <div class="hideElement" id="noResult"><center>No Record Available</center>
-</div>
+</div><p id="confirmed" style="margin-top: 2%"> </p>
+<p id="confirmed2" style="margin-top: 2%"> </p>
     </div>
    <div style="display: none">
 <div class="elem" id="elem">
@@ -494,6 +495,7 @@ max-height: 68vh !important;
 
 
 
+
 <script>
         var tableSize2 = $('#example tbody tr').length;
 
@@ -506,15 +508,14 @@ max-height: 68vh !important;
         } );
 
     </script>
-</div>
 
 
 <script>
-   function makepdf1(){
-           var printme1=document.getElementById('example1');
-         var e = document.getElementById("print");
-var strUser = e.options[e.selectedIndex].text;
- var htmlToPrint = '' +
+   function makepdf1() {
+               var printme1=document.getElementById('example1');
+       var e = document.getElementById("print");
+       var strUser = e.options[e.selectedIndex].text;
+       var htmlToPrint = '' +
         '<style type="text/css">' +
         'table ,th, td {' +
         'border:1px solid black;' +
@@ -522,38 +523,39 @@ var strUser = e.options[e.selectedIndex].text;
             ' border-collapse: collapse; ' +
         '}' +
         '</style>';
-if (strUser == "Daily"){
+       if (strUser == "Daily") {
+           var date = $('#day').val().split('/');
+           var year = date[0];
+           var month = date[1];
+           var day = date[2];
+           var date1 = year
+           var printme = document.getElementById('example');
+           var e = document.getElementById('list');
+           var f = document.getElementById('year');
+           var result = e.options[e.selectedIndex].text;
+           var g = f.options[f.selectedIndex].text;
+           var wme = window.open("p", "", "a4");
+           var style = "<style>";
+           style = style + ".td1 {font-size: 14px !important;}";
+           style = style + "</style>";
+           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
+           wme.document.write('<center><b>' + date + '<br>' + '<br>');
+           wme.document.write(document.getElementById("elem").innerHTML);
+           wme.document.write(document.getElementById("elem1").innerHTML);
+            wme.document.write(htmlToPrint);
 
-        var date = $('#day').val().split('/');
-        var year = date[0];
-        var month = date[1];
-        var day = date[2];
-        var date1 = year
+           wme.document.write(printme.outerHTML);
+                   wme.document.write(document.getElementById("elem2").innerHTML);
 
-        var printme = document.getElementById('example');
-        var e = document.getElementById('list');
-        var f = document.getElementById('year');
-        var result = e.options[e.selectedIndex].text;
-        var g = f.options[f.selectedIndex].text;
-        var wme = window.open("p", "", "a4");
-        wme.document.write(htmlToPrint);
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + date + '<br>' + '<br>');
-        wme.document.write(document.getElementById("elem").innerHTML);
-        wme.document.write(document.getElementById("elem1").innerHTML);
-
-        wme.document.write(printme.outerHTML);
-        wme.document.write(document.getElementById("elem2").innerHTML);
-
-        wme.document.close();
-        wme.focus();
-        wme.print();
-        wme.refresh();
-        wme.close();
-
-}else if(strUser=="Weekly"){
-  var date = $('#date-start').val().split('/');
+           wme.document.write(style);
+           wme.document.close();
+           wme.focus();
+           wme.print();
+           wme.refresh();
+           wme.close();
+       } else if (strUser == "Weekly") {
+             var date = $('#date-start').val().split('/');
 var year = date[0];
 var month = date[1];
 var day = date[2];
@@ -573,7 +575,7 @@ var date3 =  year1
            style = style + ".td1 {font-size: 14px !important;}";
            style = style + "</style>";
            wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
+           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
               wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
           wme.document.write(document.getElementById("elem").innerHTML);
            wme.document.write(document.getElementById("elem1").innerHTML);
@@ -589,59 +591,64 @@ var date3 =  year1
            wme.refresh();
            wme.close();
 
-}else if(strUser=="Monthly"){
+       } else if (strUser == "Monthly") {
+           var printme = document.getElementById('example');
+           var e = document.getElementById('list');
+           var f = document.getElementById('year');
+           var result = e.options[e.selectedIndex].text;
+           var g = f.options[f.selectedIndex].text;
+           var wme = window.open("p", "", "a4");
+           var style = "<style>";
+           style = style + ".td1 {font-size: 14px !important;}";
+           style = style + "</style>";
+           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
+           wme.document.write('<center><b>' + g+ ' ' + result + '<br>' + '<br>');
+            wme.document.write(htmlToPrint);
 
-        var printme = document.getElementById('example');
-        var e = document.getElementById('list');
-        var f = document.getElementById('year');
-        var result = e.options[e.selectedIndex].text;
-        var g = f.options[f.selectedIndex].text;
-        var wme = window.open("p", "", "a4");
-        wme.document.write(htmlToPrint);
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + g + ' ' + result + '<br>' + '<br>');
-        wme.document.write(document.getElementById("elem").innerHTML);
-        wme.document.write(document.getElementById("elem1").innerHTML);
+           wme.document.write(document.getElementById("elem").innerHTML);
+           wme.document.write(document.getElementById("elem1").innerHTML);
+           wme.document.write(htmlToPrint);
 
-        wme.document.write(printme.outerHTML);
-        wme.document.write(document.getElementById("elem2").innerHTML);
+           wme.document.write(printme.outerHTML);
+                   wme.document.write(document.getElementById("elem2").innerHTML);
 
-        wme.document.close();
-        wme.focus();
-        wme.print();
-        wme.refresh();
-        wme.close();
-
-
-
-}else if(strUser=="General") {
-
-        var printme = document.getElementById('example');
-        var e = document.getElementById('list');
-        var f = document.getElementById('year');
-        var result = e.options[e.selectedIndex].text;
-        var g = f.options[f.selectedIndex].text;
-        var wme = window.open("p", "", "a4");
-        wme.document.write(htmlToPrint);
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + g + '<br>' + '<br>');
-        wme.document.write(document.getElementById("elem").innerHTML);
-        wme.document.write(document.getElementById("elem1").innerHTML);
-
-        wme.document.write(printme.outerHTML);
-                wme.document.write(document.getElementById("elem2").innerHTML);
-
-        wme.document.close();
-        wme.focus();
-        wme.print();
-        wme.refresh();
-        wme.close();
+           wme.document.write(style);
+           wme.document.close();
+           wme.focus();
+           wme.print();
+           wme.refresh();
+           wme.close();
 
 
-}
-    }
+       } else if (strUser == "General") {
+           var printme = document.getElementById('example');
+           var e = document.getElementById('list');
+           var f = document.getElementById('year');
+           var result = e.options[e.selectedIndex].text;
+           var g = f.options[f.selectedIndex].text;
+           var wme = window.open("p", "", "a4");
+           var style = "<style>";
+           style = style + ".td1 {font-size: 14px !important;}";
+           style = style + "</style>";
+           wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+           wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
+           wme.document.write('<center><b>' + g + '<br>' + '<br>');
+            wme.document.write(htmlToPrint);
+ wme.document.write(document.getElementById("elem").innerHTML);
+           wme.document.write(document.getElementById("elem1").innerHTML);
+           wme.document.write(printme.outerHTML);
+                   wme.document.write(document.getElementById("elem2").innerHTML);
+
+           wme.document.write(style);
+           wme.document.close();
+           wme.focus();
+           wme.print();
+           wme.refresh();
+           wme.close();
+       }
+
+   }
 </script>
 
 <script>
@@ -651,20 +658,15 @@ var date3 =  year1
       var f = document.getElementById('year');
 	var result = e.options[e.selectedIndex].text;
 	var g = f.options[f.selectedIndex].text;
-      var wme = window.open("p","","a4");
-         var style = "<style>";
-  style = style + ".td1 {font-size: 14px !important;}";
-  style = style + "</style>";
+        var wme = window.open("p","","a4");
         wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
+        wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
         wme.document.write('<center><b>' + result +' '+ g +'<br>'+'<br>');
-        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 85px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 115px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 40px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 50px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 95px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 118px; margin: 0; border-collapse: collapse">Date Admitted</th><th style="float: left; width: 110px; margin: 0; border-collapse: collapse">Date Died</thead></table>');
+        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 155px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
   wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);wme.document.write(printme.outerHTML);
+           wme.document.write(document.getElementById("elem1").innerHTML);
         wme.document.write(printme.outerHTML);
-                wme.document.write(document.getElementById("elem2").innerHTML);
 
-wme.document.write(style);
         wme.document.close();
         wme.focus();
         wme.print();
@@ -686,18 +688,46 @@ var month1 = date2[1];
 var day1 = date2[2];
 var date3 = month1 + "/" + day1 + "/" + year1
         var printme=document.getElementById('example');
-      var wme = window.open("p","","a4");
+        var wme = window.open("p","","a4");
 
-     var style = "<style>";
-  style = style + ".td1 {font-size: 14px !important;}";
-  style = style + "</style>";
         wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-        wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
-       wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
-        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 85px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 115px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 40px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 50px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 95px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 118px; margin: 0; border-collapse: collapse">Date Admitted</th><th style="float: left; width: 110px; margin: 0; border-collapse: collapse">Date Died</thead></table>');
+        wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
+        wme.document.write('<center><b>'+'From ' +date1+ ' '+' to ' + date3+'<br>'+'<br>');
+        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 155px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
+         wme.document.write(document.getElementById("elem").innerHTML);
+           wme.document.write(document.getElementById("elem1").innerHTML);
+           wme.document.write(printme.outerHTML);
+
+        wme.document.close();
+        wme.focus();
+        wme.print();
+         wme.refresh();
+        wme.close();
+    }
+</script>
+<script>
+   function makepdf3(){
+           var date = $('#day').val().split('-');
+var year = date[0];
+var month = date[1];
+var day = date[2];
+var date1 = month + "/" + day + "/" + year
+      var printme=document.getElementById('example');
+        var wme = window.open("p","","a4");
+
+          var style = "<style>";
+  style = style + ".td1 {display: none !important;}";
+  style = style + "</style>";
+
+        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
+           wme.document.write(style);
+        wme.document.write('<center><th><b>LIST OF ACTIVE COVID-19 PATIENTS</b><th>');
+        wme.document.write('<center><b>' +date1+'<br>'+'<br>' );
+        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 155px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 55px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 60px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 100px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 120px; margin: 0; border-collapse: collapse">Date Admitted</thead></table>');
           wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);wme.document.write(printme.outerHTML);
-wme.document.write(style);
+           wme.document.write(document.getElementById("elem1").innerHTML);
+        wme.document.write(printme.outerHTML);
+
         wme.document.close();
         wme.focus();
         wme.print();
@@ -713,81 +743,6 @@ function myFunction1() {
   input1 = document.getElementById("year");
  input2 = document.getElementById("list");
   filter = input2.value.toUpperCase() +' '+ input1.value.toUpperCase()+' '+ input.value.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-<script>
-// When the user clicks on <div>, open the popup
-function myFunction6() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
-<script>
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("list");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-<script>
-   function makepdf3(){
-      var printme=document.getElementById('example');
-      var wme = window.open("p","","a4");
-           var date = $('#day').val().split('-');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = month + "/" + day + "/" + year
-         var style = "<style>";
-  style = style + ".td1 {font-size: 14px!important;}";
-  style = style + "</style>";
-
-        wme.document.write('<head><center><p>MUNICIPALITY OF KALAYAAN<br>Municipal Health Office<br>Kalayaan, Laguna</p></center></head>');
-           wme.document.write(style);
-        wme.document.write('<center><th><b>LIST OF DECEASED COVID-19 PATIENTS</b><th>');
-        wme.document.write('<center><b>' + date1+'<br>'+'<br>');
-        wme.document.write('<table style="width:100%; text-align: left; border-collapse: collapse; border-spacing: 0;"><thead><th style="float: left; width: 85px; margin: 0; border-collapse: collapse">Patient ID<th style="float: left; width: 115px; margin: 0; border-collapse: collapse">Patient Status<th style="float: left; width: 90px; margin: 0; border-collapse: collapse">Name<th style="float: left; width: 40px; margin: 0; border-collapse: collapse">Sex<th style="float: left; width: 50px; margin: 0; border-collapse: collapse">Age<th style="float: left; width: 95px; margin: 0; border-collapse: collapse">Barangay<th style="float: left; width: 118px; margin: 0; border-collapse: collapse">Date Admitted</th><th style="float: left; width: 110px; margin: 0; border-collapse: collapse">Date Died</thead></table>');
-          wme.document.write(document.getElementById("elem").innerHTML);
-           wme.document.write(document.getElementById("elem1").innerHTML);
-        wme.document.write(printme.outerHTML);
-wme.document.write(style);
-        wme.document.close();
-        wme.focus();
-        wme.print();
-         wme.refresh();
-        wme.close();
-
-    }
-</script>
-<script>
-function myFunction2() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("year");
-  filter = input.value.toUpperCase();
   table = document.getElementById("example");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
@@ -833,16 +788,113 @@ function displayNoResult(allLI) {
   var hiddenLILength1 = document.querySelectorAll('tr');
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
-  if ( 1 === hiddenLILength.length) {
+  if ( 0 === hiddenLILength.length) {
     document.getElementById('noResult').classList.add('hideElement')
-
-  } else {
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
+  } else{
       document.getElementById('noResult').classList.remove('hideElement')
-
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
 
   }
 }
 </script>
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction6() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("list");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].classList.remove('hideElement');
+      } else {
+        tr[i].classList.add('hideElement');
+      }
+    }
+  }
+  displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+  if ( allLI === hiddenLILength.length) {
+       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+  } else{
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+
+  }
+}
+</script>
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction6() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+<script>
+function myFunction2() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("year");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("example");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].classList.remove('hideElement');
+      } else {
+        tr[i].classList.add('hideElement');
+      }
+    }
+  }
+  displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+  if ( allLI === hiddenLILength.length) {
+       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+  } else{
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+
+  }
+}
+</script>
+
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction6() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
 </script>
 <script>
     var tableSize = $('#Table_id tbody tr').length;
@@ -854,13 +906,6 @@ function displayNoResult(allLI) {
 
 
     </script>
-<script>
-// When the user clicks on <div>, open the popup
-function myFunction6() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
 <script>
     function searchDateAlternative() {
   // get the values and convert to date
@@ -893,12 +938,33 @@ var date2 = month1 + "/" + day1 + "/" + year1
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
         // show the row by setting the display property
-       tr[i].style.display = '';
+         tr[i].classList.remove('hideElement');
       } else {
         // hide the row by setting the display property
-        tr[i].style.display = 'none';
+        tr[i].classList.add('hideElement');
       }
     }
+
+  }
+   displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+ var count1 =hiddenLILength1.length - hiddenLILength.length -1
+  if ( allLI === hiddenLILength.length-1) {
+
+       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+  } else{
+
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count1+" of "+count+" entries";
 
   }
 }
@@ -980,4 +1046,3 @@ var date2 = month1 + "/" + day1 + "/" + year1
 </body>
 {% endblock %}
 </html>
-

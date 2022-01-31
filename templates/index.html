@@ -455,7 +455,7 @@ height:7px;
 
         <thead>
 
-        <tr>
+
             <th>Name</th>
 
              <th>Condition and Case</th>
@@ -468,7 +468,7 @@ height:7px;
               <th class ="td1" style="display: none">Week Admitted</th>
             <th class="td1">Action</th>
 
-        </tr>
+
         </thead>
 
         <tbody>
@@ -624,34 +624,7 @@ function myFunction1() {
   }
 }
 </script>
-<script>
-function myFunction() {
-  var input, input1,input2,input3, filter, table, tr, td, i;
-  var date = $('#day').val().split('-');
-var year = date[0];
-var month = date[1];
-var day = date[2];
-var date1 = month + "/" + day + "/" + year
-  input = document.getElementById("week");
-    input3 = document.getElementById("day");
-  input1 = document.getElementById("year");
- input2 = document.getElementById("list");
-  filter =date1.toUpperCase();
-  table = document.getElementById("example");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[7];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
 
-</script>
 <script>
     function myFunction5() {
         var input, input1,input2,input3, filter, table, tr, td, i;
@@ -669,13 +642,16 @@ var date1 = month + "/" + day + "/" + year
       td = li[i].getElementsByTagName("td")[7];
       if (td) {
           if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-              li[i].classList.remove('hideElement');
+              li[i].style.display = '';
+               li[i].classList.remove('hideElement');
           } else {
-              li[i].classList.add('hideElement');
+              li[i].style.display = 'none';
+               li[i].classList.add('hideElement');
           }
       }
+
   }
-  displayNoResult(li.length)
+ displayNoResult(li.length-1)
 }
 function displayNoResult(allLI) {
 
@@ -683,22 +659,22 @@ function displayNoResult(allLI) {
   var hiddenLILength1 = document.querySelectorAll('tr');
      const  time = document.querySelector('#confirmed')
     const  time1 = document.querySelector('#confirmed2');
-  if ( 0 === hiddenLILength.length) {
-    document.getElementById('noResult').classList.add('hideElement')
-       document.getElementById('confirmed2').classList.add('hideElement')
-    time.textContent = "Showing 1 to "+hiddenLILength1.length+" of "+hiddenLILength1.length+" entries";
-  } else{
-      document.getElementById('noResult').classList.remove('hideElement')
+    var count = hiddenLILength1.length-1
+  if ( allLI === hiddenLILength.length) {
+       document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
 
+
+  } else{
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+
+
+
   }
 }
-</script>
-<script>
-    var hiddenLILength = document.querySelectorAll('tr');
-    const  time = document.querySelector('#confirmed2');
-time.textContent = "Showing 1 to " +hiddenLILength.length+ " of " +hiddenLILength.length+ " entries";
 </script>
 <script>
 function myFunction2() {
@@ -708,18 +684,45 @@ function myFunction2() {
   table = document.getElementById("example");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
+    td = tr[i].getElementsByTagName("td")[7];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
+        tr[i].style.display = '';
+               tr[i].classList.remove('hideElement');
       } else {
-        tr[i].style.display = "none";
+        tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
   }
+  displayNoResult(tr.length)
+}
+function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+    var count1 =hiddenLILength1.length - hiddenLILength.length -1
+alert(allLI + "alert1"+hiddenLILength.length)
+  if ( allLI === hiddenLILength.length) {
+document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
+
+
+  } else{
+
+        document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
+
+  }
+
 }
 </script>
-
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i;
@@ -731,11 +734,31 @@ function myFunction() {
     td = tr[i].getElementsByTagName("td")[6];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
+        tr[i].classList.remove('hideElement');
+        tr[i].style.display = 'none';
       } else {
-        tr[i].style.display = "none";
+        tr[i].classList.add('hideElement');
+        tr[i].style.display = 'none';
       }
     }
+  }
+  displayNoResult(tr.length-1)
+}function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+  if ( allLI === hiddenLILength.length) {
+       document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+  } else{
+      document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+count+" of "+count+" entries";
+
   }
 }
 </script>
@@ -1043,12 +1066,39 @@ var date2 = month1 + "/" + day1 + "/" + year1
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
         // show the row by setting the display property
-        tr[i].style.display = '';
+         tr[i].style.display = '';
+               tr[i].classList.remove('hideElement');
       } else {
         // hide the row by setting the display property
         tr[i].style.display = 'none';
+               tr[i].classList.add('hideElement');
       }
     }
+
+  }
+ displayNoResult(tr.length)
+}
+function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+    var count1 =hiddenLILength1.length - hiddenLILength.length -1
+
+  if ( allLI === hiddenLILength.length) {
+document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
+
+
+  } else{
+
+        document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
 
   }
 }
