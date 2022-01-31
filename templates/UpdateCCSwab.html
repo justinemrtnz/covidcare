@@ -41,57 +41,141 @@
             {% endif %}
         {% endwith %}
 </div>
+<div style="position: absolute; z-index: 10; margin-right: 10%; margin-top: 1.5%; width: 500px; font-size: 1vw" class="container1" >
+     {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
+    Swal.fire({
+  title: "Failed!",
+  text: "Date must be 1 day advance. Please try again!",
+        customClass: 'swal-wide',
+  icon: "error",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
+});
+</script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+</div>
 <style>
-     .row {
-   margin-top: -1%;
-  margin-left:7%;
-  margin-right:-.5%;
-          margin-bottom:-10px;
-}
- input:hover, textarea:hover, select:hover {
-      outline: none;
-      border: 1px solid #095484;
-      background: #e6eef7;
-      }
-.column {
 
-  padding: .2%;
+.datee {
+    display: block;
+    width: 85%;
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-body{
-    background: #d5f3fe;
-    background-size: cover;
-        overflow-y:scroll;
-}label{
-        margin-left: 38%;
-        font-family: "Poppins";
-     font-size: 1vw;
- }input {
-               margin-left: 38%;
- font-family: "Poppins";
-  font-size: 1vw;
-   }
+@keyframes show_slide {
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  80%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes hide_slide {
+  0%{
+    transform: translateX(-10px);
+  }
+  40%{
+    transform: translateX(0%);
+  }
+  80%{
+    transform: translateX(-10%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+}
+
+       .row {
+  margin-left:15%;
+}
+
+.column {
+  float: left;
+  width: 30%;
+  padding: 5px;
+}
+label{
+        padding-left: 35%;
+        font-family: 'Poppins';
+        font-size: 1vw;
+ }
   select{
          margin-left: 35%;
- font-family: "Poppins";
-
+ font-family: 'Poppins';
+        font-style: italic;
   }
-  .swal2-popup {
-font-size: 1.6rem;
+    .table-container{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border-radius: 10px;backgroud-color: white;
+    }
+.table-container1{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border-radius: 10px;backgroud-color: white;
+    }
+    label{
+        font-size: 1vm;
+    }
+
+    input{
+        font-size: 1vm;
+    }
+
+    .table-container:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .table-container1:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+  .table-container {
+    margin-top: 2%;
+    background-color: white;
+    font-size: .8vw;
+    border-radius: 10px;
+    backgroud-color: white;
+    padding: 20px 20px 20px 20px;
 }
-  .swal2-html-container {
-    z-index: 1;
-    justify-content: center;
-    margin: 1em 1.6em 0.3em;
-    padding: 0;
-    overflow: auto;
-    color: #545454;
-    font-size: .925em;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    word-wrap: break-word;
-    word-break: break-word;
+  .table-container1{
+    margin-top: 2%;
+    background-color: white;
+    font-size: .8vw;
+    border-radius: 10px;
+    backgroud-color: white;
+    padding: 20px 20px 30px 20px;
 }
+  body {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+
 .imgright{
       float: right;
       position:relative;
@@ -99,12 +183,6 @@ font-size: 1.6rem;
     max-height: 2.5vw;
     margin-top:-50%;
     margin-left:-50%;
-}
-    .txtright{
-        margin-top: -2%;
-        float:right;
-        margin-right: 6%;
-
 }
 
 div.shadow {
@@ -121,54 +199,26 @@ div.shadow1 {
     left:93%;
     overflow:visible;
 }
-    .table-container{
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
 
 
-}
-
-
-.table-container:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.table-container{
-    margin-top: 2%;
-    background-color: white;
-      border-radius: 10px;
-      backgroud-color: white;
-    padding: 1% 1% 1% 1%;
-    width: 45%;
-}
-body {
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
-}
-
-
-.alert_box{
-     position: absolute;
-  top: 50%;
+.alert_box {
+    position: absolute;
+  top: 40%;
   left: 50%;
   transform: translate(-50% , -50%);
 }
+
 .show_button{
-  position: relative;
-  margin-left: 54%;
-    margin-right: 40%;
-}
-.show_button{
-  display: block;
-	width: 70%;
-	height: 2%;
+ display: block;
+	width: 100px;
+	height: 35px;
 	border-radius: 25px;
 	outline: none;
 	border: none;
     padding: 5px 18px ;
 	background-image: linear-gradient(to right, #42adf5, deepskyblue, skyblue);
 	background-size: 200%;
-	font-size: .8vw;
+	font-size: 16px;
 	color: #fff;
 	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
@@ -177,7 +227,7 @@ body {
 	transition: .5s;
 }
 .show_button:hover{
-  background: #2573a7;
+  background-position: right;
 }
 .background{
   position: absolute;
@@ -200,7 +250,7 @@ body {
   max-width: 450px;
   width: 100%;
   border-radius: 5px;
-  z-index: 5;
+  z-index: 100;
   opacity: 0;
   pointer-events: none;
   transform: translate(-50% , -50%) scale(0.97);
@@ -266,7 +316,11 @@ body {
 .btns label:last-child:hover{
   background: #d9210d;
 }
-
+input:hover, textarea:hover, select:hover {
+      outline: none;
+      border: 1px solid #095484;
+      background: #e6eef7;
+      }
 fieldset.scheduler-border {
     border: solid 2px gray !important;
     padding: 0 10px 10px 10px;
@@ -277,29 +331,6 @@ legend.scheduler-border {
     width: auto !important;
     border: none;
     font-size: 14px;
-}
-.swal-wide{
-    height:345px !important;
-    width: 380px !important;
-
-}
-.form-control1 {
-    display: block;
-    width: 100%;
-    height: 30px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 </style>
 
@@ -324,7 +355,7 @@ legend.scheduler-border {
 <fieldset class="scheduler-border">
 <legend class="scheduler-border">Swab Schedule</legend>
 {% for p in data %}
-    <form method="POST" action="/CCswab/{{p.key()}}">
+    <form method="POST" action="/edit/{{p.key()}}">
      <div class="col-8" style="margin-top: -5%">
      <i style="position: absolute;pointer-events: none ; margin-left: 3%"> <img src="{{url_for('static', filename='iconcalendar.png')}}" class="icon" width="30%" height="auto"  ; style="margin-top:27%"></i>
    <div class="row">
@@ -350,6 +381,12 @@ legend.scheduler-border {
 
   </div>
     <div class="row" style="display: none">
+     <div class="column" >
+          <label for="result">Patient Status</label>
+        <input readonly="readonly" style="width:85%;  height: 3%;    font-size: 1vw;background: white" type="text" name="result" placeholder="result"
+               class="form-control"
+         value="{{request.form['result'] or p.val().result}}">
+</div>
     <div class="column" >
           <label for="mobile_num">Mobile Number</label>
         <input readonly="readonly" style="width:85%;  height: 3%;    font-size: 1vw;background: white" type="text" name="mobile_num" placeholder="Mobile_num"
@@ -370,14 +407,14 @@ legend.scheduler-border {
        <div class="row"><div class="column" style="margin-right:5%; margin-top: 1%">
      <b><label for="time">Time</label></b>
 
-        <input  style="width:60%;  height: 2%;   font-size: 1vw; background: white"  type="time" id="time"name="time" placeholder="Click to select date"
+        <input  style="width:60%;  height: 2%;   font-size: 1vw; background: white"  type="time" id="time"name="time"  placeholder="Click to select time"
                class="form-control1">
 
 </div>
 
     </div>
-      <div class="row"><div class="column" style="margin-left:70%; margin-top: 3%; margin-bottom: 3%">
-           <label class="show_button" for="check">Set schedule</label>
+      <div class="row"><div class="column" style="margin-left:86%; margin-top: 3%; margin-bottom: 3%">
+           <label class="show_button" for="check">Add</label>
       </div></div>
 
     {% endfor %}
@@ -409,13 +446,19 @@ legend.scheduler-border {
 </fieldset>
 </div>
 </form>
-
+ <script>
+    $(".container1" ).fadeOut(5000);
+</script>
 <script>
     var today = new Date().toISOString().split('T')[0];
 document.getElementsByName("date")[0].setAttribute('min', today);
 </script>
 </body>
+<script>
+        var  a= document.getElementsByName("mobile_num")[0].value;
 
+
+</script>
 {% endblock %}
 </html>
 
