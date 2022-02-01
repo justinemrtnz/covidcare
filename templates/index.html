@@ -1190,6 +1190,19 @@ var data = " ";
 }
 </script>
 <script>
+    const collection = document.getElementsByClassName("dataTables_empty")[0].value;
+    const collection = document.querySelector("#confirmed2");
+    const  time = document.querySelector('#confirmed2');
+    if (collection == "No matching records found"){
+        time.textContent = "Showing 1 to 0 of 0 entries"
+    }else {
+var hiddenLILength = document.querySelectorAll('tr');
+    var hidd = hiddenLILength.length-1
+
+time.textContent = "Showing 1 to " +hidd+ " of " +hidd+ " entries";
+    }
+</script>
+<script>
          const  time = document.querySelector('#confirmed')
 
         const  t1 = {{ t1 }}

@@ -465,9 +465,11 @@ height:7px;
             <th>Age</th>
                 <th>Barangay </th>
                 <th>Date Admitted</th>
-
+                 <th>Date Recovered</th>
+<th>Day Recovered</th>
 
                   <th class="td1"  style="display: none">Week Admitted</th>
+                <th class="td1"  style="display: none">Week Admitted</th>
 
             </tr>
             </thead>
@@ -486,9 +488,10 @@ height:7px;
                     <td>{{l.val().age }}</td>
                     <td >{{l.val().address }}</td>
                     <td>{{l.val().dateAdmitted }}</td>
+                     <td>{{l.val().dateRecovered }}</td>
+                      <td >{{l.val().dayRecovered }}</td>
 
 
-  <td class="td1" style="display: none">{{l.val().dayAdmitted }}</td>
                     </form>
                     </td>
                     </tr>
@@ -644,15 +647,10 @@ function displayNoResult(allLI) {
        document.getElementById('noResult').classList.remove('hideElement')
              document.getElementById('confirmed2').classList.add('hideElement')
       time.textContent = "Showing 0 to 0 of 0 entries";
-
-
   } else{
       document.getElementById('noResult').classList.add('hideElement')
        document.getElementById('confirmed2').classList.add('hideElement')
     time.textContent = "Showing 1 to "+count+" of "+count+" entries";
-
-
-
   }
 }
 </script>
@@ -707,7 +705,7 @@ function myFunction() {
   table = document.getElementById("example");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[6];
+    td = tr[i].getElementsByTagName("td")[7];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = '';
@@ -992,7 +990,7 @@ var date2 = month1 + "/" + day1 + "/" + year1
   tr = table.getElementsByTagName("tr");
 
   for (i = 0; i < tr.length; i++) {
-    let td_date = new Date(tr[i].getElementsByTagName("td")[7].textContent);
+    let td_date = new Date(tr[i].getElementsByTagName("td")[8].textContent);
 
     if (td_date) {
       if (td_date >= input_startDate && td_date <= input_stopDate) {
