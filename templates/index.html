@@ -342,7 +342,7 @@ height:7px;
   {% if a == l.val().estimatedDateRecovery or b == l.val().estimatedDateRecovery or c == l.val().estimatedDateRecovery or d == l.val().estimatedDateRecovery or e == l.val().estimatedDateRecovery %}
 <div style=" max-width:2000px; padding: 10px;  border-bottom:#8c8c8c 1px solid; font-family: Poppins; color:#0f0e0f;  ">
 <table  id="Table_id">
-    <tbody>
+    <tbody >
      <tr>
       <p style="font-size: 12px; font-weight: bold" class="tb">  {{ l.val().patientID}} recovery is near! </p>
     <p style="font-size: 12px; font-style: italic">Expected date of recovery: {{ l.val().estimatedDateRecovery }}  </p>
@@ -370,7 +370,8 @@ height:7px;
      <p style="margin-left: 2%">Patient Information</p>
   </div>
          <div class="column">
-         <i style="padding-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
+             <i style="padding-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
+         <input id="myInput" onkeyup="myFunction10()"class='form-control btn-secondary' type="text" placeholder="Search.." style="margin-left: 30%; margin-top: 1.5%; width: 14%; z-index: 10; position: absolute">
          </div>
     </div>
  <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups"  >
@@ -444,9 +445,7 @@ height:7px;
     </button>
   </div>
 </div>
-
 </div>
-
 <div style="margin-left:7%; margin-right:2%;width: 90.9%" class ="table-container" id="hide" >
 
      <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -471,7 +470,7 @@ height:7px;
 
         </thead>
 
-        <tbody>
+        <tbody  id="myUL">
             {% if t == 0 %}
             {% else %}
                 {% for l in t %}
@@ -547,7 +546,7 @@ height:7px;
 
         $(document).ready(function() {
               $('#example').DataTable({
-
+bFilter: false,
         paging:         false,
                  info:false,
               });
@@ -1115,14 +1114,12 @@ document.getElementById('noResult').classList.remove('hideElement')
   var main_select = document.getElementById("print");
   var select_1 = document.getElementById("day");
   var select_2 = document.getElementById("day1");
-
   var select_4 = document.getElementById("date-start1");
   var select_6 = document.getElementById("date-stop1");
   var select_7 = document.getElementById("list");
   var select_8 = document.getElementById("list1");
   var select_9 = document.getElementById("year");
   var select_10 = document.getElementById("year1");
-
   var desired_box = main_select.options[main_select.selectedIndex].value;
   if(desired_box == "Daily") {
     select_1.style.display = '';
@@ -1213,6 +1210,48 @@ const sum = t1 + t2 + t3;
 
 
     </script>
+<script>
+function myFunction10() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName("tr");
+  for (i = 0; i < li.length; i++) {
+    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].classList.remove('hideElement');
+    } else {
+      li[i].classList.add('hideElement');
+    }
+  }
+  displayNoResult(li.length)
+}
+
+function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+    var count1 =hiddenLILength1.length - hiddenLILength.length -1
+
+  if ( allLI === hiddenLILength.length) {
+document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
+
+
+  } else{
+
+        document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
+
+  }
+}
+</script>
 </div>
 </body>
 {% endblock %}

@@ -371,6 +371,8 @@ height:7px;
   </div>
          <div class="column">
          <i style="padding-left: 95%; margin-top: -10%" id="refresh-btn" name="refresh" onClick="window.location.reload();" class="fa fa-refresh btn-secondary" aria-hidden="true"></i>
+                      <input id="myInput" onkeyup="myFunction10()"class='form-control btn-secondary' type="text" placeholder="Search.." style="margin-left: 30%; margin-top: 1.5%; width: 14%; z-index: 10; position: absolute">
+
          </div>
     </div>
  <div class="btn-toolbar1" role="toolbar" aria-label="Toolbar with button groups"  >
@@ -472,7 +474,8 @@ height:7px;
             </tr>
             </thead>
 
-            <tbody>
+           <tbody  id="myUL">
+
 
             {% if t == 0 %}
                 <td colspan="7"><center>No records of Active patients</center></td>
@@ -533,6 +536,8 @@ height:7px;
         $(document).ready(function() {
               $('#example').DataTable({
         paging:         false,
+                  bFilter: false,
+
                  info:false,
               });
         } );
@@ -1173,6 +1178,48 @@ const sum = t1 + t2 + t3;
 
 
     </script>
+<script>
+function myFunction10() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName("tr");
+  for (i = 0; i < li.length; i++) {
+    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].classList.remove('hideElement');
+    } else {
+      li[i].classList.add('hideElement');
+    }
+  }
+  displayNoResult(li.length)
+}
+
+function displayNoResult(allLI) {
+
+  var hiddenLILength = document.querySelectorAll('tr.hideElement');
+  var hiddenLILength1 = document.querySelectorAll('tr');
+     const  time = document.querySelector('#confirmed')
+    const  time1 = document.querySelector('#confirmed2');
+    var count = hiddenLILength1.length-1
+    var count1 =hiddenLILength1.length - hiddenLILength.length -1
+
+  if ( allLI === hiddenLILength.length) {
+document.getElementById('noResult').classList.remove('hideElement')
+             document.getElementById('confirmed2').classList.add('hideElement')
+      time.textContent = "Showing 0 to 0 of 0 entries";
+
+
+
+  } else{
+
+        document.getElementById('noResult').classList.add('hideElement')
+       document.getElementById('confirmed2').classList.add('hideElement')
+    time.textContent = "Showing 1 to "+ count1 +" of "+count+" entries";
+
+  }
+}
+</script>
 </div>
 </body>
 {% endblock %}
