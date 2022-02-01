@@ -1379,6 +1379,7 @@ def editS(username):
                                                       "estimatedDateRecovery": date,
 
                                                        })
+            db.child("Suspected").child(username).remove()
             db.child("Self-Monitoring").child(PatientID).remove()
             db.child("Patient Monitoring").child(PatientID).remove()
             flash('Successfully logged in!', "success")

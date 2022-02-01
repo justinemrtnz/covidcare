@@ -1117,6 +1117,12 @@ var data = " ";
 }
 }
 </script>
+<script>
+    var hiddenLILength = document.querySelectorAll('tr');
+    var hidd = hiddenLILength.length-1
+    const  time = document.querySelector('#confirmed2');
+time.textContent = "Showing 1 to " +hidd+ " of " +hidd+ " entries";
+</script>
 </div>
 </body>
 {% endblock %}
