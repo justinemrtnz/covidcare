@@ -24,9 +24,16 @@
 
 
 <style>
+ .swal-wide{
+    height:345px !important;
+    width: 380px !important;
 
+}
 body{
     overflow-y:scroll;
+}
+.swal2-popup {
+font-size: 1.5rem;
 }
 .datee {
     display: block;
@@ -304,26 +311,25 @@ legend.scheduler-border {
     font-size: 14px;
 }
 </style>
-     <div >
-        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+
+    <div>    {% with errors = get_flashed_messages(category_filter=["success"]) %}
             {% if errors %}
-                {%- for message in errors %}s
-<script type="text/javascript">
+                {%- for message in errors %}
+                  <script type="text/javascript">
     Swal.fire({
-  title: "Failed!",
-  text: "Login Failed!",
+  title: "Success!",
+  text: "Update Successfully!!!",
         customClass: 'swal-wide',
   icon: "error",
-        confirmButtonColor: "#3b83dc",
- confirmButtonText: "Continue!",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
 });
 </script>
                 {% endfor -%}
             {% endif %}
         {% endwith %}
     </div>
-
-    <div>
+<div>
         {% with errors = get_flashed_messages(category_filter=["danger"]) %}
             {% if errors %}
                 {%- for message in errors %}
@@ -331,6 +337,24 @@ legend.scheduler-border {
     Swal.fire({
   title: "Failed!",
   text: "Login Failed!",
+        customClass: 'swal-wide',
+  icon: "error",
+         confirmButtonColor: "#3b83dc",
+   confirmButtonText: "Continue!",
+});
+</script>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
+<div>
+        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                  <script type="text/javascript">
+    Swal.fire({
+  title: "Failed!",
+  text: "Invalid time",
         customClass: 'swal-wide',
   icon: "error",
          confirmButtonColor: "#3b83dc",
@@ -779,7 +803,7 @@ legend.scheduler-border {
     if (a === "Deceased"){
                    var select_3 = document.getElementById("asd");
                    var select_4 = document.getElementById("result");
-                   select_3.style.display = 'none';
+                    select_3.style.display='none';
                     select_4.style.pointerEvents = 'none';
     }
 </script>

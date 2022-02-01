@@ -791,12 +791,10 @@ def view2(PatientID):
 def edit1(username):
     from datetime import datetime, timedelta
     dt = datetime.today().strftime("%B %d, %Y %H:%M:%S")
-
     today = datetime.today().strftime('%d %B %Y ')
     today4 = datetime.today().strftime('%m/%d/%Y')
     today2 = datetime.today().strftime('%B %Y ')
     today1 = datetime.today().strftime('%Y-%m-%d')
-
     if request.method == 'POST':
         dayAdmitted = request.form['dayAdmitted']
         estimatedDateRecovery = request.form['estimatedDateRecovery']
@@ -819,18 +817,18 @@ def edit1(username):
         CivilStatus = request.form['civilStatus']
         Address = request.form['address']
         dateAdmitted = request.form['dateAdmitted']
+        dayAdmitted = request.form['dayAdmitted']
+
         housenum = request.form['housenum']
         city = request.form['city']
         province = request.form['province']
         PIcontact = request.form['PIcontact']
         NatureOfContact = request.form['NOcontact']
-
         SignAndSymp = request.form['SignAndSymp']
         doConsultation = request.form['doConsultation']
         result = request.form['result']
         antigenres = request.form['antigenres']
         Dantigen = request.form['Dantigen']
-        ate_time_obj10 = datetime.strptime(dateAdmitted, '%d %B %Y').strftime('%m/%d/%Y')
         if result == "Recovered":
             db.child(result).child(PatientID).set({"result": result,
                                                    "antigenres": antigenres,
@@ -839,7 +837,7 @@ def edit1(username):
                                                    "security": security,
                                                    "securityQues": securityQues,
                                                    "swabSchedule": swabSchedule,
-                                                   "dayAdmitted": ate_time_obj10,
+                                                   "dayAdmitted": dayAdmitted,
                                                    "estimatedDateRecovery": estimatedDateRecovery,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
@@ -875,7 +873,7 @@ def edit1(username):
                 "security": security,
                 "securityQues": securityQues,
                 "swabSchedule": swabSchedule,
-                "dayAdmitted": ate_time_obj10,
+                "dayAdmitted": dayAdmitted,
                 "estimatedDateRecovery": estimatedDateRecovery,
                 "patientName": Pname,
                 "patientID": PatientID,
@@ -902,88 +900,100 @@ def edit1(username):
                 "doConsultation": doConsultation,
 
             })
-
+            flash("Patient Status Updated Successfully!", "success")
+            return redirect(url_for('home'))
         elif result == "Deceased":
-            today0 = datetime.today().strftime('%m/%d/%Y')
-            COD = request.form['CauseofDeath']
-            dateandtime = request.form['date']
-
+            from datetime import datetime as dt
+            import datetime
+            now = datetime.datetime.now().time()
             dateandtime1 = request.form['time']
-            ate_time_obj = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%d %B %Y ')
-            ate_time_obj2 = datetime.strptime(dateandtime,  '%Y-%m-%d').strftime('%m/%d/%Y')
-            ate_time_obj1 = datetime.strptime(dateandtime1,  '%H:%M').strftime('%I:%M %p')
+            from datetime import datetime
+            ate_time_obj1 = datetime.strptime(dateandtime1, '%H:%M').strftime('%H')
+            ate_time_obj200 = datetime.strptime(dateandtime1, '%H:%M').strftime('%M')
+            ate_time_obj20= datetime.strptime(dateandtime1, '%H:%M').strftime('%I:%M %p')
+            if int(now.hour) < int(ate_time_obj1):
+                flash("Failed!", "warning")
+            else:
+                COD = request.form['CauseofDeath']
+                dateandtime = request.form['date']
 
-            db.child(result).child(PatientID).set({"result": result,
-                                                   "antigenres": antigenres,
-                                                   "Dantigen": Dantigen,
-                                                   "patientName": Pname,
-                                                   "patientID": PatientID,
-                                                   "birthday": Birthday,
-                                                   "age": Age,
-                                                   "sex": Sex,
-                                                   "mobile_num": Mobile_num,
-                                                   "address": Address,
-                                                   "housenum": housenum,
-                                                   "city": city,
-                                                   "province": province,
-                                                   "condition": Condition,
-                                                   "caseStatus": CaseStatus,
-                                                   "otherIllness": OtherIllness,
-                                                   "emergencyCPerson": EmergencyCPerson,
-                                                   "emergencyContact": emergencyContact,
-                                                   "username": username,
-                                                   "civilStatus": CivilStatus,
-                                                   "dateAdmitted": dateAdmitted,
-                                                   "dateDied": ate_time_obj,
-                                                   "dayDied": ate_time_obj2,
-                                                   "CauseOfDeath": COD,
-                                                   "DTofDeath": dateandtime + "Time: " + ate_time_obj1,
-                                                   "PIcontact": PIcontact,
-                                                   "NatureOfContact": NatureOfContact,
-                                                   "SignAndSymp": SignAndSymp,
-                                                   "doConsultation": doConsultation,
+                ate_time_obj = datetime.strptime(dateandtime, '%Y-%m-%d').strftime('%d %B %Y ')
+                ate_time_obj2 = datetime.strptime(dateandtime, '%Y-%m-%d').strftime('%m/%d/%Y')
 
-                                                   })
-            db.child("Active").child(PatientID).remove()
-            db.child("Patients").child(username).update({
-                "result": result,
-                "dateDied": ate_time_obj,
-                "dayDied": ate_time_obj2,
-                "antigenres": antigenres,
-                "Dantigen": Dantigen,
-                "CauseOfDeath": COD,
-                "patientName": Pname,
-                "patientID": PatientID,
-                "birthday": Birthday,
-                "age": Age,
-                "sex": Sex,
-                "dayAdmitted": ate_time_obj10,
-                "mobile_num": Mobile_num,
-                "address": Address,
-                "housenum": housenum,
-                "city": city,
-                "province": province,
-                "condition": Condition,
-                "caseStatus": CaseStatus,
-                "otherIllness": OtherIllness,
-                "emergencyCPerson": EmergencyCPerson,
-                "emergencyContact": emergencyContact,
-                "username": username,
-                "civilStatus": CivilStatus,
-                "dateAdmitted": dateAdmitted,
-                "PIcontact": PIcontact,
-                "SignAndSymp": SignAndSymp,
-                "doConsultation": doConsultation,
-                "NatureOfContact": NatureOfContact,
-                "DTofDeath": dateandtime + "Time: " + dateandtime1,
-            })
+                db.child(result).child(PatientID).set({"result": result,
+                                                       "antigenres": antigenres,
+                                                       "Dantigen": Dantigen,
+                                                       "patientName": Pname,
+                                                       "patientID": PatientID,
+                                                       "birthday": Birthday,
+                                                       "age": Age,
+                                                       "sex": Sex,
+                                                       "mobile_num": Mobile_num,
+                                                       "address": Address,
+                                                       "housenum": housenum,
+                                                       "city": city,
+                                                       "province": province,
+                                                       "condition": Condition,
+                                                       "caseStatus": CaseStatus,
+                                                       "otherIllness": OtherIllness,
+                                                       "emergencyCPerson": EmergencyCPerson,
+                                                       "emergencyContact": emergencyContact,
+                                                       "username": username,
+                                                       "civilStatus": CivilStatus,
+                                                       "dateAdmitted": dateAdmitted,
+                                                       "dateDied": ate_time_obj,
+                                                       "dayDied": ate_time_obj2,
+                                                       "CauseOfDeath": COD,
+                                                       "DTofDeath": dateandtime + " Time: " + ate_time_obj20,
+                                                       "PIcontact": PIcontact,
+                                                       "NatureOfContact": NatureOfContact,
+                                                       "SignAndSymp": SignAndSymp,
+                                                       "doConsultation": doConsultation,
+
+                                                       })
+                db.child("Active").child(PatientID).remove()
+                db.child("Patients").child(username).update({
+                    "result": result,
+                    "dateDied": ate_time_obj,
+                    "dayDied": ate_time_obj2,
+                    "antigenres": antigenres,
+                    "Dantigen": Dantigen,
+                    "CauseOfDeath": COD,
+                    "patientName": Pname,
+                    "patientID": PatientID,
+                    "birthday": Birthday,
+                    "age": Age,
+                    "sex": Sex,
+                    "dayAdmitted": dayAdmitted,
+                    "mobile_num": Mobile_num,
+                    "address": Address,
+                    "housenum": housenum,
+                    "city": city,
+                    "province": province,
+                    "condition": Condition,
+                    "caseStatus": CaseStatus,
+                    "otherIllness": OtherIllness,
+                    "emergencyCPerson": EmergencyCPerson,
+                    "emergencyContact": emergencyContact,
+                    "username": username,
+                    "civilStatus": CivilStatus,
+                    "dateAdmitted": dateAdmitted,
+                    "PIcontact": PIcontact,
+                    "SignAndSymp": SignAndSymp,
+                    "doConsultation": doConsultation,
+                    "NatureOfContact": NatureOfContact,
+                    "DTofDeath": dateandtime + "Time: " + ate_time_obj20,
+                })
+                flash("Patient Status Updated Successfully!", "success")
+                return redirect(url_for('home'))
+
         elif result == "Active":
             db.child(result).child(PatientID).set({"result": result,
                                                    "password": password,
                                                    "security": security,
                                                    "securityQues": securityQues,
                                                    "swabSchedule": swabSchedule,
-                                                   "dayAdmitted": ate_time_obj10,
+                                                   "dayAdmitted": dayAdmitted,
                                                    "estimatedDateRecovery": estimatedDateRecovery,
                                                    "patientName": Pname,
                                                    "patientID": PatientID,
@@ -1021,7 +1031,7 @@ def edit1(username):
                 "security": security,
                 "securityQues": securityQues,
                 "swabSchedule": swabSchedule,
-                 "dayAdmitted": ate_time_obj10,
+                 "dayAdmitted": dayAdmitted,
                 "estimatedDateRecovery": estimatedDateRecovery,
                 "patientName": Pname,
                 "patientID": PatientID,
@@ -1050,6 +1060,8 @@ def edit1(username):
                 "doConsultation": doConsultation,
 
             })
+            flash("Patient Status Updated Successfully!", "success")
+            return redirect(url_for('home'))
         elif result == "Close Contact":
             db.child(result).child(PatientID).set({"result": result,
                                                    "patientName": Pname,
@@ -1103,7 +1115,7 @@ def edit1(username):
             "doConsultation": doConsultation,
             "NatureOfContact": NatureOfContact,
         })
-        return redirect(url_for('home'))
+
 
     orderedDict = db.child("Patients").order_by_key().equal_to(username).limit_to_first(1).get()
 
@@ -1370,7 +1382,8 @@ def editCC(username):
 
                                                            })
             db.child(PatientID).remove()
-            flash('Successfully ', "success")
+
+        flash('Successfully ', "success")
         return redirect(url_for('CloseContact'))
 
     orderedDict = db.child("Close Contact").order_by_key().equal_to(username).limit_to_first(1).get()
@@ -1580,15 +1593,16 @@ def editP(username):
         Dantigen = request.form['Dantigen']
         res3=str(res1+1)
         pID = "KP-" + res3;
+
+        dayAdmitted = request.form['dayAdmitted']
         swabSchedule = "Your Swab schedule is not yet available"
-        ate_time_obj10 = datetime.strptime(dateAdmitted, '%d %B %Y').strftime('%m/%d/%Y')
         if result == "Active":
             db.child(result).child(pID).set({"result": result,
                                                    "password": password,
                                                    "security": security,
                                                    "securityQues": securityQues,
                                                    "swabSchedule": swabSchedule,
-                                                   "dayAdmitted": ate_time_obj10,
+                                                   "dayAdmitted": dayAdmitted,
                                                    "patientName": Pname,
                                                    "patientID": pID,
                                                    "birthday": Birthday,
@@ -1621,7 +1635,7 @@ def editP(username):
                                                        "security": security,
                                                        "securityQues": securityQues,
                                                        "swabSchedule": swabSchedule,
-                                                       "dayAdmitted": ate_time_obj10,
+                                                       "dayAdmitted": dayAdmitted,
                                                        "patientName": Pname,
                                                        "patientID": pID,
                                                        "birthday": Birthday,
@@ -1659,7 +1673,7 @@ def editP(username):
                                                       "security": security,
                                                       "securityQues": securityQues,
                                                       "swabSchedule": swabSchedule,
-                                                      "dayAdmitted": ate_time_obj10,
+                                                      "dayAdmitted": dayAdmitted,
                                                       "patientName": Pname,
                                                       "patientID": PatientID,
                                                       "birthday": Birthday,
