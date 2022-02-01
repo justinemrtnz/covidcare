@@ -1200,7 +1200,6 @@ def editCC(username):
                                                    "SignAndSymp": SignAndSymp,
                                                    "doConsultation": doConsultation,
                                                 "estimatedDateRecovery": date,
-
                                              })
             db.child("Patients").child(username).set({"result": result,
                                                        "password": password,
@@ -1271,7 +1270,6 @@ def editCC(username):
                                                            "SignAndSymp": SignAndSymp,
                                                            "doConsultation": doConsultation,
                                                            "estimatedDateRecovery": date,
-
                                                            })
             db.child(PatientID).remove()
         elif result == "Suspected":
