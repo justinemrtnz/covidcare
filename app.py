@@ -830,7 +830,7 @@ def edit1(username):
         result = request.form['result']
         antigenres = request.form['antigenres']
         Dantigen = request.form['Dantigen']
-        ate_time_obj10 = datetime.strptime(dateAdmitted, '%d %B %Y ').strftime('%m/%d/%Y')
+        ate_time_obj10 = datetime.strptime(dateAdmitted, '%d %B %Y').strftime('%m/%d/%Y')
         if result == "Recovered":
             db.child(result).child(PatientID).set({"result": result,
                                                    "antigenres": antigenres,
