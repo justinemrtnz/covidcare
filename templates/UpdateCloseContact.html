@@ -481,13 +481,23 @@ legend.scheduler-border {
 </div>
 <div class="column" >
          <label for="result">Patient Status</label>
+    {% if p.val().result == "Cleared" %}
                      <select onchange="select()" style="width:85%;   margin-left: 35%; height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
 <option value="{{ p.val().result }}">{{ p.val().result }}</option>
     <option value="Active">Active</option>
-    <option value="Cleared">Cleared</option>
+    <option value="Suspected">Suspected</option>
+                         <option value="Probable">Probable</option>
+                                              <option value="Close Contact">Close Contact</option>
 
 
 </select>
+        {% else %}
+                        <select onchange="select()" style="width:85%;   margin-left: 35%; height: 3%;    font-size: 1vw;background: white" name="result" id="result" class="form-control ">
+<option value="{{ p.val().result }}">{{ p.val().result }}</option>
+    <option value="Active">Active</option>
+    <option value="Cleared">Cleared</option>
+        </select>
+    {% endif %}
     </div>
    </div>
 
